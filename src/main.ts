@@ -15,7 +15,11 @@ import 'virtual:windi-utilities.css'
 import 'virtual:windi-devtools'
 
 const routes = setupLayouts(generatedRoutes)
-
+window.addEventListener('resize', onResize)
+onResize()
+function onResize() {
+  document.body.style.setProperty('--vh', `${window.innerHeight}px`)
+}
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,

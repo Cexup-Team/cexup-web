@@ -1,11 +1,17 @@
 @import './markdown.css';
 
 html,
-body,
 #app {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body{
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  text-align: center;
+  max-width: 500px;
+  margin: 0px auto;
 }
 
 html.dark {
