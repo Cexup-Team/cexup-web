@@ -62,5 +62,6 @@
 
 <route lang="yaml">
 meta:
-  layout: home
+  layout: dashboard
+  requiresAuth: true
 </route>

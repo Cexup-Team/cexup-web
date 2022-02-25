@@ -15,16 +15,40 @@ import 'virtual:windi-utilities.css'
 import 'virtual:windi-devtools'
 
 const routes = setupLayouts(generatedRoutes)
-window.addEventListener('resize', onResize)
-onResize()
-function onResize() {
-  document.body.style.setProperty('--vh', `${window.innerHeight}px`)
-}
+
+
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
   { routes, base: import.meta.env.BASE_URL },
   (ctx) => {
+   
+    /***
+     * authored trian damai
+     * this section have purpose for navigation guards 
+     * every user should have login first before access 
+     * 
+    */
+    ctx.router.beforeEach((to,from,next)=>{
+
+      //todo: check if user has credential
+      const isAuthenticated = false
+      
+      if(to.path == "/"){
+        if(!isAuthenticated) return next({path:"/auth/login"})
+       return next({path:"dashboard"})
+      }
+      
+      //if the route needs auth
+      if(to.meta.requiresAuth && !isAuthenticated){  
+        return  next({
+            path:"auth/login"
+          })
+      }
+
+      //all passing
+      return next()
+    })
     // install all modules under `modules/`
     Object.values(import.meta.globEager('./modules/*.ts')).forEach(i => i.install?.(ctx))
   },
