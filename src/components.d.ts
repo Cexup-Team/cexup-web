@@ -6,7 +6,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppbarDashboard: typeof import('./components/AppbarDashboard.vue')['default']
     BottomNavigation: typeof import('./components/BottomNavigation.vue')['default']
-    CarbonWarning: typeof import('~icons/carbon/warning')['default']
+    CarbonPassword: typeof import('~icons/carbon/password')['default']
+    CarbonUser: typeof import('~icons/carbon/user')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     README: typeof import('./components/README.md')['default']
   }
