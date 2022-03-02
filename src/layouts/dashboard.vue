@@ -5,13 +5,12 @@
     min-h-screen 
     items-center
     ">
-        <div>Header</div>
+        
         <div class=" 
         flex 
     flex-row
     max-w-lg
-    h-full
-    items-center 
+    h-full`
     content-center">
             <router-view/>
         </div>

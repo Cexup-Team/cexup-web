@@ -6,9 +6,9 @@
     bottom-0 
     flex 
     flex-row 
-    bg-blue-400
+    bg-light-50
     w-screen
-    max-w-lg
+    max-w-sm
     justify-between 
     items-center 
     content-center
