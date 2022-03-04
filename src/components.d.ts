@@ -6,11 +6,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppbarDashboard: typeof import('./components/AppbarDashboard.vue')['default']
     BottomNavigation: typeof import('./components/BottomNavigation.vue')['default']
-    CarbonCube: typeof import('~icons/carbon/cube')['default']
     CarbonPassword: typeof import('~icons/carbon/password')['default']
     CarbonUser: typeof import('~icons/carbon/user')['default']
-    CarbonView: typeof import('~icons/carbon/view')['default']
-    CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     README: typeof import('./components/README.md')['default']
   }
