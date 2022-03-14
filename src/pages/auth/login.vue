@@ -22,7 +22,7 @@
           <img src="/public/Google.png" class="h-6 flex"/>
           <p class="flex pl-3">  Continue with google</p>
         </button>
-        <p class="pt-4">Don't have an account yet? <button class="text-blue-500">Sign Up</button></p>
+        <p class="pt-4">Don't have an account yet? <button class="text-blue-500"> <router-link to="/auth/register"> Sign Up</router-link></button></p>
     </div>
 </template>
 
