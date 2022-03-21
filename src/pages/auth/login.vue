@@ -2,27 +2,35 @@
 
 </script>
 <template>
-    <div class="h-screen w-screen bg-light-800">
-      <h1 class="relative text-left pl-13 py-7 text-7xl font:semibold">Log In</h1>
-        <p class="relative text-left pl-13 pt-5 pb-1">Username</p>
-        <div class="bg-[#DDEDFA] w-100 ml-13 shadow-md rounded-md">
-        <carbon-user class="float-left ml-6 mt-3"/>
-        <input class="outline-none bg-[#DDEDFA] pr-32 py-3 " type="name" placeholder="Username"/>
+    <div class="h-screen w-screen bg-white">
+      <h4 class="relative text-center text-4xl pt-7 pb-3 mt-3 text-[#008CA3] font:semibold-poppins">Sign In</h4>
+      <p>Don't have an account? <button class="text-[#008CA3]"> <router-link to="/auth/register"> Sign Up now!</router-link></button></p>
+        <div>
+        <input class="border-1 border-[#DBDFE3] w-110 mt-10 mb-8 shadow-md rounded-md py-3" type="text" placeholder="Email or phone number"/>
         </div>
-        <p class="relative text-left pl-13 pt-5 pb-1">Password</p>
-        <div class="bg-[#DDEDFA] w-100 ml-13 shadow-md rounded-md">
-        <carbon-password class="float-left ml-6 mt-3"/>
-        <input class="outline-none bg-[#DDEDFA] mr-0 pr-22.5 py-3" type="password" placeholder="Your Secret Password"/>
-        <img src="/public/eye.png" class="h-5 float-right mr-4 mt-3 icon-btn">
-        </div>
-        <p class="text-blue-500 py-3 relative text-right pr-13"><button>Forgot Password ?</button></p>
-        <button class="bg-blue-500 text-white px-46 py-3 rounded-md shadow-xl active:shadow-2xl">Login</button>
-        <p class="py-3">—————  Or log in with  —————</p>
-        <button class="bg-white px-28 py-3 ml-13 flex content-center rounded-md shadow-xl active:shadow-2xl">
-          <img src="/public/Google.png" class="h-6 flex"/>
-          <p class="flex pl-3">  Continue with google</p>
+        <div>
+        <input class="relative border-1 border-[#DBDFE3] w-110 mb-3 shadow-md rounded-md  py-3" type="password" name="password" placeholder="Password"/>
+        <button>
+        <carbon-view  class="absolute -mt-3 -ml-8 icon-btn"/>
         </button>
-        <p class="pt-4">Don't have an account yet? <button class="text-blue-500"> <router-link to="/auth/register"> Sign Up</router-link></button></p>
+        </div>
+        <div class="flex justify-between py-3">
+          <div class="flex justify-start pl-9">
+        <input type="checkbox" class="-pb-2 appearance-none checked:bg-[#008CA3]"><h7 class="pl-3">Remember Me</h7>
+          </div>
+        <h7 class="text-[#008CA3] relative text-right pr-9"><button>Forgot Password ?</button></h7>
+        </div>
+        <button class="bg-[#008CA3] text-white w-110 py-3 mr-1 rounded-md shadow-xl active:transition duration-300 transition-gray-500">Sign In</button>
+        <p class="py-5"> OR </p>
+        <div class="flex">
+        <button class="bg-[#4285F4] py-3 ml-8.5 w-110 flex content-center rounded-md shadow-xl active:shadow-2xl">
+          <div class="pl-3">
+          <img src="/public/Google.png" class="h-8 flex bg-white p-1 rounded-md "/>
+          </div>
+          <p class="flex pl-25 pt-1 text-white">  Continue with google</p>
+        </button>
+        </div>
+        
     </div>
 </template>
 
