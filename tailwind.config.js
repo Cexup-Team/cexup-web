@@ -11,6 +11,21 @@ module.exports = {
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
+    extend: {
+      colors: {
+        'gray-150': '#DBDFE3',
+        'gray-350': '#8A8A8E',
+        'gray-175' : '#D8D8D8',
+        'gray-250' : "#9695AD",
+        'blue-650' : "#4285F4",
+        'primary-color' : '#008CA3'
+        
+        
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',
