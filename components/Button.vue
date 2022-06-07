@@ -1,5 +1,5 @@
 <script setup lang="ts">
-   const props = defineProps({
+  defineProps({
         className: {
             type: [String],
             required : false
@@ -15,18 +15,18 @@
         src :{
             type :[String],
             required : false
-        }
-
+        },
     })
 </script>
 
 <template>
-  <div class="relative">
-      <nuxt-link :to="'/auth/register'">
-        <img v-if="props.icon === true" class="absolute right-0 left-2 bottom-0" src="../../assets/images/google.svg" alt="">
-        <button :class="props.className+ ' focus:outline-none'">{{ props.title }}</button>
+    <div class="relative">
+    <nuxt-link :to="'/auth'">
+        <img v-if="icon === true" class="absolute right-0 left-2 bottom-0" src="../../assets/images/google.svg" alt="">
+        <button :class="className+ ' focus:outline-none'">{{ title }}</button>
       </nuxt-link>
-  </div>
+    </div>
+
 </template>
 
 <style>

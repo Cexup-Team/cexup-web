@@ -1,18 +1,25 @@
 <script setup lang="ts">
-    const props = defineProps({
+    defineProps({
         title: {
             type: [String],
             required : false
-        }
-       
-
+        },
+        modelValue: {
+            type: [Boolean],
+        },
     })
+
+    const emit = defineEmits(['update:modelValue'])
+
+    function updateValue(event){
+        emit('update:modelValue', event.target.checked)
+    }
  
 </script>
 <template>
-    <div class="block relative pl-6 cursor-pointer text-xs"> <span class="font-poppins font-medium text-gray-350">{{ props.title }}</span> 
+    <div class="block relative pl-6 cursor-pointer text-xs"> <span class="font-poppins font-medium text-gray-350">{{ title }}</span> 
         <label class="wrapper-checkbox">
-        <input type="checkbox" class="absolute opacity-0 cursor-pointer h-0 w-0" checked="checked">
+        <input type="checkbox" class="absolute opacity-0 cursor-pointer h-0 w-0" :value="modelValue" v-on:input="updateValue">
         <span class="checkmark absolute top-0 left-0 h-4 w-4 bg-white"></span>
         </label>
     </div>
@@ -37,6 +44,11 @@
         -ms-user-select: none;
         user-select: none;
   
+    }
+
+    input ~ .checkmark {
+        background-color: #fff;
+        outline: 2px solid #D8D8D8;
     }
 
 

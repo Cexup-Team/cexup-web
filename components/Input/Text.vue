@@ -19,13 +19,25 @@ const props = defineProps({
   src :{
     type :[String]
   },
+  src_eye :{
+    type :[String]
+  },
+  modelValue: {
+    type: [String],
+  },
 
 })
 
 let type: Ref<String> = ref('text')
 
 type.value = props.type
-console.log(type.value)
+
+const emit = defineEmits(['update:modelValue'])
+
+function updateValue(event){
+   emit('update:modelValue', event.target.value)
+}
+
 
 function showPassword() {
    if (type.value === "password") {
@@ -40,9 +52,12 @@ function showPassword() {
 </script>
 <template>
     <div class="relative wrapper-input-text">
-      <img :src="props.src" v-if="props.icon === true" class="img-input-text absolute right-3 z-50 p-1" alt="" @click="showPassword">
-      <input :type="type" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
-      <label for="" class="label-text absolute pointer-events-none left-4 top-4 px-1 text-gray-350 bg-white text-sm transition-all duration-300">{{props.placeholder}}</label> 
+      
+      <img :src="props.src" v-if="props.icon === true && type === 'password'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
+      <img :src="props.src_eye" v-if="props.icon === true && type === 'text'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
+      <input :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
+   
+      <label for="" class="label-text absolute font-poppins pointer-events-none left-4 top-4 px-1 text-gray-350 bg-white text-sm transition-all duration-300">{{props.placeholder}}</label> 
     </div>
 </template>
 
