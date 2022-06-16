@@ -22,9 +22,19 @@ const props = defineProps({
   src_eye :{
     type :[String]
   },
+  select: {
+    type : [String],
+  },
+  slc: {
+    type : [Boolean],
+    default : false
+  },
   modelValue: {
     type: [String],
   },
+  slcValue : {
+    type: [String]
+  }
 
 })
 
@@ -32,10 +42,10 @@ let type: Ref<String> = ref('text')
 
 type.value = props.type
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'update:slcValue', 'update:changeOpen'])
 
 function updateValue(event){
-   emit('update:modelValue', event.target.value)
+  event.type === 'focus' ? emit('update:slcValue', event.target.attributes.typeselect.value) : emit('update:modelValue', event.target.value)
 }
 
 
@@ -55,7 +65,8 @@ function showPassword() {
       
       <img :src="props.src" v-if="props.icon === true && type === 'password'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
       <img :src="props.src_eye" v-if="props.icon === true && type === 'text'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
-      <input :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
+      <input v-if="props.slc === false" :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
+      <input v-if="props.slc === true" :typeselect="props.select"  :type="type" :value="modelValue" v-on:focus="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" readonly />
    
       <label for="" class="label-text absolute font-poppins pointer-events-none left-4 top-4 px-1 text-gray-350 bg-white text-sm transition-all duration-300">{{props.placeholder}}</label> 
     </div>
