@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.1.9",
+    "apexcharts": "^3.35.3",
+    "npm": "^8.12.2",
     "pinia": "^2.0.14",
-    "swiper": "^8.2.4"
+    "swiper": "^8.2.4",
+    "vue3-apexcharts": "^1.4.1"
   }
 }
