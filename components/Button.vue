@@ -16,12 +16,16 @@
             type :[String],
             required : false
         },
+        link: {
+            type: [String],
+            required : false
+        }
     })
 </script>
 
 <template>
     <div class="relative">
-    <nuxt-link :to="'/auth'">
+    <nuxt-link :to="link">
         <img v-if="icon === true" class="absolute right-0 left-2 bottom-0" src="../../assets/images/google.svg" alt="">
         <button :class="className+ ' focus:outline-none'">{{ title }}</button>
       </nuxt-link>

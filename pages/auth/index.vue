@@ -16,7 +16,7 @@ const login: LoginState = reactive({
 <div>
     <nuxt-layout name="auth">
         
-        <div class="mt-9">
+        <div class="mt-9 p-4">
             <img src="../../assets/images/icon_back.svg" alt="" class="w-2 h-4">
             <h2 class="text-3xl text-primary-color font-bold mt-9 w-full text-center font-poppins">Sign In</h2>
             <h5 class="text-sm font-medium w-full text-gray-350 text-center mt-6 font-poppins">Don’t have an account? <nuxt-link :to="'/auth/register'"><span class="text-primary-color">Sign up now!</span></nuxt-link></h5>

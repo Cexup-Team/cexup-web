@@ -2,6 +2,7 @@ module.exports = {
   mode: "jit",
   content: [
     "./components/**/*.{vue,js}",
+    "./parts/**/*.{vue,js}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
@@ -19,6 +20,7 @@ module.exports = {
         'gray-350': '#8A8A8E',
         'gray-550' : "#E6E6E6",
         'blue-650' : "#4285F4",
+        'blue-350' : "#4ABBCD",
         'primary-color' : '#008CA3'
         
         
