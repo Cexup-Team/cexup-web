@@ -26,22 +26,22 @@
                             </div>
                         </div>
                     </nuxt-link>
-                    <div class="w-full h-full relative">
+                    <nuxt-link to="/profile" class="w-full h-full relative">
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             <div class="item_active">
 
                                 <img src="../assets/images/packet_nav.svg" alt="" class="w-5 h-5">
                             </div>
                         </div>
-                    </div>
-                    <div class="w-full h-full relative">
+                    </nuxt-link>
+                    <nuxt-link to="/profile" class="w-full h-full relative">
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                            <div class="item_active">
-
-                                <img src="../assets/images/user_nav.svg" alt="" class="w-5 h-5">
+                            <div :class="props.active === '/profile' ? 'bg-primary-color rounded-lg p-4' : ''+ ' transition-all duration-200 ease-in-out'">
+                                <img v-if="props.active !== '/profile'" src="../assets/images/user_nav.svg" alt="" class="w-5 h-5">
+                                <img v-if="props.active === '/profile'" src="../assets/images/user_nav_fill.svg" alt="" class="w-4 h-4">
                             </div>
                         </div>
-                    </div>
+                    </nuxt-link>
                 </div>
             </div>
 
