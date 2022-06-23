@@ -5,7 +5,6 @@
     <div>
         <nuxt-layout name="main">
             <div class="profile-wrapper h-full relative w-full">
-                <BottomNav active="/profile" />
 
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
@@ -18,7 +17,7 @@
                 <section class="history-profile px-4 pt-20 relative bg-blue-50 h-screen">
                     <div>
                         <div class="bg-white rounded-lg px-4 w-full">
-                           <MoreProfile img="../assets/images/icon_setting.svg" title="Account Settings" alt="img account" />
+                           <MoreProfile link="/profile/settings" img="../assets/images/icon_setting.svg" title="Account Settings" alt="img account" />
                             <hr>
                             <MoreProfile img="../assets/images/icon_give_rating.svg" title="Give Rating" alt="img give rating" />
                         </div>

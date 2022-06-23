@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-order-body mt-1 bg-white px-4 py-3">
+            <div class="card-order-body mt-0.5 bg-white px-4 py-3">
                 <div class="flex items-center">
                     <img src="../../assets/images/doctor_img.png" class="w-14 h-14 rounded-full object-cover mr-3" alt="">
                     <div>

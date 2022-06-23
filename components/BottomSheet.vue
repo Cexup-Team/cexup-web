@@ -19,6 +19,12 @@ import { Ref } from "vue"
         },
         searchIcon : {
             type: Array
+        },
+        type: {
+            type: String
+        },
+        title: {
+            type: String
         }
     })
     
@@ -36,7 +42,7 @@ import { Ref } from "vue"
         () => props.openModal,
           (newopenModal, prevopenModal) => {
           const mapping = props.list
-          s.item = mapping.get(props.select)
+          s.item = mapping?.get(props.select)
           setSheetHeight('auto')
           setIsSheetShow(newopenModal)
           loading.value = true
@@ -100,7 +106,7 @@ import { Ref } from "vue"
 <template>
     <div id="sheet" class="flex flex-col items-center justify-end" aria-hidden="true">
         <div class="overlay"></div>
-        <div class="content flex flex-col" v-if="props.select !== 'date'">
+        <div class="content flex flex-col" v-if="props.select !== 'date' && props.type !== 'blank'">
             <header class="controls">
                 <div class="draggable-area">
                     <div class="draggable-thumb"></div>
@@ -143,6 +149,23 @@ import { Ref } from "vue"
                 </ul>
             </main>
         </div>
+
+        <div class="content flex flex-col" v-if="props.type === 'blank'">
+            <header class="controls">
+                <div class="draggable-area">
+                    <div class="draggable-thumb"></div>
+                </div>
+            </header>
+            <main class="body fill flex flex-col w-full overflow-y-scroll">
+              <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-3">{{props.title}}</h3>
+               <ul class="w-full h-full overflow-y-scroll slide-warpper">
+                   <slot name="bottomSheet"></slot>
+                    
+                </ul>
+            </main>
+        </div>
+
+        <!-- <div class="content flex flex-col" v-if="props.select === 'date'"></div> -->
     </div>
 </template>
 
@@ -205,6 +228,7 @@ import { Ref } from "vue"
         margin: auto;
         padding: 1rem;
         cursor: grab;
+        transform: translateX(-50%);
        
     }
 
