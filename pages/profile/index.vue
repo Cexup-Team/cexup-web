@@ -10,15 +10,17 @@
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-7 mx-6 items-center">
-                        <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">Profile</h1>
-                        <div></div>
+                        <nuxt-link to="/profile/more">
+                            <img src="../../assets/images/more_profile_icon.svg" class="w-2 h-4 cursor-pointer" alt="">
+                        </nuxt-link>
                     </div>
                 </div>
                 <section class="profile-header mt-20">
                     <div class="flex px-5 items-center">
                         <div class="w-20 h-20 rounded-full overflow-hidden mr-4">
-                            <img src="../assets/images/profile_header.png" class="object-cover" alt="">
+                            <img src="../../assets/images/profile_header.png" class="object-cover" alt="">
                         </div>
                         <div class="flex flex-col">
                             <h2 class="text-lg font-semibold font-poppins leading-7">Iqbal Nur Tmvn</h2>
@@ -50,7 +52,7 @@
                         <div class="history-card mt-4">
                             <div class="history-card-body bg-white rounded-xl">
                                 <div class="flex items-start pt-5 px-6">
-                                    <img src="../assets/images/activity_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="../../assets/images/activity_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4 mb-5">
                                         <h2 class="font-poppins font-semibold text-sm">Activity</h2>
                                         <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
@@ -58,7 +60,7 @@
                                 </div>
                                 <hr class="w-full h-0.5 bg-gray-175">
                                 <div class="flex items-start pb-5 pt-5 px-6">
-                                    <img src="../assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="../../assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4">
                                         <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
                                         <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
@@ -70,7 +72,7 @@
                         <div class="history-card mt-4 mb-20">
                             <div class="history-card-body bg-white rounded-xl">
                                 <div class="flex items-start pt-5 px-6">
-                                    <img src="../assets/images/help_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="../../assets/images/help_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4 mb-5">
                                         <h2 class="font-poppins font-semibold text-sm">Activity</h2>
                                         <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
@@ -78,7 +80,7 @@
                                 </div>
                                 <hr class="w-full h-0.5 bg-gray-175">
                                 <div class="flex items-start pb-5 pt-5 px-6">
-                                    <img src="../assets/images/about_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="../../assets/images/about_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4">
                                         <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
                                         <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
