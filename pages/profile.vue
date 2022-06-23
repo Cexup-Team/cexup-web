@@ -7,12 +7,15 @@
             <div class="profile-wrapper h-full relative w-full">
                 <BottomNav active="/profile" />
 
-                <div class="flex justify-between mt-7 mx-6 items-center">
-                    <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                    <h1 class="font-poppins text-xl font-semibold">Profile</h1>
-                    <div></div>
+                <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
+                    
+                    <div class="flex justify-between mt-7 mx-6 items-center">
+                        <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <h1 class="font-poppins text-xl font-semibold">Profile</h1>
+                        <div></div>
+                    </div>
                 </div>
-                <section class="profile-header mt-6">
+                <section class="profile-header mt-20">
                     <div class="flex px-5 items-center">
                         <div class="w-20 h-20 rounded-full overflow-hidden mr-4">
                             <img src="../assets/images/profile_header.png" class="object-cover" alt="">
@@ -42,8 +45,49 @@
                             
                         </div>
                     </div>
-                    <div class="bg-blue-50 h-screen w-full pt-16 px-4">
+                    <div class="bg-blue-50 w-full pt-16 px-4 overflow-y-scroll h-full no-scrollbar">
                         <h2 class="font-semibold font-poppins text-base">History</h2>
+                        <div class="history-card mt-4">
+                            <div class="history-card-body bg-white rounded-xl">
+                                <div class="flex items-start pt-5 px-6">
+                                    <img src="../assets/images/activity_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <div class="ml-4 mb-5">
+                                        <h2 class="font-poppins font-semibold text-sm">Activity</h2>
+                                        <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
+                                    </div>
+                                </div>
+                                <hr class="w-full h-0.5 bg-gray-175">
+                                <div class="flex items-start pb-5 pt-5 px-6">
+                                    <img src="../assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <div class="ml-4">
+                                        <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
+                                        <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="font-semibold font-poppins text-base mt-5">Help</h2>
+                        <div class="history-card mt-4 mb-20">
+                            <div class="history-card-body bg-white rounded-xl">
+                                <div class="flex items-start pt-5 px-6">
+                                    <img src="../assets/images/help_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <div class="ml-4 mb-5">
+                                        <h2 class="font-poppins font-semibold text-sm">Activity</h2>
+                                        <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
+                                    </div>
+                                </div>
+                                <hr class="w-full h-0.5 bg-gray-175">
+                                <div class="flex items-start pb-5 pt-5 px-6">
+                                    <img src="../assets/images/about_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <div class="ml-4">
+                                        <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
+                                        <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                 </section>
 
@@ -58,4 +102,19 @@
     .floating-profile-body {
         box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.09);
     }
+
+    .history-card-body {
+        box-shadow: 0px 2px 14px rgba(0, 0, 0, 0.09);
+    }
+
+      @media only screen and (min-width: 700px) {
+        .nav-bar {
+            top: 0;
+            left: 50%; 
+            margin-left: -255px;
+            width: 510px;   
+
+        }
+    }
+
 </style>
