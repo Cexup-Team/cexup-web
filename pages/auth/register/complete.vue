@@ -116,7 +116,7 @@ import { Ref } from "vue"
               <InputText className="rounded-md"  type="text" placeholder="Village" v-model="state.village" src="../../assets/images/arrow_down.svg" :icon="true" select="village" slc @update:slc-value="slcValue" />
             </div>
              <BottomSheet :openModal="openModal" @update:change-open="changeOpen" @update:change-select="changeSelect" :select="stateBottomSheet.selection" :list="listMap" firstSelect="gender" :choose="state.selection" :searchIcon="searchIcon" />
-             <!-- <BottomSheet :openModal="openModal" @update:change-open="changeOpen" @update:change-select="changeSelect" :select="stateBottomSheet.selection" :list="listMap" firstSelect="gender" :choose="state.selection" type='date' /> -->
+             <!-- <BottomSheet :openModal="openModal" @update:change-open="changeOpen" @update:change-select="changeSelect" :select="stateBottomSheet.selection" :list="listMap" type='blank' /> -->
             <div class="mt-40">
 
             </div>
