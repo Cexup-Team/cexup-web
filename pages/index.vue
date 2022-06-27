@@ -2,6 +2,8 @@
 
 import HealthStatusVue from "../parts/HealthStatus.vue";
 import HealthFeatureVue from "../parts/HealthFeature.vue";
+import BottomNav from '~~/parts/BottomNav.vue';
+
 
       
 </script>
@@ -9,7 +11,8 @@ import HealthFeatureVue from "../parts/HealthFeature.vue";
 <template>
     <div>
         <nuxt-layout name="main">
-            <div class="dashboard-wrapper h-full">
+            <div class="dashboard-wrapper h-full relative">
+                <BottomNav active="/" />
                 
                 <section class="pt-2">
 
