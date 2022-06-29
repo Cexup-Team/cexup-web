@@ -43,9 +43,9 @@ import BottomNav from '~~/parts/BottomNav.vue';
                                 <h2 class="font-poppins text-base leading-6 font-medium mb-1">Kesehatanmu Nomor Satu!</h2>
                                 <p class="text-sm text-gray-350 font-poppins font-normal leading-5">Temukan solusi disini untuk tetap sehat!</p>
                             </div>
-                            <div class="">
+                            <nuxt-link to="/telemedicine" class="">
                                 <img class="w-8 h-8" src="../assets/images/icon_right_background_rounded.svg" alt="">
-                            </div>
+                            </nuxt-link>
                         </div>
                         <div class="doctor-list w-full mb-4">
                             <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">

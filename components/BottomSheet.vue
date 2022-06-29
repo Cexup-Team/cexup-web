@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Ref } from "vue"
+import DateTimePicker, { DatePicker, TimePicker } from 'vue-drumroll-datetime-picker'
+import 'vue-drumroll-datetime-picker/dist/style.css'
 
     const props = defineProps({
         openModal: {
@@ -29,7 +31,8 @@ import { Ref } from "vue"
     })
     
     const s = reactive({
-      item : null
+      item : null,
+      now : '12/06/2022'
     })
 
 
@@ -125,7 +128,6 @@ import { Ref } from "vue"
         const y = touchPosition(event).pageY
         const deltaY = dragPosition - y
         // const deltaHeight = deltaY / offsetHeight * 100
-        console.log(y)
         // console.log(deltaHeight)
         // setSheetHeight(sheetHeight + deltaHeight)
         // dragPosition = y
@@ -225,7 +227,7 @@ import { Ref } from "vue"
             <main class="body fill flex flex-col w-full overflow-y-scroll">
               <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-3">Choose Birth Date</h3>
                <div class="w-full h-full overflow-y-scroll slide-date-wrapper p-5">
-                    <ul class="flex justify-center items-center w-full h-auto">
+                    <!-- <ul class="flex justify-center items-center w-full h-auto">
                        <li class="slide-date-item flex flex-col items-center w-full">
                             <span class="border-b-4 border-primary-color p-4 text-base font-poppins font-medium">21</span>
                             <span class="border-b-4 border-primary-color p-4 text-base font-poppins font-medium">22</span>
@@ -243,7 +245,8 @@ import { Ref } from "vue"
                        </li>
                        
                        
-                    </ul>
+                    </ul> -->
+
                     
                 </div>
             </main>

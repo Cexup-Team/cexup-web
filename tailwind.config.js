@@ -20,11 +20,15 @@ module.exports = {
         'gray-225' : '#E8EDF1',
         'gray-350': '#8A8A8E',
         'gray-550' : "#E6E6E6",
-        'blue-650' : "#4285F4",
         'blue-50' : "#F5FDFF",
+        'blue-150' : "#EBFBFF",
         'blue-350' : "#4ABBCD",
         'blue-450' : "#24D4DF",
+        'blue-650' : "#4285F4",
+
         'red-650' : "#EF716B",
+        'teal-550' : "#52D16B",
+        'teal-750' : "#0E852E",
         'primary-color' : '#008CA3'
     
         
