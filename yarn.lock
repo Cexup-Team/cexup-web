@@ -5784,10 +5784,10 @@ vue-demi@*:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"
   integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
 
-vue-drumroll-datetime-picker@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/vue-drumroll-datetime-picker/-/vue-drumroll-datetime-picker-1.0.5.tgz#dd34f80c0f8fee7c9d60b54a1867eab2334c9e08"
-  integrity sha512-YSD3nXvZjIBcilXylpFZwCjaZkW/uVPe1F20NTP730m0gfky7e/YXXaw6xzbmu3gMk3HSz94STD0rlDWDWonfA==
+vue-drumroll-datetime-picker@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-drumroll-datetime-picker/-/vue-drumroll-datetime-picker-1.0.0.tgz#7048b53a6a043e0840b329f4ca6cd45380183857"
+  integrity sha512-XDcNQiGO9xbGRN9PCdUpjqv3QzpXLOr2d/6C602M52itkGBKe2cDNaKN1Zzl05ozznPLIkFgOt65zpgGWD9A0Q==
   dependencies:
     "@mdi/js" "^5.9.55"
     dayjs "^1.10.4"

@@ -55,10 +55,10 @@ import 'vue-drumroll-datetime-picker/dist/style.css'
             setTimeout(() => {
                 const slideDateWrapper = document.getElementsByClassName("slide-date-item")
             
-            slideDateWrapper[0].addEventListener("mousedown", onDragStart)
-            slideDateWrapper[0].addEventListener("touchstart", onDragStart)
-            slideDateWrapper[0].addEventListener("mousemove", onDragMove)
-            slideDateWrapper[0].addEventListener("touchmove", onDragMove)
+            slideDateWrapper[0]?.addEventListener("mousedown", onDragStart)
+            slideDateWrapper[0]?.addEventListener("touchstart", onDragStart)
+            slideDateWrapper[0]?.addEventListener("mousemove", onDragMove)
+            slideDateWrapper[0]?.addEventListener("touchmove", onDragMove)
             }, 500);
                 
           

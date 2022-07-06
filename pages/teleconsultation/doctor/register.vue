@@ -63,7 +63,7 @@ export default {
                         </div>
                     </section>
                     <div class="mt-12 mb-10">
-                        <Button className="w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Checkout" link="/teleconsultation/doctor/register" />
+                        <Button className="w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Checkout" link="/teleconsultation/doctor/checkout" />
                     </div>
                 </div>
         </div>
