@@ -58,7 +58,7 @@
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
                         <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                        <h1 class="font-poppins text-xl font-semibold">Order</h1>
+                        <h1 class="font-poppins text-xl font-semibold">Checkout</h1>
                         <div></div>
                     </div>
                 </div>
@@ -148,7 +148,10 @@
                             <h5 class="text-primary-color font-semibold font-poppins">Rp 5.000</h5>
                         </div>
                         <nuxt-link to="/teleconsultation/order/success">
-                            <button :class="'text-white font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg '+(state.selected ? 'bg-primary-color' : 'bg-gray-550')">Pay now</button>
+                            <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88">
+                                
+                                <button :class="'text-white font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg '+(state.selected ? 'bg-primary-color' : 'bg-gray-550')">Pay now</button>
+                            </nuxt-link>
 
                         </nuxt-link>
                     </div>

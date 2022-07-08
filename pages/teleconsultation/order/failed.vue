@@ -25,7 +25,7 @@
             
                 </div>
 
-                <div class="mt-4 flex items-center absolute bottom-0 px-4 w-full mb-9">
+                <div class="mt-4 flex items-center absolute bottom-0 px-4 w-full mb-20">
                     <button class="w-3/6 bg-blue-150 mr-3 font-poppins px-4 py-3 font-medium text-sm text-primary-color rounded-xl">Back to browse</button>
                     <button class="w-3/6 font-poppins px-4 py-3 font-medium text-sm text-white rounded-xl bg-primary-color">Order Again</button>
                 </div>
