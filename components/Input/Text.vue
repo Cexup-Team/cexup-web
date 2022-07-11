@@ -65,6 +65,7 @@ function showPassword() {
       
       <img :src="props.src" v-if="props.icon === true && type === 'password'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
       <img :src="props.src_eye" v-if="props.icon === true && type === 'text'" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
+      <img :src="props.src" v-if="props.icon === true" class="img-input-text absolute right-3 z-10 p-1 transition-all duration-300" alt="" />
       <input v-if="props.slc === false" :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
       <input v-if="props.slc === true" :typeselect="props.select"  :type="type" :value="modelValue" v-on:focus="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" readonly />
    
