@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Ref } from "vue"
+import DateTimePicker, { DatePicker, TimePicker } from 'vue-drumroll-datetime-picker'
+import 'vue-drumroll-datetime-picker/dist/style.css'
 
     const props = defineProps({
         openModal: {
@@ -29,7 +31,8 @@ import { Ref } from "vue"
     })
     
     const s = reactive({
-      item : null
+      item : null,
+      now : '12/06/2022'
     })
 
 
@@ -52,10 +55,10 @@ import { Ref } from "vue"
             setTimeout(() => {
                 const slideDateWrapper = document.getElementsByClassName("slide-date-item")
             
-            slideDateWrapper[0].addEventListener("mousedown", onDragStart)
-            slideDateWrapper[0].addEventListener("touchstart", onDragStart)
-            slideDateWrapper[0].addEventListener("mousemove", onDragMove)
-            slideDateWrapper[0].addEventListener("touchmove", onDragMove)
+            slideDateWrapper[0]?.addEventListener("mousedown", onDragStart)
+            slideDateWrapper[0]?.addEventListener("touchstart", onDragStart)
+            slideDateWrapper[0]?.addEventListener("mousemove", onDragMove)
+            slideDateWrapper[0]?.addEventListener("touchmove", onDragMove)
             }, 500);
                 
           
@@ -125,7 +128,6 @@ import { Ref } from "vue"
         const y = touchPosition(event).pageY
         const deltaY = dragPosition - y
         // const deltaHeight = deltaY / offsetHeight * 100
-        console.log(y)
         // console.log(deltaHeight)
         // setSheetHeight(sheetHeight + deltaHeight)
         // dragPosition = y
@@ -163,13 +165,13 @@ import { Ref } from "vue"
                     <div class="draggable-thumb"></div>
                 </div>
             </header>
-            <main class="body fill flex flex-col w-full overflow-y-scroll" v-if="loading === true">
+            <main class="body fill flex flex-col w-full overflow-y-scroll no-scrollbar" v-if="loading === true">
               <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-6">{{ props.select.charAt(0).toUpperCase() + props.select.slice(1) }}</h3>
               <div class="relative h-16 max-h-16 min-h-max mb-5" v-if="props.searchIcon.indexOf(props.select) > -1">
                   <input class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search" type="text">
                   <img src="../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
               </div>
-                <ul class="w-full h-full overflow-y-scroll">
+                <ul class="w-full h-full overflow-y-scroll no-scrollbar">
                     <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in s.item" :key="index">
                         <p :class="'text-base leading-6 font-poppins '+(props.choose[props.select] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
                         <img v-if="props.choose[props.select] === text" src="../assets/images/check_with_bg.svg" class="m-1" alt="" />
@@ -207,12 +209,12 @@ import { Ref } from "vue"
                     <div class="draggable-thumb"></div>
                 </div>
             </header>
-            <main class="body fill flex flex-col w-full overflow-y-scroll">
+            <main class="body fill flex flex-col w-full overflow-y-scroll no-scrollbar">
               <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-3">{{props.title}}</h3>
-               <ul class="w-full h-full overflow-y-scroll">
+               <div class="w-full h-full overflow-y-scroll">
                    <slot name="bottomSheet"></slot>
                     
-                </ul>
+                </div>
             </main>
         </div>
 
@@ -225,7 +227,7 @@ import { Ref } from "vue"
             <main class="body fill flex flex-col w-full overflow-y-scroll">
               <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-3">Choose Birth Date</h3>
                <div class="w-full h-full overflow-y-scroll slide-date-wrapper p-5">
-                    <ul class="flex justify-center items-center w-full h-auto">
+                    <!-- <ul class="flex justify-center items-center w-full h-auto">
                        <li class="slide-date-item flex flex-col items-center w-full">
                             <span class="border-b-4 border-primary-color p-4 text-base font-poppins font-medium">21</span>
                             <span class="border-b-4 border-primary-color p-4 text-base font-poppins font-medium">22</span>
@@ -243,7 +245,8 @@ import { Ref } from "vue"
                        </li>
                        
                        
-                    </ul>
+                    </ul> -->
+
                     
                 </div>
             </main>
@@ -337,6 +340,16 @@ import { Ref } from "vue"
 
     .slide-date-wrapper .slide-date-item > span:nth-child(3) {
         color: #8A8A8E;
+    }
+
+    @media only screen and (min-width: 700px) {
+         #sheet {
+            top: 0;
+            left: 50%; 
+            margin-left: -255px;
+            width: 510px;   
+
+        }
     }
     
     
