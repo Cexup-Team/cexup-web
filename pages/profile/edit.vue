@@ -27,6 +27,7 @@
                         <div class="input-form">
                             <InputText className="rounded-md" type="text" placeholder="Name" />
                         </div>
+                        
                     </div>
                 </section>
             </div>
