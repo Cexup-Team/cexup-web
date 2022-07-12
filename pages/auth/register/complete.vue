@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref } from "vue"
+    import { Ref } from "vue"
 
     interface CompleteState{
         slcValue : string,
