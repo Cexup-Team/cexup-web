@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import Tabs from '~~/parts/Tabs.vue';
     import BottomNav from '~~/parts/BottomNav.vue';
+
 </script>
 <template>
     <div>
@@ -46,9 +47,16 @@
                                 <CardExplorePackage img="../../assets/images/image-package-obgyn.png" title="Monitoring Hamil" subTitle="Checkup kehamilan dokter obygn 2x/1bln " price="Rp200.000" duration="1 bln" />
                             </div>
                         </div>
-                        <div class="tab-body-item">
-                            <h2>Call Doctor</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem tempore corrupti eius rerum dolore, natus id, consequuntur magni deleniti alias et delectus porro corporis optio nisi aliquid! Ad, natus?</p>
+                        <div class="tab-body-item px-4 pb-44 w-full">
+                            <h2 class="text-base font-poppins font-medium text-gray-350 mt-5">Paket Langganan</h2>
+                            <div class="mt-4">
+                                <CardMySubscribePackage title="Stay Healthy Silver" price="Rp45.000/ Bulan" duration="04 Jun 2022" status />
+                            </div>
+                             <div class="mt-4">
+                                <CardMySubscribePackage title="Stay Healthy Gold" price="Rp60.000/ Bulan" duration="31 Jun 2022" />
+                            </div>
+
+                            <div class="mt-10"></div>
                         </div>
                 
                     </template>
