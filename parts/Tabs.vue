@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+
+    import {ref} from 'vue';
     defineProps({
         bgBody : {
             type: String
@@ -7,61 +9,70 @@
     })
 
 
+        const tabHeader = ref(null);
+        const tabBody = ref(null)
+        const tabIndicator = ref(null)
+
     onMounted(() => {
-        
-        setTimeout(() => {
-            let tabHeader = document.getElementsByClassName("tab-header")[0]
-            let tabIndicator = document.getElementsByClassName("tab-indicator")[0]
-            let tabBody = document.getElementsByClassName("tab-body")[0]
 
-            const countItem = tabHeader.getElementsByTagName("div").length
-
-            let root = document.querySelector(':root');
-
-            root.style.setProperty('--countItem', countItem);
-
-        
-            let tabsPane = tabHeader.getElementsByTagName("div")
-            console.log(tabsPane)
-            for (let i = 0; i < tabsPane.length; i++) {
-                tabsPane[i].addEventListener("click", function() {
-                        tabHeader.getElementsByClassName("active")[0].classList.remove("active")
-                        tabsPane[i].classList.add("active")
-                        tabBody.getElementsByClassName("active")[0].classList.remove("active")
-                        tabBody.getElementsByClassName("tab-body-item")[i].classList.add("active")
     
-                        tabIndicator.style.left = `calc(calc(100%/${countItem}) * ${i}) `
-                        
-                })
-            }
+        
+        
+
+
+        // console.log(tabHeader.value)
+        // let tabHeader = document.getElementsByClassName("tab-header")[0]
+        // let tabIndicator = document.getElementsByClassName("tab-indicator")[0]
+        // let tabBody = document.getElementsByClassName("tab-body")[0]
+
+        const countItem = tabHeader.value?.getElementsByTagName("div").length
+
+        let root = document.querySelector(':root');
+
+        root.style.setProperty('--countItem', countItem);
+
+    
+        let tabsPane = tabHeader.value.getElementsByTagName("div")
+
+        for (let i = 0; i < tabsPane.length; i++) {
+            tabsPane[i].addEventListener("click", function() {
+                    tabHeader.value?.getElementsByClassName("active")[0].classList.remove("active")
+                    tabsPane[i].classList.add("active")
+                    tabBody.value?.getElementsByClassName("active")[0].classList.remove("active")
+                    tabBody.value?.getElementsByClassName("tab-body-item")[i].classList.add("active")
+
+                    tabIndicator.value.style.left = `calc(calc(100%/${countItem}) * ${i}) `
+                    
+            })
+        }
+        
             
-            
-        }, 300);
 
 
-        setTimeout(() => {
-            let tabStatus = document.getElementsByClassName("tab-status")[0]
-            let tabPaneStatus = document.getElementsByClassName("tab-status-item")
 
-            for (let i = 0; i < tabPaneStatus.length; i++) {
-                tabPaneStatus[i].addEventListener("click", function() {
-                    tabStatus.getElementsByClassName("active_tab_filter")[0].classList.remove("active_tab_filter")
-                    tabPaneStatus[i].classList.add("active_tab_filter")
-                })
-            }
-        }, 300);
+
+        let tabStatus = document?.getElementsByClassName("tab-status")[0]
+        let tabPaneStatus = document?.getElementsByClassName("tab-status-item")
+
+        for (let i = 0; i < tabPaneStatus.length; i++) {
+            tabPaneStatus[i]?.addEventListener("click", function() {
+                tabStatus?.getElementsByClassName("active_tab_filter")[0].classList.remove("active_tab_filter")
+                tabPaneStatus[i].classList.add("active_tab_filter")
+            })
+        }
+
 
     })
 </script>
 
 <template>
     <div class="tabs absolute top-1/2 left-1/2 mt-12 w-full">
-        <div class="tab-header">
+        <div class="tab-header" ref="tabHeader">
             <slot name="tabHeader"></slot>
         </div>
-        <div class="tab-indicator relative transition-all duration-300 bg-primary-color left-0 rounded-md h-0.5"></div>
+        <div class="tab-indicator relative transition-all duration-300 bg-primary-color left-0 rounded-md h-0.5" ref="tabIndicator"></div>
         <slot name="tabFilter"></slot>
-        <div :class="'tab-body relative h-full w-full overflow-y-scroll no-scrollbar '+(bgBody)">
+        <div ref="tabBody" :class="'tab-body relative h-full w-full overflow-y-scroll no-scrollbar '+(bgBody)">
             <slot name="tabBody"></slot>
             
         </div>
