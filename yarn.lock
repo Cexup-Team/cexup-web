@@ -358,6 +358,11 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
+"@mdi/js@^5.9.55":
+  version "5.9.55"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-5.9.55.tgz#8f5bc4d924c23f30dab20545ddc768e778bbc882"
+  integrity sha512-BbeHMgeK2/vjdJIRnx12wvQ6s8xAYfvMmEAVsUx9b+7GiQGQ9Za8jpwp17dMKr9CgKRvemlAM4S7S3QOtEbp4A==
+
 "@netlify/functions@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-1.0.0.tgz#5b6c02fafc567033c93b15a080cc021e5f10f254"
@@ -1809,6 +1814,15 @@ data-uri-to-buffer@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
   integrity sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==
+
+"dayjs-jp-format@git+https://github.com/plusone-masaki/dayjs-jp-format.git#dist":
+  version "1.0.2"
+  resolved "git+https://github.com/plusone-masaki/dayjs-jp-format.git#36d3e19dbd9717bfec406f1c2c6da1421f26f8d6"
+
+dayjs@^1.10.4:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
+  integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
 debug@2.6.9:
   version "2.6.9"
@@ -5770,6 +5784,16 @@ vue-demi@*:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"
   integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
 
+vue-drumroll-datetime-picker@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-drumroll-datetime-picker/-/vue-drumroll-datetime-picker-1.0.0.tgz#7048b53a6a043e0840b329f4ca6cd45380183857"
+  integrity sha512-XDcNQiGO9xbGRN9PCdUpjqv3QzpXLOr2d/6C602M52itkGBKe2cDNaKN1Zzl05ozznPLIkFgOt65zpgGWD9A0Q==
+  dependencies:
+    "@mdi/js" "^5.9.55"
+    dayjs "^1.10.4"
+    dayjs-jp-format "https://github.com/plusone-masaki/dayjs-jp-format.git#dist"
+    vue-scroll-picker "0.8.0"
+
 vue-router@4:
   version "4.0.16"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.16.tgz#9477beeeef36e80e04d041a1738801a55e6e862e"
@@ -5783,6 +5807,11 @@ vue-router@^4.0.15:
   integrity sha512-xa+pIN9ZqORdIW1MkN2+d9Ui2pCM1b/UMgwYUCZOiFYHAvz/slKKBDha8DLrh5aCG/RibtrpyhKjKOZ85tYyWg==
   dependencies:
     "@vue/devtools-api" "^6.0.0"
+
+vue-scroll-picker@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/vue-scroll-picker/-/vue-scroll-picker-0.8.0.tgz#9e55feb2731f4fbe943977856c29d0b62eddc94e"
+  integrity sha512-h9EcLxyVeYBm9eUJdG/uCQpSJI8ReNr2F6uVlwGWz2c56hNerySfkPytSymKo13xFAxaSJ132bJhSgJ+hQzoOA==
 
 vue3-apexcharts@^1.4.1:
   version "1.4.1"
