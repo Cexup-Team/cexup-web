@@ -25,7 +25,9 @@
                         <div class="flex flex-col">
                             <h2 class="text-lg font-semibold font-poppins leading-7">Iqbal Nur Tmvn</h2>
                             <h3 class="text-xs font-poppins text-gray-350">iqbalnunrhaqbinkidi@gmail.com</h3>
-                            <button class="px-2 py-2 border border-gray-150 font-poppins w-fit rounded-xl text-primary-color font-medium text-sm mt-3">Edit Profile</button>
+                            <nuxt-link to="/profile/edit">
+                                <button class="px-2 py-2 border border-gray-150 font-poppins w-fit rounded-xl text-primary-color font-medium text-sm mt-3">Edit Profile</button>
+                            </nuxt-link>
                         </div>
                     </div>
                 </section>
