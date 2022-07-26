@@ -22,7 +22,7 @@
     })
 </script>
 <template>
-  <div class="aticle-item rounded-lg w-80 mr-4 h-auto p-4">
+  <div class="aticle-item rounded-lg w-80 mr-4 h-auto p-4 bg-white">
         <div class="flex justify-between items-center">
             <div class="w-3/6">
                 <h2 class="text-sm font-medium text-primary-color font-poppins mb-2">{{ title }}</h2>

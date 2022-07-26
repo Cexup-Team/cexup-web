@@ -120,8 +120,8 @@
                         <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88" class="w-full">
                             <button class="text-white w-full font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg bg-gray-550">Waiting Meeting</button>
                         </nuxt-link>
-                        <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88" class="w-full mb-3">
-                            <button class="text-red-650 w-full font-poppins outline-none font-medium text-sm mt-5 px-10 rounded-lg bg-white">Cancel</button>
+                        <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88" class="w-full mb-3 mt-5">
+                            <button class="text-red-650 w-full font-poppins outline-none font-medium text-sm px-10 rounded-lg bg-white">Cancel</button>
                         </nuxt-link>
 
                     
