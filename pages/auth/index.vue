@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserStore } from '~~/stores/user-store';
+
 
 interface LoginState {
     email : string,
@@ -9,6 +11,12 @@ const login: LoginState = reactive({
     email : "",
     password: ""
 })
+
+const user = useUserStore()
+
+function signIn(){
+    user.signIn("","")
+}
 
 </script>
 
@@ -38,7 +46,7 @@ const login: LoginState = reactive({
             <Button className="mt-7 w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Sign In" />
             <p class="w-full text-center mt-6 text-gray-250 font-medium text-sm">OR</p>
             <div class="mt-6">
-                <Button class="w-full text-center bg-blue-650 text-white py-3 font-poppins rounded-lg text-base" title="Continue with Google" icon />
+                <Button @click="signIn" class="w-full text-center bg-blue-650 text-white py-3 font-poppins rounded-lg text-base" title="Continue with Google" icon />
             </div>
 
         </div>
