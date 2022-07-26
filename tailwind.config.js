@@ -6,6 +6,7 @@ module.exports = {
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
+    // "./nuxt.config.{js,ts}",
   ],
   darkMode: 'class', // or 'media' or 'class'
   presets: [],
@@ -15,9 +16,11 @@ module.exports = {
       colors: {
         'gray-150': '#DBDFE3',
         'gray-175' : '#D8D8D8',
+        'gray-185' : "#DBDADA",
         'gray-250' : "#9695AD",
         'gray-225' : '#E8EDF1',
         'gray-350': '#8A8A8E',
+        'gray-375' : "#979797",
         'gray-450' : '#F4F4F4',
         'gray-550' : "#E6E6E6",
         'blue-50' : "#F5FDFF",
@@ -25,6 +28,7 @@ module.exports = {
         'blue-175' : "#CDF2F9",
         'blue-350' : "#4ABBCD",
         'blue-450' : "#24D4DF",
+        'blue-550' : "#35B8CD",
         'blue-650' : "#4285F4",
         'indigo-850' : "#555555",
         
