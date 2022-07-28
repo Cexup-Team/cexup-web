@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import { useStorage } from '@vueuse/core'
+import { useSession } from "~~/composables/useSession"
 
-// const userSession = useUserSession()
 export const useUserStore = defineStore('userStore',{
     state:()=>({
 
@@ -12,7 +11,7 @@ export const useUserStore = defineStore('userStore',{
             const {success,message, data} = await api.signIn(email,password)
             console.log(data)
             if(success){
-                localStorage.setItem("token-cexup", data.access_token)
+                useSession().setItem("cexup-session", data.access_token)
             }
         }
     }
