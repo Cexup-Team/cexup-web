@@ -15,7 +15,8 @@ const login: LoginState = reactive({
 const user = useUserStore()
 
 function signIn(){
-    user.signIn("","")
+    user.signIn("samad_abraham123@gmail.com","password")
+    
 }
 
 </script>
@@ -43,7 +44,7 @@ function signIn(){
                 <span class="text-xs font-poppins font-medium text-primary-color">Forgot password?</span>
 
             </div>
-            <Button className="mt-7 w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Sign In" />
+            <Button @click="signIn" className="mt-7 w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Sign In" />
             <p class="w-full text-center mt-6 text-gray-250 font-medium text-sm">OR</p>
             <div class="mt-6">
                 <Button @click="signIn" class="w-full text-center bg-blue-650 text-white py-3 font-poppins rounded-lg text-base" title="Continue with Google" icon />

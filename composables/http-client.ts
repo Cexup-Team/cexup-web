@@ -14,7 +14,7 @@ export class Api implements api{
 
     async get(url: string): Promise<BaseResponse> {
 
-        return await fetch(`${import.meta.env.BASE_URL_API}/${url}`, {
+        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -39,19 +39,20 @@ export class Api implements api{
     }
 
     async post(url: string, body: any): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.BASE_URL_API}/${url}`, {
+        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'POST',
             body:JSON.stringify(body),
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
+                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX'
             })
         })
             .then((res) => res.json())
             .then((val) => {
                 return {
-                    success: false,
+                    success: val.success,
                     message: "",
-                    data: ""
+                    data: val.data
                 }
             })
             .catch(e => {
@@ -63,11 +64,12 @@ export class Api implements api{
             })
     }
     async postForm(url: string, body: FormData): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.BASE_URL_API}/${url}`, {
+        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'POST',
             body:body,
             headers: new Headers({
                 'Content-Type': 'application/form-data; charset=UTF-8',
+                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX'
             })
         })
             .then((res) => res.json())
@@ -88,7 +90,7 @@ export class Api implements api{
     }
 
     async put(url: string, body: any): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.BASE_URL_API}/${url}`, {
+        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'PUT',
             body:JSON.stringify(body),
             headers: new Headers({
@@ -112,7 +114,7 @@ export class Api implements api{
             })
     }
     async delete(url: string): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.BASE_URL_API}/${url}`, {
+        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',

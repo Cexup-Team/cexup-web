@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
+import { useStorage } from '@vueuse/core'
 
+// const userSession = useUserSession()
 export const useUserStore = defineStore('userStore',{
     state:()=>({
 
@@ -7,9 +9,10 @@ export const useUserStore = defineStore('userStore',{
     actions:{
        async signIn(email:string,password:string){
             const api = useApi()
-            const {success,message} = await api.signIn(email,password)
+            const {success,message, data} = await api.signIn(email,password)
+            console.log(data)
             if(success){
-                //todo show toas or whatever
+                localStorage.setItem("token-cexup", data.access_token)
             }
         }
     }
