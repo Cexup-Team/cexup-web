@@ -49,6 +49,12 @@ export class Api implements api{
         })
             .then((res) => res.json())
             .then((val) => {
+                if (!val.success) {
+                    return Promise.reject({
+                        message: val.message
+                    });
+                    
+                }
                 return {
                     success: val.success,
                     message: "",
@@ -59,7 +65,7 @@ export class Api implements api{
                 return {
                     success: false,
                     message: e.message,
-                    data: ""
+                    data: null
                 }
             })
     }

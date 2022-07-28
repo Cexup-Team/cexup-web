@@ -17,5 +17,6 @@ build: {
   modules:[
     "@pinia/nuxt",
     "@vueuse/nuxt",
+    '@tailvue/nuxt',
   ],
 })

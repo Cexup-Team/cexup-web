@@ -9,9 +9,17 @@ export const useUserStore = defineStore('userStore',{
        async signIn(email:string,password:string){
             const api = useApi()
             const {success,message, data} = await api.signIn(email,password)
-            console.log(data)
+            console.log(success)
             if(success){
-                useSession().setItem("cexup-session", data.access_token)
+                useSession().setItem("cexup-session ", data.access_token)
+                useSession().setItem("cexup-user ", data.user)
+                return {
+                    data : data.access_token
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
             }
         }
     }

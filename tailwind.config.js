@@ -6,6 +6,7 @@ module.exports = {
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
+    "node_modules/tailvue/dist/tailvue.es.js",
     // "./nuxt.config.{js,ts}",
   ],
   darkMode: 'class', // or 'media' or 'class'
@@ -32,6 +33,7 @@ module.exports = {
         'blue-650' : "#4285F4",
         'indigo-850' : "#555555",
         
+        'red-550' : "#FC4B40",
         'red-650' : "#EF716B",
         'teal-550' : "#52D16B",
         'teal-750' : "#0E852E",
