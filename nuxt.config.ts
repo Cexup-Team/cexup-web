@@ -14,5 +14,9 @@ build: {
       },
     },
   },
-  modules:["@pinia/nuxt"],
+  modules:[
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    '@tailvue/nuxt',
+  ],
 })

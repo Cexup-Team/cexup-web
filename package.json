@@ -7,6 +7,8 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@tailvue/nuxt": "^0.1.62",
+    "@vueuse/nuxt": "^9.0.0",
     "autoprefixer": "^10.4.7",
     "nuxt": "3.0.0-rc.3",
     "postcss": "^8.4.14",
@@ -14,12 +16,14 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.1.9",
+    "@vueuse/core": "^9.0.0",
     "apexcharts": "^3.35.3",
     "npm": "^8.12.2",
     "pinia": "^2.0.14",
     "swiper": "^8.2.4",
     "vue-drumroll-datetime-picker": "1.0.0",
     "vue-router": "4",
+    "vue-toast-notification": "^0.6.3",
     "vue3-apexcharts": "^1.4.1"
   }
 }

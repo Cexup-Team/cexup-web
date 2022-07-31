@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ref } from "vue"
-
+import { useSessionStorage } from '@vueuse/core'
 
 let disableButton: Ref<string> = ref("disabled")
 let className: Ref<string> = ref("mt-8 w-full text-center text-white font-poppins py-3 rounded-lg font-medium text-base bg-gray-550 transition-all duration-300")
@@ -29,6 +29,9 @@ watch(() => [register.name, register.email, register.password, register.confirmP
      className.value = className.value.replace("bg-primary-color","bg-gray-550")
   }
 })
+
+
+
 
 
 </script>
