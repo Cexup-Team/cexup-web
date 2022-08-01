@@ -9,7 +9,6 @@ export const useUserStore = defineStore('userStore',{
        async signIn(email:string,password:string){
             const api = useApi()
             const {success,message, data} = await api.signIn(email,password)
-            console.log(success)
             if(success){
                 useSession().setItem("cexup-session ", data.access_token)
                 useSession().setItem("cexup-user ", data.user)
@@ -21,6 +20,13 @@ export const useUserStore = defineStore('userStore',{
                     message: message
                 });       
             }
+        },
+
+        async signUp(name:string, emai:string, password:string){
+            const api = useApi()
+            const {success, message, data} = await api.signUp(name, emai, password)
+            console.log(success)
+            console.log(data)
         }
     }
 

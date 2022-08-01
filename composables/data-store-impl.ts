@@ -20,4 +20,18 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+    async signUp(name: string, email: string, password: string): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.post('register/patient', {
+            name: name,
+            email: email,
+            password: password
+        })
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
 }
