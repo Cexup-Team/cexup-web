@@ -37,9 +37,13 @@ const props = defineProps({
   },
   suffixText : {
     type: [String]
-  }
+  },
+  borderValidation: {
+    type: [String],
+  },
 
 })
+
 
 let type: Ref<String> = ref('text')
 
@@ -61,6 +65,12 @@ function showPassword() {
 }
 
 
+    let root = document.querySelector(':root');
+
+    // console.log(root)
+    // root.style.setProperty('--borderValidator', borderClassName);
+
+
 
 </script>
 <template>
@@ -70,7 +80,7 @@ function showPassword() {
       <img :src="props.src_eye" v-if="props.icon === true && type === 'text' && !props.suffixText" class="img-input-text absolute right-3 z-50 p-1 transition-all duration-300" alt="" @click="showPassword">
       <img :src="props.src" v-if="props.icon === true" class="img-input-text absolute right-3 z-10 p-1 transition-all duration-300" alt="" />
       <span v-if="props.suffixText" class="absolute right-4 z-10 transition-all duration-300 font-poppins text-gray-350 text-sm top-0 h-full flex items-center ">{{suffixText}}</span>
-      <input v-if="props.slc === false" :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
+      <input v-if="props.slc === false" :type="type" :value="modelValue" v-on:input="updateValue" placeholder=" " :class="'input-text outline-none border focus:border-primary-color w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full '+props.className" />
       <input v-if="props.slc === true" :typeselect="props.select"  :type="type" :value="modelValue" v-on:focus="updateValue" placeholder=" " :class="'input-text outline-none border border-gray-150 w-full bg-none p-4  font-poppins text-sm absolute top-0 left-0 h-full '+props.className" readonly />
    
       <label for="" class="label-text absolute font-poppins pointer-events-none left-4 top-4 px-1 text-gray-350 bg-white text-sm transition-all duration-300">{{props.placeholder}}</label> 
@@ -101,12 +111,9 @@ function showPassword() {
     }
 
     .input-text:not(:placeholder-shown) {
-      border: 1px solid #008CA3;
-    }
+      /* border: 1px solid var(--borderValidator); */
+    } 
 
-    .input-text:focus {
-      border: 1px solid #008CA3;
-    }
 
     .img-input-text {
         top: 28%;
