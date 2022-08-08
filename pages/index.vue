@@ -1,8 +1,51 @@
 <script setup lang="ts">
 
-import HealthStatusVue from "../parts/HealthStatus.vue";
-import HealthFeatureVue from "../parts/HealthFeature.vue";
-import BottomNav from '~~/parts/BottomNav.vue';
+    import HealthStatusVue from "../parts/HealthStatus.vue";
+    import HealthFeatureVue from "../parts/HealthFeature.vue";
+    import BottomNav from '~~/parts/BottomNav.vue';
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useDashboardStore } from '~~/stores/dashboard-store';
+    import { useUserStore } from '~~/stores/user-store';
+
+
+    const dashboard = useDashboardStore()
+    const user = useUserStore()
+    const $toast = useToast()
+    const router = useRouter()
+
+    const stateDoctor = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+
+    const getListDoctor = (size) => {
+        stateDoctor.isLoading = true
+        dashboard.getListDoctor(size).then(
+            res => {
+                stateDoctor.isData = res.data
+                stateDoctor.isLoading = false
+                stateDoctor.isStatus = "success"
+                console.log(stateDoctor.isData)
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateDoctor.isLoading = false
+                stateDoctor.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
+
+    onMounted(() => {
+        getListDoctor(4)
+        
+    })
 
 
       
@@ -48,11 +91,24 @@ import BottomNav from '~~/parts/BottomNav.vue';
                             </nuxt-link>
                         </div>
                         <div class="doctor-list w-full mb-4">
-                            <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
-                                <CardDoctor title="dr Yakob Togar" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor title="dr Iqbal Nur Haq Binkidi" subTitle="Cardiac" price="Rp. 89.999.999"  icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor  title="dr Wati" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor title="dr Ayu Alga" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
+                            
+                            <div v-if="stateDoctor.isLoading">
+                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
+                                    <div v-for="(i, index) in 4" :key="index">
+                                        <ShimmerCardDoctor />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div v-if="!stateDoctor.isLoading && stateDoctor.isStatus === 'success'">
+                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
+                                    <div v-for="(item, index) in stateDoctor.isData" :key="index">
+                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" />
+                                    </div>
+                                </div>
+                                <!-- <CardDoctor title="dr Iqbal Nur Haq Binkidi" subTitle="Cardiac" price="Rp. 89.999.999"  icon="../../assets/images/dummy_doctor.png" />
+                                <CardDoctor  title="dr Wati" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
+                                <CardDoctor title="dr Ayu Alga" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" /> -->
                             </div>
                         </div>
                     </div>

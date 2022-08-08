@@ -80,4 +80,15 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+
+    async getListDoctor(size): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`doctor?data=${size}`)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
 }

@@ -15,4 +15,6 @@ interface DataStore{
         district_id?: string, 
         village_id?: string
     ): Promise<{success:Boolean,message:string,data:any}>
+    // 
+    getListDoctor(size): Promise<{success:Boolean,message:string,data:any}>
 }

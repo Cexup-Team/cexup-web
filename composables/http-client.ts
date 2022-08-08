@@ -18,6 +18,7 @@ export class Api implements api{
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
+                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX'
             })
         })
             .then((res) => res.json())
