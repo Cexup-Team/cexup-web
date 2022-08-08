@@ -23,6 +23,14 @@
     })
 
 
+     const stateProduct = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+
     const getListDoctor = (size) => {
         stateDoctor.isLoading = true
         dashboard.getListDoctor(size).then(
@@ -30,7 +38,6 @@
                 stateDoctor.isData = res.data
                 stateDoctor.isLoading = false
                 stateDoctor.isStatus = "success"
-                console.log(stateDoctor.isData)
             }
         ).catch(
             err => {
@@ -42,8 +49,29 @@
         // state.isLoading = false
     }
 
+    const getListProduct = (size) => {
+        stateProduct.isLoading = true
+        dashboard.getListProduct(size).then(
+            res => {
+                stateProduct.isData = res.data
+                stateProduct.isLoading = false
+                stateProduct.isStatus = "success"
+                console.log(stateProduct.isData)
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateProduct.isLoading = false
+                stateProduct.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
+    
+
     onMounted(() => {
         getListDoctor(4)
+        getListProduct("")
         
     })
 
@@ -140,13 +168,28 @@
                         </div>
 
                         <div class="product-list w-full mb-5">
-                            <div class="slide-product pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png"  />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
-                            </div>
+
+
+
+                                <div v-if="stateDoctor.isLoading">
+                                    <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
+                                        <div v-for="(i, index) in 4" :key="index">
+                                            <ShimmerCardDoctor />
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div v-if="!stateProduct.isLoading && stateProduct.isStatus === 'success'">
+                                    <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
+                                        <div v-for="(item, index) in stateProduct.isData" :key="index" class="">
+                                            <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" />
+                                        </div>
+                                    </div>
+                                </div>
+                                                                    
+                               
                         </div>
+                    
                     </div>
 
                     <div class="article">

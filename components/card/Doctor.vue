@@ -10,7 +10,7 @@
             type: String
         },
         price : {
-            type: String
+            type: Number
         },
         icon : {
             type: String
@@ -22,9 +22,9 @@
         <div class="card-item w-36 mt-4 rounded-lg bg-white overflow-hidden">
             <img :src="icon" class="object-cover" alt="">
             <div class="w-full flex flex-col px-3 pb-3">
-                <h3 class="text-sm font-poppins font-medium mt-2">{{title}}</h3>
+                <h3 class="text-sm font-poppins font-medium mt-2 truncate text-ellipsis whitespace-nowrap">{{title}}</h3>
                 <p class="mt-2 w-full font-poppins text-gray-350 text-xs leading-5">{{subTitle}}</p>
-                <p class="w-full mt-1 text-primary-color text-sm leading-5 font-poppins">{{price}}</p>
+                <p class="w-full mt-1 text-primary-color text-sm leading-5 font-poppins">Rp. {{price}}</p>
             </div>
         </div>
     </div>

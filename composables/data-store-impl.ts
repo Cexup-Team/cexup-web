@@ -91,4 +91,14 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+    async getListProduct(size): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`ecommerce/product?data=${size}`)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
 }

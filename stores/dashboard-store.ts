@@ -18,6 +18,20 @@ export const useDashboardStore = defineStore('DashboardStore',{
                     message: message
                 });       
             }
+        },
+
+        async getListProduct(size){
+            const api = useApi()
+            const {success, message, data} = await api.getListProduct(size)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
         }
     }
 

@@ -17,4 +17,5 @@ interface DataStore{
     ): Promise<{success:Boolean,message:string,data:any}>
     // 
     getListDoctor(size): Promise<{success:Boolean,message:string,data:any}>
+    getListProduct(size): Promise<{success:Boolean,message:string,data:any}>
 }
