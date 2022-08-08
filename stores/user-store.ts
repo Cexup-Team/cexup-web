@@ -10,10 +10,29 @@ export const useUserStore = defineStore('userStore',{
             const api = useApi()
             const {success,message, data} = await api.signIn(email,password)
             if(success){
-                useSession().setItem("cexup-session ", data.access_token)
-                useSession().setItem("cexup-user ", data.user)
-                return {
-                    data : data.access_token
+                useSession().setItem("cexup-token", data.access_token)
+                useSession().setItem("cexup-user", JSON.stringify(data.user))
+                const users = JSON.parse(useSession().getItem("cexup-user"))
+                if (
+                    !users.phone_number ||
+                    !users.gender || 
+                    !users.date_of_birth || 
+                    !users.no_type || 
+                    !users.type ||
+                    !users.no_type ||  
+                    !users.provinsi_id || 
+                    !users.kabupaten_id || 
+                    !users.kecamatan_id ||
+                    !users.desa_id
+                ) {
+                    return {
+                        route : '/auth/register/complete'
+                    }
+                    
+                }else{
+                    return {
+                        route : '/auth'
+                    }
                 }
             }else{
                 return Promise.reject({
@@ -25,9 +44,56 @@ export const useUserStore = defineStore('userStore',{
         async signUp(name:string, emai:string, password:string){
             const api = useApi()
             const {success, message, data} = await api.signUp(name, emai, password)
-            console.log(success)
-            console.log(data)
-        }
+            if(success){
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+
+        async updatePatient(
+            phone?: string,
+            gender?: string, 
+            date_of_birth?: string,
+            address?: string,
+            identity?: string,
+            province_id?: string, 
+            regency_id?: string, 
+            district_id?: string, 
+            village_id?: string
+        ){
+
+            const api = useApi()
+            const users = JSON.parse(useSession().getItem("cexup-user"))
+            console.log(users)
+            const {success, message, data} = await api.updatePatient(
+                users.user_id,
+                users.name,
+                phone, 
+                gender, 
+                date_of_birth,
+                address,
+                identity,
+                province_id, 
+                regency_id, 
+                district_id, 
+                village_id
+            )
+            if(success){
+                return {
+                    route : '/'
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+        
     }
 
 })

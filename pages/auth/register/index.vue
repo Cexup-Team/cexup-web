@@ -53,6 +53,11 @@ watch(() => [state.name, state.email, state.password, state.confirmPassword, sta
   }
 })
 
+
+watch(() => state.email, (newEmail) => {
+  
+})
+
 function signUp(){
     
     if (!disableButton.value) {
@@ -63,7 +68,9 @@ function signUp(){
             state.email,
             state.password
         ).then(
-            res => router.push("/register/complete")
+            res => {
+              router.push("auth/register/complete")
+            }
         ).catch(
             err => {
                 $toast.show({
@@ -93,7 +100,6 @@ function signUp(){
     //     )
     //     state.isLoading = false
     // }
-    
 }
 
 

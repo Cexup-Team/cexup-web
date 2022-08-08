@@ -5,9 +5,11 @@ import { useError } from "../../utils/errorValidation"
 
 import { useToast, useModal } from 'tailvue'
 import { useRouter } from 'vue-router';
+import { useSession } from "~~/composables/useSession"
+import commonjs from '@rollup/plugin-commonjs';
 
 const $toast = useToast()
-const router = useRouter()
+const $router = useRouter()
 
 interface LoginState {
     email : string,
@@ -34,6 +36,8 @@ const state: LoginState = reactive({
 
 
 const user = useUserStore()
+const session = useSession()
+
 
 function signIn(){
     state.email === "" ? state.isErrorMessage.email = "Email must be required" : state.isErrorMessage.email = ""
@@ -45,7 +49,8 @@ function signIn(){
             state.email,
             state.password
         ).then(
-            res => router.push("/")
+            res => $router.push(res.route)
+            
         ).catch(
             err => {
                 $toast.show({
