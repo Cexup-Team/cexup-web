@@ -32,7 +32,24 @@ export const useDashboardStore = defineStore('DashboardStore',{
                     message: message
                 });       
             }
+        },
+
+
+        async getListArticle(size){
+            const api = useApi()
+            const {success, message, data} = await api.getListArticle(size)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
         }
+
+
     }
 
 })

@@ -23,7 +23,14 @@
     })
 
 
-     const stateProduct = reactive({
+    const stateProduct = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+    const stateArticle = reactive({
         isLoading: false,
         isStatus: 'idle',
         isError : false,
@@ -56,7 +63,6 @@
                 stateProduct.isData = res.data
                 stateProduct.isLoading = false
                 stateProduct.isStatus = "success"
-                console.log(stateProduct.isData)
             }
         ).catch(
             err => {
@@ -67,11 +73,31 @@
         )
         // state.isLoading = false
     }
+
+
+    const getListArticle = (size) => {
+        stateArticle.isLoading = true
+        dashboard.getListArticle(size).then(
+            res => {
+                stateArticle.isData = res.data
+                stateArticle.isLoading = false
+                stateArticle.isStatus = "success"
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateArticle.isLoading = false
+                stateArticle.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
     
 
     onMounted(() => {
         getListDoctor(4)
         getListProduct("")
+        getListArticle("")
         
     })
 
@@ -204,13 +230,23 @@
                         </div>
                         
                         <div class="overflow-x-scroll no-scrollbar">
+                            <div v-if="!stateProduct.isLoading && stateProduct.isStatus === 'success'">
                             <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
-                              
-                              <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
-                            
-                              <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
-                                                 
+                                <div v-for="(item, index) in stateArticle.isData" :key="index" class="">
+                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                </div>  
                             </div>
+                            </div>
+
+
+                            <div v-if="stateProduct.isLoading">
+                                <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
+                                    <div v-for="(i, index) in 4" :key="index">
+                                        <ShimmerCardArticle />
+                                    </div> 
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
