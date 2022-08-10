@@ -23,4 +23,7 @@ interface DataStore{
     getLatestVitalSign(user_code): Promise<{success:Boolean,message:string,data:any}>
     // ews
     getCurrentEWS(user_code): Promise<{success:Boolean,message:string,data:any}>
+
+    // order
+    getListOrder(appointment, type, user_id): Promise<{success:Boolean,message:string,data:any}>
 }

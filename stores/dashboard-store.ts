@@ -81,6 +81,22 @@ export const useDashboardStore = defineStore('DashboardStore',{
             }
         },
 
+        //order
+        async getListOrder(appointment, type, user_id){
+            const api = useApi()
+            const {success, message, data} = await api.getListOrder(appointment, type, user_id)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+
+
 
     }
 

@@ -2,6 +2,61 @@
     import BottomNav from '~~/parts/BottomNav.vue';
     import Tabs from '~~/parts/Tabs.vue';
 
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useDashboardStore } from '~~/stores/dashboard-store';
+    import { useUserStore } from '~~/stores/user-store';
+
+
+
+
+    const dashboard = useDashboardStore()
+
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()
+
+    const state = reactive({
+        slcAppointment: ""
+    })
+
+    const stateOrder = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+    const updateSelect = (value) => {
+        state.slcAppointment = value
+        const user = JSON.parse(session.getItem("cexup-user"))
+        getListOrder(state.slcAppointment, "", user.user_id)
+    }
+
+    const getListOrder = (appointment, type, user_id) => {
+        stateOrder.isLoading = true
+        dashboard.getListOrder(appointment, type, user_id).then(
+            res => {
+                stateOrder.isData = res.data
+                stateOrder.isLoading = false
+                stateOrder.isStatus = "success"
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateOrder.isLoading = false
+                stateOrder.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
+
+    onMounted(() => {
+        const user = JSON.parse(session.getItem("cexup-user"))
+        getListOrder(state.slcAppointment, "", user.user_id)
+    })
+
 
 </script>
 <template>
@@ -18,15 +73,15 @@
             </div>
 
 
-            <Tabs bgBody="bg-blue-50">
+            <Tabs bgBody="bg-blue-50" @update:select="updateSelect">
                 <template v-slot:tabHeader>
-                    <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="">
                         All
                     </div>
-                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="call">
                         Call Doctor
                     </div>
-                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="meet">
                         Meet Doctor
                     </div>
                     
@@ -59,21 +114,52 @@
                 </template>
                 <template v-slot:tabBody>
                     <div class="tab-body-item active w-full pb-44">
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
+                        <div v-if="stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+
+                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                      
                         <div class="mt-14"></div>
                     </div>
-                    <div class="tab-body-item">
-                        <h2>Call Doctor</h2>
-        
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem tempore corrupti eius rerum dolore, natus id, consequuntur magni deleniti alias et delectus porro corporis optio nisi aliquid! Ad, natus?</p>
+                    <div class="tab-body-item w-full pb-44">
+                        <div v-if="stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+                        
+                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                        <div class="mt-14"></div>
                     </div>
-                    <div class="tab-body-item">
-                        <h2> Meet Doctor</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem tempore corrupti eius rerum dolore, natus id, consequuntur magni deleniti alias et delectus porro corporis optio nisi aliquid! Ad, natus?</p>
+                    <div class="tab-body-item w-full pb-44">
+
+                        <div v-if="stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+
+                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                        <div class="mt-14"></div>
+                    
                     </div>
                     
                 </template>

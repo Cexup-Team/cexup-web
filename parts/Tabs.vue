@@ -8,10 +8,12 @@
         }
     })
 
+    const emit = defineEmits(['update:select'])
 
-        const tabHeader = ref(null);
-        const tabBody = ref(null)
-        const tabIndicator = ref(null)
+
+    const tabHeader = ref(null);
+    const tabBody = ref(null)
+    const tabIndicator = ref(null)
 
     onMounted(() => {
 
@@ -35,9 +37,10 @@
         let tabsPane = tabHeader.value.getElementsByTagName("div")
 
         for (let i = 0; i < tabsPane.length; i++) {
-            tabsPane[i].addEventListener("click", function() {
+            tabsPane[i].addEventListener("click", function(e) {
                     tabHeader.value?.getElementsByClassName("active")[0].classList.remove("active")
                     tabsPane[i].classList.add("active")
+                    emit('update:select',e.target.getAttribute('select'))
                     tabBody.value?.getElementsByClassName("active")[0].classList.remove("active")
                     tabBody.value?.getElementsByClassName("tab-body-item")[i].classList.add("active")
 
