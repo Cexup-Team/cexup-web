@@ -19,4 +19,8 @@ interface DataStore{
     getListDoctor(size): Promise<{success:Boolean,message:string,data:any}>
     getListProduct(size): Promise<{success:Boolean,message:string,data:any}>
     getListArticle(size): Promise<{success:Boolean,message:string,data:any}>
+    // vital sign
+    getLatestVitalSign(user_code): Promise<{success:Boolean,message:string,data:any}>
+    // ews
+    getCurrentEWS(user_code): Promise<{success:Boolean,message:string,data:any}>
 }

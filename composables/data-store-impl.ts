@@ -37,7 +37,7 @@ export class DataStoreImpl implements DataStore{
 
 
     async getRegion(id: string): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.get('wilayah/'+id)
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,'wilayah/'+id, `${import.meta.env.VITE_APP_API_KEY}`)
 
         return {
             success:success,
@@ -82,7 +82,7 @@ export class DataStoreImpl implements DataStore{
 
 
     async getListDoctor(size): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.get(`doctor?data=${size}`)
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, `doctor?data=${size}`, `${import.meta.env.VITE_APP_API_KEY}`)
 
         return {
             success:success,
@@ -92,7 +92,7 @@ export class DataStoreImpl implements DataStore{
     }
 
     async getListProduct(size): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.get(`ecommerce/product?data=${size}`)
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`ecommerce/product?data=${size}`, `${import.meta.env.VITE_APP_API_KEY}`)
 
         return {
             success:success,
@@ -102,7 +102,30 @@ export class DataStoreImpl implements DataStore{
     }
 
     async getListArticle(size): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.get(`article?data=${size}`)
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`article?data=${size}`, `${import.meta.env.VITE_APP_API_KEY}`)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+
+
+    async getLatestVitalSign(user_code): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`latest-vital-sign/${user_code}`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+
+    async getCurrentEWS(user_code): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`ews/${user_code}`, `${import.meta.env.VITE_APP_API_KEY}`)
 
         return {
             success:success,

@@ -47,7 +47,39 @@ export const useDashboardStore = defineStore('DashboardStore',{
                     message: message
                 });       
             }
-        }
+        },
+
+        //vital sign
+
+        async getLatestVitalSign(user_code){
+            const api = useApi()
+            const {success, message, data} = await api.getLatestVitalSign(user_code)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+
+        //ews
+
+        async getCurrentEWS(user_code){
+            const api = useApi()
+            const {success, message, data} = await api.getCurrentEWS(user_code)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
 
 
     }

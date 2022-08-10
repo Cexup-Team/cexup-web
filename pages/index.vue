@@ -14,6 +14,7 @@
     const user = useUserStore()
     const $toast = useToast()
     const router = useRouter()
+    const session = useSession()
 
     const stateDoctor = reactive({
         isLoading: false,
@@ -31,6 +32,20 @@
     })
 
     const stateArticle = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+    const stateVitalSign = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+    const stateCurrentEWS = reactive({
         isLoading: false,
         isStatus: 'idle',
         isError : false,
@@ -92,12 +107,54 @@
         )
         // state.isLoading = false
     }
+
+    const getLatestVitalSign = (user_code) => {
+        stateVitalSign.isLoading = true
+        dashboard.getLatestVitalSign(user_code).then(
+            res => {
+                stateVitalSign.isData = res.data
+                stateVitalSign.isLoading = false
+                stateVitalSign.isStatus = "success"
+                
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateVitalSign.isLoading = false
+                stateVitalSign.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
+
+     const getCurrentEWS = (user_code) => {
+        stateCurrentEWS.isLoading = true
+        dashboard.getCurrentEWS(user_code).then(
+            res => {
+                stateCurrentEWS.isData = res.data
+                stateCurrentEWS.isLoading = false
+                stateCurrentEWS.isStatus = "success"
+                console.log(res.data)
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateCurrentEWS.isLoading = false
+                stateCurrentEWS.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
     
 
     onMounted(() => {
+        const user = JSON.parse(session.getItem("cexup-user"))
+        // console.log(user.user_code)
         getListDoctor(4)
         getListProduct("")
         getListArticle("")
+        getLatestVitalSign(user.user_code)
+        getCurrentEWS(user.user_code)
         
     })
 
@@ -126,8 +183,14 @@
                     </div>
 
                     <!-- Health Status -->
+                    <div v-if="stateVitalSign.isLoading && stateCurrentEWS.isLoading">
+                        
+                        <ShimmerHealthStatus />
+                    </div>
+                    <div v-if="!stateVitalSign.isLoading && stateVitalSign.isStatus === 'success' && !stateCurrentEWS.isLoading && stateCurrentEWS.isStatus === 'success'">
+                        <HealthStatusVue :vital="stateVitalSign.isData" :ews="stateCurrentEWS.isData" />
+                    </div>
 
-                    <HealthStatusVue />
 
                     <!-- Feature -->
                     <HealthFeatureVue />  

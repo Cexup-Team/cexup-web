@@ -1,71 +1,21 @@
+
 <script setup lang="ts">
-import VueApexCharts from "vue3-apexcharts";
-
-    const props = defineProps({
-        vital : {
-            type : Array
-        },
-        ews: {
-            type: String
-        }
-    })
 
 
-  const series = [70]
-        const chartOptions =  {
-            chart: {
-              height: 140,
-              type: 'radialBar',
-            },
-            plotOptions: {
-              radialBar: {
-                hollow: {
-                  size: '55%',
-                   margin: 5,
-                },
-                dataLabels: {
-                  name: {
-                    show: true,
-                    color : '#000000',
-                    fontSize: '12px',
-                    fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 'normal',
-                  },
-                  value: {
-                    show: false,
-                  },
-                
-                }
-              },
-            },
-            labels: [props.ews.result],
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: ['#77DAFA', '#00C1FF'],
-                    type: "horizontal",
-                    opacityFrom: 0.7,
-                    opacityTo: 0.7,
-                    stops: [0, 100],
-                    colorStops: []
-                }
-            }
-          }
 </script>
-
 <template>
-  <div class="health-status mx-5 z-10 mt-6">
-        <div class="bg-white w-full px-3 pt-2 pb-6 rounded-lg">
+  <div class="health-status mx-5 z-10 mt-6 h-44">
+        <div class="bg-white w-full px-3 pt-2 pb-6 rounded-lg h-full">
             <div class="flex flex-col">
                 <div class="w-full flex">
                     <div class="w-2/6 flex justify-center items-center">
-                        <VueApexCharts type="radialBar" class="" height="140" :options="chartOptions" :series="[series]"></VueApexCharts>
+                        <div class=" bg-gray-400 h-28 w-full object-cover object-center animate-pulse mb-2 rounded-full mt-2" style="width: 71px; height: 63px;"></div>
                     </div>
                     <div class="w-2/6 flex justify-center items-center">
                         <div class="flex flex-col justify-center items-center">
                             <div class="blood flex flex-col text-center">
                                 <h4 class="text-gray-350 font-poppins font-normal text-xs">Blood Preasure</h4>
-                                <p class="text-primary-color font-poppins font-medium text-base">{{props.vital.bloodPressure.systole}}/{{props.vital.bloodPressure.diastole}} mhg</p>
+                                <p class="leading-relaxed w-full h-3 animate-pulse bg-primary-color mt-1"></p>
                             </div>
                         </div>
                     </div>
@@ -75,7 +25,7 @@ import VueApexCharts from "vue3-apexcharts";
                         <div class="flex flex-col justify-center items-center bgred">
                             <div class="spo flex flex-col text-center">
                                 <h4 class="text-gray-350 font-poppins font-normal text-xs">SpO2</h4>
-                                <p class="text-primary-color font-poppins font-medium text-base">{{props.vital.bloodOxygen}}%</p>
+                                <p class="leading-relaxed w-full h-3 animate-pulse bg-primary-color mt-1"></p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +37,7 @@ import VueApexCharts from "vue3-apexcharts";
                             <div class="flex flex-col justify-center items-center">
                             <div class="spo flex flex-col text-center">
                                 <h4 class="text-gray-350 font-poppins font-normal text-xs">Heart Rate</h4>
-                                <p class="text-primary-color font-poppins font-medium text-base">{{props.vital.heartRate}} bpm</p>
+                                <p class="leading-relaxed w-full h-3 animate-pulse bg-primary-color mt-1"></p>
                             </div>
                         </div>
                     </div>
@@ -95,7 +45,7 @@ import VueApexCharts from "vue3-apexcharts";
                             <div class="flex flex-col justify-center items-center">
                             <div class="spo flex flex-col text-center">
                                 <h4 class="text-gray-350 font-poppins font-normal text-xs">Temparature</h4>
-                                <p class="text-primary-color font-poppins font-medium text-base">{{props.vital.temperature}} C</p>
+                                <p class="leading-relaxed w-full h-3 animate-pulse bg-primary-color mt-1"></p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +53,7 @@ import VueApexCharts from "vue3-apexcharts";
                             <div class="flex flex-col justify-center items-center">
                             <div class="spo flex flex-col text-center">
                                 <h4 class="text-gray-350 font-poppins font-normal text-xs">Respiration</h4>
-                                <p class="text-primary-color font-poppins font-medium text-base">{{props.vital.respiration}}%</p>
+                                <p class="leading-relaxed w-full h-3 animate-pulse bg-primary-color mt-1"></p>
                             </div>
                         </div>
                     </div>
