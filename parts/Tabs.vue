@@ -8,7 +8,7 @@
         }
     })
 
-    const emit = defineEmits(['update:select'])
+    const emit = defineEmits(['update:select', 'update:status'])
 
 
     const tabHeader = ref(null);
@@ -58,7 +58,8 @@
         let tabPaneStatus = document?.getElementsByClassName("tab-status-item")
 
         for (let i = 0; i < tabPaneStatus.length; i++) {
-            tabPaneStatus[i]?.addEventListener("click", function() {
+            tabPaneStatus[i]?.addEventListener("click", function(e) {
+                emit('update:status', e.target.getAttribute('status'))
                 tabStatus?.getElementsByClassName("active_tab_filter")[0].classList.remove("active_tab_filter")
                 tabPaneStatus[i].classList.add("active_tab_filter")
             })

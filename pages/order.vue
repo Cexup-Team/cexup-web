@@ -18,8 +18,11 @@
     const session = useSession()
 
     const state = reactive({
-        slcAppointment: ""
+        slcAppointment: "",
+        slcStatus: "",
     })
+
+    
 
     const stateOrder = reactive({
         isLoading: false,
@@ -34,6 +37,15 @@
         getListOrder(state.slcAppointment, "", user.user_id)
     }
 
+    const updateStatus = (value) => {
+        state.slcStatus= value
+        const user = JSON.parse(session.getItem("cexup-user"))
+        getListOrder(state.slcAppointment, state.slcStatus, user.user_id)
+        // state.slcAppointment = value
+        // const user = JSON.parse(session.getItem("cexup-user"))
+        // getListOrder(state.slcAppointment, "", user.user_id)
+    }
+
     const getListOrder = (appointment, type, user_id) => {
         stateOrder.isLoading = true
         dashboard.getListOrder(appointment, type, user_id).then(
@@ -44,7 +56,6 @@
             }
         ).catch(
             err => {
-                console.log(err)
                 stateOrder.isLoading = false
                 stateOrder.isStatus = "error"
             }
@@ -73,7 +84,7 @@
             </div>
 
 
-            <Tabs bgBody="bg-blue-50" @update:select="updateSelect">
+            <Tabs bgBody="bg-blue-50" @update:select="updateSelect" @update:status="updateStatus">
                 <template v-slot:tabHeader>
                     <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="">
                         All
@@ -89,25 +100,21 @@
                 <template v-slot:tabFilter>
                     <div class="pt-4 pb-5 bg-blue-50 overflow-x-scroll no-scrollbar">
                         <div class="tab-status flex items-center w-full min-w-max mx-3">
-                            <div class="tab-status-item mr-3 active_tab_filter">
+                            <div class="tab-status-item mr-3 active_tab_filter" status="">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">All</p>
                             </div>
-                            <div class="tab-status-item mr-3">
+                            <div class="tab-status-item mr-3" status="pending">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Payment</p>
                             </div>
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Progress</p>
+                            <div class="tab-status-item mr-3" status="booked">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Processed</p>
                             </div>
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Meeting </p>
-                            </div>
-
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Meeting </p>
+                            <div class="tab-status-item mr-3" status="finish">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Completed</p>
                             </div>
 
-                            <div class="tab-status-item">
-                                <p class="px-4 py-2 font-poppins font-medium text-sm">Waiting Meeting </p>
+                            <div class="tab-status-item" status="failed">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Canceled</p>
                             </div>
                         </div>
                     </div>

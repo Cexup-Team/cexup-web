@@ -4,7 +4,7 @@
     import {getStatus} from '../../utils/statusOrder'
     const props = defineProps({
         order : {
-            type: Array
+            type: Object
         },
     })
 
