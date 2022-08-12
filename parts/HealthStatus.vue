@@ -3,10 +3,10 @@ import VueApexCharts from "vue3-apexcharts";
 
     const props = defineProps({
         vital : {
-            type : Array
+            type : Object
         },
         ews: {
-            type: String
+            type: Object
         }
     })
 

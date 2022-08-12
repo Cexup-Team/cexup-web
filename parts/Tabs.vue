@@ -14,13 +14,9 @@
     const tabHeader = ref(null);
     const tabBody = ref(null)
     const tabIndicator = ref(null)
+    const tabFilter = ref(null)
 
     onMounted(() => {
-
-    
-        
-        
-
 
         // console.log(tabHeader.value)
         // let tabHeader = document.getElementsByClassName("tab-header")[0]
@@ -48,16 +44,12 @@
                     
             })
         }
-        
-            
+
+        let tabStatus = tabFilter.value?.getElementsByClassName("tab-status")[0]
+        let tabPaneStatus = tabStatus?.getElementsByClassName("tab-status-item")
 
 
-
-
-        let tabStatus = document?.getElementsByClassName("tab-status")[0]
-        let tabPaneStatus = document?.getElementsByClassName("tab-status-item")
-
-        for (let i = 0; i < tabPaneStatus.length; i++) {
+        for (let i = 0; i < tabPaneStatus?.length; i++) {
             tabPaneStatus[i]?.addEventListener("click", function(e) {
                 emit('update:status', e.target.getAttribute('status'))
                 tabStatus?.getElementsByClassName("active_tab_filter")[0].classList.remove("active_tab_filter")
@@ -75,7 +67,10 @@
             <slot name="tabHeader"></slot>
         </div>
         <div class="tab-indicator relative transition-all duration-300 bg-primary-color left-0 rounded-md h-0.5" ref="tabIndicator"></div>
-        <slot name="tabFilter"></slot>
+        <div ref="tabFilter">
+            <slot name="tabFilter"></slot>
+
+        </div>
         <div ref="tabBody" :class="'tab-body relative h-full w-full overflow-y-scroll no-scrollbar '+(bgBody)">
             <slot name="tabBody"></slot>
             

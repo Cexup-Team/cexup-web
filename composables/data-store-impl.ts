@@ -119,8 +119,7 @@ export class DataStoreImpl implements DataStore{
 
     async getLatestVitalSign(user_code): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
-        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`latest-vital-sign/${user_code}`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, token)
-
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`latest-vital-sign/${user_code}`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
         return {
             success:success,
             message:message,
@@ -143,6 +142,30 @@ export class DataStoreImpl implements DataStore{
     async getListOrder(appointment, type, user_id): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
         const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`orders/${user_id}?appointment=${appointment}&type=${type}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getListSpeciality(): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,'speciality', `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+
+    // Tele
+    async getListDoctorTele(size, search, speciality, hospital): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, `doctor?data=${size}&name=${search}&speciality=${speciality}&hospital=${hospital}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
 
         return {
             success:success,

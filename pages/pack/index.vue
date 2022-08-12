@@ -9,7 +9,7 @@
             <div class="pack-wrapper h-full relative w-full">
                 <BottomNav active="/pack" />
                 <div class="flex justify-between mt-7 mx-6 items-center">
-                    <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                    <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
                     <h1 class="font-poppins text-xl font-semibold">Package</h1>
                     <div>
 

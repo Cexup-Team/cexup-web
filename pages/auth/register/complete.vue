@@ -192,18 +192,6 @@
     })
 
     const next = () => {
-        // console.log(state.phone)
-        // console.log(state.date)
-        // console.log(state.gender)
-        // console.log(state.identity)
-        // console.log(state.province_id)
-        
-        // console.log(state.regency_id)
-        
-        // console.log(state.district_id)
-        
-        // console.log(state.village_id)
-
         const month = state.date?.getMonth()+1 < 10 ? `0${state.date?.getMonth()+1}` : state.date?.getMonth()+1
         
         const date = state.date ? `${state.date?.getFullYear()}-${month}-${state.date?.getDate()}` : ""
