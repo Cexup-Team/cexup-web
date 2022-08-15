@@ -174,5 +174,16 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+    async getDoctorTele(id): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, `doctor/${id}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
 
 }

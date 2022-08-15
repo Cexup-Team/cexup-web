@@ -30,4 +30,5 @@ interface DataStore{
 
     // tele
     getListDoctorTele(size, search, speciality, hospital): Promise<{success:Boolean,message:string,data:any}>
+    getDoctorTele(id): Promise<{success:Boolean,message:string,data:any}>
 }

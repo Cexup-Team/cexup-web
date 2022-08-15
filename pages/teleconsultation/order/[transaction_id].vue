@@ -1,4 +1,60 @@
 <script setup lang="ts">
+    import { Ref } from "vue"
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useTeleconsultationStore } from '~~/stores/teleconsultation-store';
+    import { useUserStore } from '~~/stores/user-store';
+
+
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()
+    const listMap = new Map()
+
+    const teleconsultation = useTeleconsultationStore()
+
+
+    let openModal: Ref<boolean> = ref(false)
+
+    let typingTimer;
+    let doneTypingInterval = 2000;
+
+    const state = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+
+
+    
+    const getDoctorTele = (id) => {
+        state.isLoading = true
+        teleconsultation.getDoctorTele(id).then(
+            res => {
+                state.isData = res.data
+                state.isLoading = false
+                state.isStatus = "success"
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                state.isLoading = false
+                state.isStatus = "error"
+            }
+        )
+        // state.isLoading = false
+    }
+
+
+
+    onMounted(() => {
+        // getDoctorTele(id)
+        console.log(router)
+    })
+
 </script>
 
 <template>

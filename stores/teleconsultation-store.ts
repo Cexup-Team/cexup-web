@@ -35,6 +35,21 @@ export const useTeleconsultationStore = defineStore('TeleconsultationStore',{
                 });       
             }
         },
+
+
+        async getDoctorTele(id){
+            const api = useApi()
+            const {success, message, data} = await api.getDoctorTele(id)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
     }
 
 })

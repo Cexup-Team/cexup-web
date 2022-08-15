@@ -1,31 +1,112 @@
 <script setup lang="ts">
-     setTimeout(() => {
-            let tabStatus = document.getElementsByClassName("card-select-date")[0]
-            let tabPaneStatus = document.getElementsByClassName("card-select-date-item")
 
-            let tabTime = document.getElementsByClassName("card-select-time")[0]
-            let tabPaneTime = document.getElementsByClassName("card-select-time-item")
+    import { ref } from "vue"
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useTeleconsultationStore } from '~~/stores/teleconsultation-store';
+    import { useUserStore } from '~~/stores/user-store';
 
-            for (let i = 0; i < tabPaneStatus.length; i++) {
-                tabPaneStatus[i].addEventListener("click", function() {
-                    tabStatus.getElementsByClassName("active")[0].classList.remove("active")
-                    tabPaneStatus[i].classList.add("active")
-                })
+
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()
+    const listMap = new Map()
+
+    const teleconsultation = useTeleconsultationStore()
+
+
+    // =======
+    function getAllDaysInMonth(year, month) {
+        const date = new Date(year, month, 1);
+
+        const dates = [];
+
+        while (date.getMonth() === month || date.getMonth() === month + 1) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+
+
+        return dates;
+    }
+
+    
+
+    const now = new Date();
+    const day =  now.getDate()
+    
+
+    // allDay.map((item, index) => {
+    //     console.log(getNameDay(item.getDay()))
+    // })
+
+    let openModal: Ref<boolean> = ref(false)
+
+    const cardTime = ref(null);
+
+    let typingTimer;
+    let doneTypingInterval = 2000;
+
+    const state = reactive({
+        allDay : null,
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
+    state.allDay  = getAllDaysInMonth(now.getFullYear(), now.getMonth()).slice(day-1, day+30);
+
+
+
+    
+    const getDoctorTele = (id) => {
+        state.isLoading = true
+        teleconsultation.getDoctorTele(id).then(
+            res => {
+                state.isData = res.data
+                state.isLoading = false
+                state.isStatus = "success"
             }
-
-            for (let i = 0; i < tabPaneTime.length; i++) {
-                tabPaneTime[i].addEventListener("click", function() {
-                    tabTime.getElementsByClassName("active")[0].classList.remove("active")
-                    tabPaneTime[i].classList.add("active")
-                })
+        ).catch(
+            err => {
+                console.log(err)
+                state.isLoading = false
+                state.isStatus = "error"
             }
-        }, 300);
+        )
+        // state.isLoading = false
+    }
+
+     
+
+
+    watch(() => [cardTime.value], ([newCardItem]) => {
+
+        let tabTime = document.getElementsByClassName("card-select-time")[0]
+        let tabPaneTime = document.getElementsByClassName("card-select-time-item")
+
+
+        for (let i = 0; i < tabPaneTime.length; i++) {
+            tabPaneTime[i].addEventListener("click", function() {
+                tabTime.getElementsByClassName("active")[0].classList.remove("active")
+                tabPaneTime[i].classList.add("active")
+            })
+        }
+    })
+
+    onMounted(() => {
+        const params = router.currentRoute.value.params.slug
+        getDoctorTele(params)
+    
+    })
 </script>
 <template>
   <div>
     <nuxt-layout name="main">
-            <div class="choose-schedule-wrapper relative">
-
+        <!--  -->
+            <div class="choose-schedule-wrapper relative" v-if="!state.isLoading && state.isStatus === 'success'">
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
@@ -42,8 +123,8 @@
                                     <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
                                 </div>
                                 <div class="flex flex-col ml-4">
-                                    <h2 class="font-poppins font-semibold text-lg">dr Iqbal Nur Haq</h2>
-                                    <h4 class="font-poppins text-gray-350 text-xs">Dermatologist</h4>
+                                    <h2 class="font-poppins font-semibold text-lg">{{state.isData.name}}</h2>
+                                    <h4 class="font-poppins text-gray-350 text-xs">{{state.isData.speciality}}</h4>
 
                                     <div class="flex items-center mt-4">
                                         <div class="flex items-center bg-primary-color px-2 py-1 rounded-md mr-3">
@@ -62,7 +143,7 @@
                                 </div>
                                 <div class="bg-blue-150 w-auto flex items-center px-2 py-2 rounded-lg">
                                     <img src="../../../assets/images/place_icon_red.svg" class="w-3 mr-2" alt="">
-                                    <span class="text-xs font-poppins whitespace-nowrap">RS. Pusdokkes</span>
+                                    <span class="text-xs font-poppins whitespace-nowrap">{{state.isData.hospital[0].name}}</span>
                                 </div>
                             </div>
                         </div> 
@@ -70,8 +151,8 @@
                     <section class="bg-blue-150 px-5 py-2 mt-4 choose-schedule-body">
                         <div class="flex justify-between items-center">
                             <div class="">
-                                <h4 class="font-medium font-poppins text-lg">Rp5.000</h4>
-                                <span class="text-gray-350 font-poppins font-medium text-xs discount relative">Rp 15.000</span>
+                                <h4 class="font-medium font-poppins text-lg">Rp {{state.isData.hospital[0].offline_price }}</h4>
+                                <span class="text-gray-350 font-poppins font-medium text-xs discount relative">{{state.isData.hospital[0].offline_price === 0 ? '' : state.isData.hospital[0].offline_price}}</span>
                             </div>
                             
                             <div class="px-3 py-2 rounded-md border-dashed border-teal-750 border-2">
@@ -93,52 +174,15 @@
                                 <h2 class="text-base font-poppins font-semibold">Avaibility</h2>
                                 <span class="text-sm font-poppins"> Febuari</span>
                             </div>
-                            <div class="card-select-date flex justify-start mt-4 overflow-x-scroll no-scrollbar px-5">
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out mr-5 rounded-xl">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out rounded-xl mr-5 ">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out rounded-xl mr-5 active">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out rounded-xl mr-5">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out rounded-xl mr-5">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                <div class="card-select-date-item cursor-pointer transition-all duration-300 ease-in-out rounded-xl mr-5">
-                                    <div class="flex flex-col items-center w-16 h-20 justify-center">
-                                        <h5 class="font-poppins text-lg font-semibold">12</h5>
-                                        <span class="text-gray-350 font-poppins text-sm">Mon</span>
-                                    </div>
-                                </div>
-                                
-                            </div>
+                            
+
+                            <CardTeleconsultationSelectDate :allDay="state.allDay" />
                             
                             <div class="mt-4 px-5">
                                 <h2 class="text-base font-poppins font-semibold">Select Time</h2>
                             </div>
                             <div class="select-time mt-4">
-                                <div class="card-select-time grid grid-cols-3 gap-4 px-4">
+                                <div class="card-select-time grid grid-cols-3 gap-4 px-4" ref="cardTime">
                                     <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
                                         <h4 class="font-poppins text-sm whitespace-nowrap">09:00 am</h4>
                                     </div>

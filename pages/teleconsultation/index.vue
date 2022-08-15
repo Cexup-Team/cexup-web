@@ -178,7 +178,7 @@
                 <section class="mt-14 px-4"> 
                     <div v-if="!stateTele.isLoading && stateTele.isStatus === 'success'">
                         <div v-for="(item, index) in stateTele.isData" :key="index">
-                            <CardTeleconsultationDoctor :name="item.name" :speciality="item.speciality" :rs="item.hospital[0].name" online :year=5 :price=100000 :image="item.thumb"  />
+                            <CardTeleconsultationDoctor :name="item.name" :speciality="item.speciality" :rs="item.hospital[0].name" online :year=5 :price=100000 :image="item.thumb" :link="'/teleconsultation/doctor/'+item.slug" />
                         </div>
                     </div>
 
