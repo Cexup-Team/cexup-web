@@ -3,7 +3,40 @@ import { useSession } from "~~/composables/useSession"
 
 export const useDashboardStore = defineStore('DashboardStore',{
     state:()=>({
+        stateProduct : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        },
 
+        stateDoctor : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        },
+
+        stateArticle : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        },
+
+        stateVitalSign : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        },
+
+        stateCurrentEWS : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        }
     }),
     actions:{
         async getListDoctor(size){
@@ -24,6 +57,7 @@ export const useDashboardStore = defineStore('DashboardStore',{
             const api = useApi()
             const {success, message, data} = await api.getListProduct(size)
             if (success) {
+                
                 return {
                     data : data
                 }

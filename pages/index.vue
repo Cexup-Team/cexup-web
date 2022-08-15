@@ -9,147 +9,102 @@
     import { useDashboardStore } from '~~/stores/dashboard-store';
     import { useUserStore } from '~~/stores/user-store';
 
-
     const dashboard = useDashboardStore()
     const user = useUserStore()
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()
 
-    const stateDoctor = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-
-    const stateProduct = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const stateArticle = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const stateVitalSign = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const stateCurrentEWS = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
 
     const getListDoctor = (size) => {
-        stateDoctor.isLoading = true
+        dashboard.stateDoctor.isLoading = true
         dashboard.getListDoctor(size).then(
             res => {
-                stateDoctor.isData = res.data
-                stateDoctor.isLoading = false
-                stateDoctor.isStatus = "success"
+                dashboard.stateDoctor.isData = res.data
+                dashboard.stateDoctor.isLoading = false
+                dashboard.stateDoctor.isStatus = "success"
             }
         ).catch(
             err => {
                 console.log(err)
-                stateDoctor.isLoading = false
-                stateDoctor.isStatus = "error"
+                dashboard.stateDoctor.isLoading = false
+                dashboard.stateDoctor.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
 
     const getListProduct = (size) => {
-        stateProduct.isLoading = true
+        dashboard.stateProduct.isLoading = true
         dashboard.getListProduct(size).then(
             res => {
-                stateProduct.isData = res.data
-                stateProduct.isLoading = false
-                stateProduct.isStatus = "success"
+                dashboard.stateProduct.isData = res.data
+                dashboard.stateProduct.isLoading = false
+                dashboard.stateProduct.isStatus = "success"
             }
         ).catch(
             err => {
-                console.log(err)
-                stateProduct.isLoading = false
-                stateProduct.isStatus = "error"
+                dashboard.stateProduct.isLoading = false
+                dashboard.stateProduct.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
 
 
     const getListArticle = (size) => {
-        stateArticle.isLoading = true
+        dashboard.stateArticle.isLoading = true
         dashboard.getListArticle(size).then(
             res => {
-                stateArticle.isData = res.data
-                stateArticle.isLoading = false
-                stateArticle.isStatus = "success"
+                dashboard.stateArticle.isData = res.data
+                dashboard.stateArticle.isLoading = false
+                dashboard.stateArticle.isStatus = "success"
             }
         ).catch(
             err => {
                 console.log(err)
-                stateArticle.isLoading = false
-                stateArticle.isStatus = "error"
+                dashboard.stateArticle.isLoading = false
+                dashboard.stateArticle.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
 
     const getLatestVitalSign = (user_code) => {
-        stateVitalSign.isLoading = true
+        dashboard.stateVitalSign.isLoading = true
         dashboard.getLatestVitalSign(user_code).then(
             res => {
-                stateVitalSign.isData = res.data
-                stateVitalSign.isLoading = false
-                stateVitalSign.isStatus = "success"
+                dashboard.stateVitalSign.isData = res.data
+                dashboard.stateVitalSign.isLoading = false
+                dashboard.stateVitalSign.isStatus = "success"
                 
             }
         ).catch(
             err => {
                 console.log(err)
-                stateVitalSign.isLoading = false
-                stateVitalSign.isStatus = "error"
+                dashboard.stateVitalSign.isLoading = false
+                dashboard.stateVitalSign.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
 
      const getCurrentEWS = (user_code) => {
-        stateCurrentEWS.isLoading = true
+        dashboard.stateCurrentEWS.isLoading = true
         dashboard.getCurrentEWS(user_code).then(
             res => {
-                stateCurrentEWS.isData = res.data
-                stateCurrentEWS.isLoading = false
-                stateCurrentEWS.isStatus = "success"
-                console.log(res.data)
+                dashboard.stateCurrentEWS.isData = res.data
+                dashboard.stateCurrentEWS.isLoading = false
+                dashboard.stateCurrentEWS.isStatus = "success"
             }
         ).catch(
             err => {
                 console.log(err)
-                stateCurrentEWS.isLoading = false
-                stateCurrentEWS.isStatus = "error"
+                dashboard.stateCurrentEWS.isLoading = false
+                dashboard.stateCurrentEWS.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
     
 
     onMounted(() => {
         const user = JSON.parse(session.getItem("cexup-user"))
-        // console.log(user.user_code)
         getListDoctor(4)
         getListProduct("")
         getListArticle("")
@@ -158,8 +113,6 @@
         
     })
 
-
-      
 </script>
 
 <template>
@@ -183,12 +136,12 @@
                     </div>
 
                     <!-- Health Status -->
-                    <div v-if="stateVitalSign.isLoading && stateCurrentEWS.isLoading">
+                    <div v-if="dashboard.stateVitalSign.isLoading && dashboard.stateCurrentEWS.isLoading">
                         
                         <ShimmerHealthStatus />
                     </div>
-                    <div v-if="!stateVitalSign.isLoading && stateVitalSign.isStatus === 'success' && !stateCurrentEWS.isLoading && stateCurrentEWS.isStatus === 'success'">
-                        <HealthStatusVue :vital="stateVitalSign.isData" :ews="stateCurrentEWS.isData" />
+                    <div v-if="!dashboard.stateVitalSign.isLoading && dashboard.stateVitalSign.isStatus === 'success' && !dashboard.stateCurrentEWS.isLoading && dashboard.stateCurrentEWS.isStatus === 'success'">
+                        <HealthStatusVue :vital="dashboard.stateVitalSign.isData" :ews="dashboard.stateCurrentEWS.isData" />
                     </div>
 
 
@@ -209,7 +162,7 @@
                         </div>
                         <div class="doctor-list w-full mb-4">
                             
-                            <div v-if="stateDoctor.isLoading">
+                            <div v-if="dashboard.stateDoctor.isLoading">
                                 <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
                                     <div v-for="(i, index) in 4" :key="index">
                                         <ShimmerCardDoctor />
@@ -217,9 +170,9 @@
                                 </div>
                             </div>
                             
-                            <div v-if="!stateDoctor.isLoading && stateDoctor.isStatus === 'success'">
+                            <div v-if="!dashboard.stateDoctor.isLoading && dashboard.stateDoctor.isStatus === 'success'">
                                 <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
-                                    <div v-for="(item, index) in stateDoctor.isData" :key="index">
+                                    <div v-for="(item, index) in dashboard.stateDoctor.isData" :key="index">
                                         <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" />
                                     </div>
                                 </div>
@@ -260,7 +213,7 @@
 
 
 
-                                <div v-if="stateDoctor.isLoading">
+                                <div v-if="dashboard.stateDoctor.isLoading">
                                     <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
                                         <div v-for="(i, index) in 4" :key="index">
                                             <ShimmerCardDoctor />
@@ -268,9 +221,9 @@
                                     </div>
                                 </div>
                                 
-                                <div v-if="!stateProduct.isLoading && stateProduct.isStatus === 'success'">
+                                <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                                     <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
-                                        <div v-for="(item, index) in stateProduct.isData" :key="index" class="">
+                                        <div v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="">
                                             <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" />
                                         </div>
                                     </div>
@@ -293,16 +246,16 @@
                         </div>
                         
                         <div class="overflow-x-scroll no-scrollbar">
-                            <div v-if="!stateProduct.isLoading && stateProduct.isStatus === 'success'">
+                            <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                             <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
-                                <div v-for="(item, index) in stateArticle.isData" :key="index" class="">
+                                <div v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="">
                                     <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" date="24 Mei 2022" author="Iqbal Tmvn" />                         
                                 </div>  
                             </div>
                             </div>
 
 
-                            <div v-if="stateProduct.isLoading">
+                            <div v-if="dashboard.stateProduct.isLoading">
                                 <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
                                     <div v-for="(i, index) in 4" :key="index">
                                         <ShimmerCardArticle />
