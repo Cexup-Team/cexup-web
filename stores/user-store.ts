@@ -3,7 +3,17 @@ import { useSession } from "~~/composables/useSession"
 
 export const useUserStore = defineStore('userStore',{
     state:()=>({
-
+        stateLogin : {
+            email : "",
+            password: "",
+            isLoading: false,
+            isData : null,
+            isStatus: 'idle',
+            isErrorMessage: {
+                'email' : '',
+                'password': ''
+            }
+        }
     }),
     actions:{
        async signIn(email:string,password:string){
