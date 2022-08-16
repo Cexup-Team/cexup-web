@@ -24,7 +24,10 @@ function signIn(){
             user.stateLogin.email,
             user.stateLogin.password
         ).then(
-            res => $router.push(res.route)
+            res => {
+                $router.push(res.route)
+                user.stateLogin.isLoading = false
+            }
         ).catch(
             err => {
                 $toast.show({
@@ -32,9 +35,11 @@ function signIn(){
                     message: err.message,
                     timeout: 4,
                 })
+
+                user.stateLogin.isLoading = false
             }
         )
-        user.stateLogin.isLoading = false
+        
     }
 }
 
@@ -75,6 +80,8 @@ watch(() => user.stateLogin.email, (newEmail) => {
 
             </div>
             <Button @click="signIn" className="mt-7 w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Sign In" :loading="user.stateLogin.isLoading" />
+
+            <!-- <ShimmerButton className="mt-7 w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" text="Loading" v-if="user.stateLogin.isLoading" /> -->
             <p class="w-full text-center mt-6 text-gray-250 font-medium text-sm">OR</p>
             <div class="mt-6">
                 <Button @click="signIn" class="w-full text-center bg-blue-650 text-white py-3 font-poppins rounded-lg text-base" title="Continue with Google" icon />

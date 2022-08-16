@@ -13,6 +13,22 @@ export const useUserStore = defineStore('userStore',{
                 'email' : '',
                 'password': ''
             }
+        },
+
+        stateRegister : {
+            name : "",
+            email: "", 
+            password: "",
+            confirmPassword : "",
+            agree : false,
+            isLoading: false,
+            isData : null,
+            isStatus: 'idle',
+            isErrorMessage: {
+              'name': '',
+              'email' : '',
+              'password' : ''
+            }
         }
     }),
     actions:{
@@ -41,7 +57,7 @@ export const useUserStore = defineStore('userStore',{
                     
                 }else{
                     return {
-                        route : '/auth'
+                        route : '/'
                     }
                 }
             }else{
