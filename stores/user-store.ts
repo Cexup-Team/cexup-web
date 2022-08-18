@@ -1,5 +1,10 @@
 import { defineStore } from "pinia";
 import { useSession } from "~~/composables/useSession"
+import { useToast, useModal } from 'tailvue'
+
+
+const $toast = useToast()
+
 
 export const useUserStore = defineStore('userStore',{
     state:()=>({
@@ -32,9 +37,13 @@ export const useUserStore = defineStore('userStore',{
         }
     }),
     actions:{
-       async signIn(email:string,password:string){
+       async signIn(){
             const api = useApi()
-            const {success,message, data} = await api.signIn(email,password)
+            const router = useRouter()
+            this.stateLogin.email === "" ? this.stateLogin.isErrorMessage.email = "Email must be required" : this.stateLogin.isErrorMessage.email = ""
+            this.stateLogin.password === "" ? this.stateLogin.isErrorMessage.password = "Password must be required" : this.stateLogin.isErrorMessage.password = ""
+            this.stateLogin.isLoading = true
+            const {success,message, data} = await api.signIn(this.stateLogin.email,this.stateLogin.password)
             if(success){
                 useSession().setItem("cexup-token", data.access_token)
                 useSession().setItem("cexup-user", JSON.stringify(data.user))
@@ -52,18 +61,26 @@ export const useUserStore = defineStore('userStore',{
                     !users.desa_id
                 ) {
                     return {
-                        route : '/auth/register/complete'
+                        location : '/auth/register/complete'
                     }
-                    
                 }else{
                     return {
-                        route : '/'
+                        location: '/'
                     }
                 }
             }else{
+                
+                $toast.show({
+                    type: 'danger',
+                    message: message,
+                    timeout: 4,
+                })
+
+                this.stateLogin.isLoading = false
+
                 return Promise.reject({
                     message: message
-                });       
+                });
             }
         },
 
