@@ -156,7 +156,7 @@
                                 <h2 class="font-poppins text-base leading-6 font-medium mb-1">Kesehatanmu Nomor Satu!</h2>
                                 <p class="text-sm text-gray-350 font-poppins font-normal leading-5">Temukan solusi disini untuk tetap sehat!</p>
                             </div>
-                            <nuxt-link to="/telemedicine" class="">
+                            <nuxt-link to="/teleconsultation" class="">
                                 <img class="w-8 h-8" src="../assets/images/icon_right_background_rounded.svg" alt="">
                             </nuxt-link>
                         </div>

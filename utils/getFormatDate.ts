@@ -10,3 +10,12 @@ function nameMonth(month){
     const name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
     return name[month];
 }
+
+export function selectSafeZero(date){
+    const slcDate = new Date(date)
+    const day = slcDate.getDate() < 10 ? `0${slcDate.getDate()}` : slcDate.getDate()
+    const month = slcDate.getMonth() + 1 < 10 ? `0${slcDate.getMonth()+1}` : slcDate.getMonth()+1
+    const year = slcDate.getFullYear()
+    const result = `${year}-${month}-${day}`
+    return result
+} 

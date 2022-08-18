@@ -1,5 +1,7 @@
 <script setup lang="ts">
     import { ref } from "vue"
+
+    
     
     
     defineProps({
@@ -25,28 +27,30 @@
 
     // console.log(props.allDay)
 
-
-    watch(() => [cardSelect.value], ([newCardItem]) => {
+    onMounted(() => {
+        
         let tabStatus = document.getElementsByClassName("card-select-date")[0]
         let tabPaneStatus = document.getElementsByClassName("card-select-date-item")
 
 
         for (let i = 0; i < tabPaneStatus.length; i++) {
             tabPaneStatus[i].addEventListener("click", function(e) {
-                console.log(e.target)
+                emit('update:selectDate', e.target.getAttribute("slc"))
                 tabStatus.getElementsByClassName("active")[0].classList.remove("active")
                 tabPaneStatus[i].classList.add("active")
             })
         }
     })
+
+
 </script>
 <template>
     <div ref="cardSelect" class="card-select-date flex justify-start mt-4 overflow-x-scroll no-scrollbar px-5">
         <div v-for="(item, index) in allDay" :key="index">
-            <div :class="'card-select-date-item cursor-pointer transition-all duration-300 ease-in-out mr-5 rounded-xl '+(index===0 ? 'active' : '')">
-                <div class="flex flex-col items-center w-16 h-20 justify-center">
-                    <h5 class="font-poppins text-lg font-semibold" :slc="item.getDate()">{{item.getDate()}}</h5>
-                    <span class="text-gray-350 font-poppins text-sm">{{getNameDay(item.getDay())}}</span>
+            <div :class="'card-select-date-item cursor-pointer transition-all duration-300 ease-in-out mr-5 rounded-xl '+(index===0 ? 'active' : '')" :slc="item.getDate()">
+                <div class="flex flex-col items-center w-16 h-20 justify-center" :slc="item">
+                    <h5 class="font-poppins text-lg font-semibold" :slc="item">{{item.getDate()}}</h5>
+                    <span class="text-gray-350 font-poppins text-sm" :slc="item">{{getNameDay(item.getDay())}}</span>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@
     import { useToast, useModal } from 'tailvue'
     import { useTeleconsultationStore } from '~~/stores/teleconsultation-store';
     import { useUserStore } from '~~/stores/user-store';
+    import { selectSafeZero } from "../../../utils/getFormatDate";
 
 
     const $toast = useToast()
@@ -49,12 +50,21 @@
     let doneTypingInterval = 2000;
 
     const state = reactive({
+        slcDate : null,
         allDay : null,
         isLoading: false,
         isStatus: 'idle',
         isError : false,
         isData : null,
     })
+
+    const stateTime = reactive({
+        isLoading: false,
+        isStatus: 'idle',
+        isError : false,
+        isData : null,
+    })
+
 
     state.allDay  = getAllDaysInMonth(now.getFullYear(), now.getMonth()).slice(day-1, day+30);
 
@@ -63,9 +73,11 @@
     
     const getDoctorTele = (id) => {
         state.isLoading = true
+        stateTime.isLoading = true
         teleconsultation.getDoctorTele(id).then(
             res => {
                 state.isData = res.data
+                getTime(selectSafeZero(new Date()))
                 state.isLoading = false
                 state.isStatus = "success"
             }
@@ -76,7 +88,6 @@
                 state.isStatus = "error"
             }
         )
-        // state.isLoading = false
     }
 
      
@@ -96,10 +107,32 @@
         }
     })
 
+    const getTime = (date) => {
+
+        const select  = selectSafeZero(date)
+        const hospital_id = state.isData.hospital[0].id
+
+        stateTime.isLoading = true
+        teleconsultation.getTimeList(42, select, 'call').then(
+            res => {
+                stateTime.isData = res.data
+                stateTime.isLoading = false
+                stateTime.isStatus = "success"
+
+                console.log(stateTime.isData)
+            }
+        ).catch(
+            err => {
+                console.log(err)
+                stateTime.isLoading = false
+                stateTime.isStatus = "error"
+            }
+        )
+    }
+
     onMounted(() => {
         const params = router.currentRoute.value.params.slug
         getDoctorTele(params)
-    
     })
 </script>
 <template>
@@ -176,29 +209,27 @@
                             </div>
                             
 
-                            <CardTeleconsultationSelectDate :allDay="state.allDay" />
+                            <CardTeleconsultationSelectDate :allDay="state.allDay" @update:selectDate="getTime" />
                             
                             <div class="mt-4 px-5">
                                 <h2 class="text-base font-poppins font-semibold">Select Time</h2>
                             </div>
                             <div class="select-time mt-4">
+
+                                <div v-if="stateTime.isLoading" class="w-full px-4 grid grid-cols-3 gap-4">
+                                    <p class="leading-relaxed h-9 animate-pulse bg-gray-400 rounded-xl"></p>
+                                    <p class="leading-relaxed h-9 animate-pulse bg-gray-400 rounded-xl"></p>
+                                    <p class="leading-relaxed h-9 animate-pulse bg-gray-400 rounded-xl"></p>
+                                </div>
+
                                 <div class="card-select-time grid grid-cols-3 gap-4 px-4" ref="cardTime">
-                                    <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
-                                        <h4 class="font-poppins text-sm whitespace-nowrap">09:00 am</h4>
+                                    <div v-if="!stateTime.isLoading && stateTime.isStatus === 'success'">
+                                        <div v-for="(item, index) in stateTime.isData" :key="index">
+                                            <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
+                                                <h4 class="font-poppins text-sm whitespace-nowrap">{{item.time}}</h4>
+                                            </div>
+                                        </div>
                                     </div>
-                                      <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
-                                        <h4 class="font-poppins text-sm whitespace-nowrap">09:15 am</h4>
-                                    </div>
-                                      <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden active">
-                                        <h4 class="font-poppins text-sm whitespace-nowrap">09:30 am</h4>
-                                    </div>
-                                    <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
-                                        <h4 class="font-poppins text-sm whitespace-nowrap">09:45 am</h4>
-                                    </div>
-                                      <div class="px-5 py-2 text-center border border-primary-color rounded-xl w-full card-select-time-item cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
-                                        <h4 class="font-poppins text-sm whitespace-nowrap">10:00 am</h4>
-                                    </div>
-                                  
                                 </div>
                             </div>
                             <div class="mt-6 px-4 mb-10">

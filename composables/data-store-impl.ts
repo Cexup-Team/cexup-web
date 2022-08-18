@@ -186,4 +186,20 @@ export class DataStoreImpl implements DataStore{
     }
 
 
+    async getTimeList(doctor_has_hospital, date, appointment): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.post('doctor/get-time-list', {
+            doctor_has_hospital_id : doctor_has_hospital,
+            date: date,
+            appointment : appointment
+        }, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+
 }

@@ -50,6 +50,22 @@ export const useTeleconsultationStore = defineStore('TeleconsultationStore',{
                 });       
             }
         },
+
+        async getTimeList(doctor_has_hospital, date, appointment){
+            const api = useApi()
+            const {success, message, data} = await api.getTimeList(doctor_has_hospital, date, appointment)
+            if (success) {
+                return {
+                    data : data
+                }
+            }else{
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+
+    
     }
 
 })
