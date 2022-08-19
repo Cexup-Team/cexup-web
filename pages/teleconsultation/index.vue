@@ -4,8 +4,7 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useTeleconsultationStore } from '~~/stores/teleconsultation-store';
-    import { useUserStore } from '~~/stores/user-store';
-    import { stat } from "fs";
+
 
     const $toast = useToast()
     const router = useRouter()
@@ -20,112 +19,60 @@
     let typingTimer;
     let doneTypingInterval = 2000;
 
-    const stateSpeciality = reactive({
-        isLoading: false,
-        isSelect : [],
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const stateTele = reactive({
-        item : null,
-        selectActive : '',
-        speciality: '',
-        search: '',
-        searchIcon : ["speciality"],
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const slcValue = (value) => {
-        stateTele.item = listMap.get(value)
-        stateTele.selectActive = value
+    const slcValue = (value) =>  {
+        teleconsultation.stateTele.item = listMap.get(value)
+        teleconsultation.stateTele.selectActive = value
         openModal.value = true
     }
+
     const changeOpen = (value) => {
         openModal.value = value
     }
 
     const selectOption = (value) => {
-        stateTele.speciality = value
+        teleconsultation.stateTele.speciality = value
         openModal.value = false
     }
-
-
     const reset = () => {
-        stateTele.speciality = ""
+        teleconsultation.stateTele.speciality = ""
         openModal.value = false
     }
 
     
     const getListDoctorTele = (size, search, speciality, hospital) => {
-        stateTele.isLoading = true
-        teleconsultation.getListDoctorTele(size, search, speciality, hospital).then(
-            res => {
-                stateTele.isData = res.data
-                stateTele.isLoading = false
-                stateTele.isStatus = "success"
-            }
-        ).catch(
-            err => {
-                console.log(err)
-                stateTele.isLoading = false
-                stateTele.isStatus = "error"
-            }
-        )
-        // state.isLoading = false
+        teleconsultation.getListDoctorTele(size, search, speciality, hospital)
     }
-
 
     const getListSpeciality = () => {
-        stateSpeciality.isLoading = true
-        teleconsultation.getListSpeciality().then(
-            res => {
-                stateSpeciality.isData = res.data
-                stateSpeciality.isData.forEach(el => {
-                    stateSpeciality.isSelect.push(el.name)
-                });
-                
-                console.log(stateSpeciality.isSelect)
-                stateSpeciality.isLoading = false
-                stateSpeciality.isStatus = "success"
-            }
-        ).catch(
-            err => {
-                console.log(err)
-                stateSpeciality.isLoading = false
-                stateSpeciality.isStatus = "error"
-            }
-        )
-        // state.isLoading = false
+        teleconsultation.stateSpeciality.isLoading = true
+        teleconsultation.getListSpeciality()
     }
 
-    watch(() => stateTele.search, (newSearch, oldSearch) => {
+    watch(() => teleconsultation.stateTele.search, (newSearch, oldSearch) => {
         if (newSearch !== oldSearch) {
-            stateTele.isLoading = true
+            teleconsultation.stateTele.isLoading = true
             clearTimeout(typingTimer)
             typingTimer = setTimeout(() => {
-                getListDoctorTele("", newSearch, stateTele.speciality, "")
+                getListDoctorTele("", newSearch, teleconsultation.stateTele.speciality, "")
                 
             }, doneTypingInterval);
         }
     })
 
 
-    watch(() => stateTele.speciality, (newSpeciality) => {
+    watch(() => teleconsultation.stateTele.speciality, (newSpeciality) => {
         getListDoctorTele("", "", newSpeciality, "")
     })
 
 
     onMounted(() => {
         getListDoctorTele("", "", "", "")
-        getListSpeciality()
+        if (teleconsultation.stateSpeciality.isSelect.length === 0) {
+            getListSpeciality()
+        }
     })
 
-    listMap.set('speciality', stateSpeciality.isSelect)
+    listMap.set('speciality', teleconsultation.stateSpeciality.isSelect)
 
     const searchIcon = ["speciality"]
     
@@ -154,7 +101,7 @@
 
                 <section class="history-profile px-4 pt-20 relative">                   
                     <div class="relative h-11">
-                        <input v-model="stateTele.search" class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search for doctor (min 3 word)" type="text">
+                        <input v-model="teleconsultation.stateTele.search" class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search for doctor (min 3 word)" type="text">
                         <img src="../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                     </div> 
                 </section>
@@ -176,13 +123,13 @@
                 </section>
 
                 <section class="mt-14 px-4"> 
-                    <div v-if="!stateTele.isLoading && stateTele.isStatus === 'success'">
-                        <div v-for="(item, index) in stateTele.isData" :key="index">
+                    <div v-if="!teleconsultation.stateTele.isLoading && teleconsultation.stateTele.isStatus === 'success'">
+                        <div v-for="(item, index) in teleconsultation.stateTele.isData" :key="index">
                             <CardTeleconsultationDoctor :name="item.name" :speciality="item.speciality" :rs="item.hospital[0].name" online :year=5 :price=100000 :image="item.thumb" :link="'/teleconsultation/doctor/'+item.slug" />
                         </div>
                     </div>
 
-                    <div v-if="stateTele.isLoading || stateTele.isStatus === 'error'">
+                    <div v-if="teleconsultation.stateTele.isLoading || teleconsultation.stateTele.isStatus === 'error'">
                         <div v-for="(item, index) in 5" :key="index">
                             <ShimmerCardTeleconsultationDoctor />
                         </div>
@@ -197,14 +144,14 @@
                                 <h3 class="text-sm font-semibold font-poppins leading-5 w-full">Choose Specialization</h3>
                                 <h3 class="font-poppins text-sm text-primary-color" @click="reset">Reset</h3>
                             </div>
-                            <div class="relative h-16 max-h-16 min-h-max mb-2" v-if="stateTele.searchIcon.indexOf(stateTele.selectActive) > -1">
+                            <div class="relative h-16 max-h-16 min-h-max mb-2" v-if="teleconsultation.stateTele.searchIcon.indexOf(teleconsultation.stateTele.selectActive) > -1">
                                 <input class="search_input outline-none border border-gray-150 w-full bg-none p-3 font-poppins text-sm absolute top-0 left-0" placeholder="Search" type="text">
                                 <img src="../../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                             </div>
                             <ul class="w-full h-full overflow-y-scroll mt-2 no-scrollbar">
-                                <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in stateTele.item" :key="index">
-                                    <p :class="'text-base leading-6 font-poppins '+(stateTele[`${stateTele.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
-                                    <img v-if="stateTele[`${stateTele.selectActive}`] === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in teleconsultation.stateTele.item" :key="index">
+                                    <p :class="'text-base leading-6 font-poppins '+(teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
+                                    <img v-if="teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
                                 </li>
                             </ul>
                         </div>
