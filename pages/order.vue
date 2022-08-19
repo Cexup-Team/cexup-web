@@ -5,67 +5,24 @@
     import { useRouter } from 'vue-router';
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
-    import { useDashboardStore } from '~~/stores/dashboard-store';
-    import { useUserStore } from '~~/stores/user-store';
+    import { useOrderStore } from '~~/stores/order-store';
 
 
 
 
-    const dashboard = useDashboardStore()
+    const order = useOrderStore()
 
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()
 
-    const state = reactive({
-        slcAppointment: "",
-        slcStatus: "",
-    })
-
-    
-
-    const stateOrder = reactive({
-        isLoading: false,
-        isStatus: 'idle',
-        isError : false,
-        isData : null,
-    })
-
-    const updateSelect = (value) => {
-        state.slcAppointment = value
-        const user = JSON.parse(session.getItem("cexup-user"))
-        getListOrder(state.slcAppointment, "", user.user_id)
-    }
-
-    const updateStatus = (value) => {
-        state.slcStatus= value
-        const user = JSON.parse(session.getItem("cexup-user"))
-        getListOrder(state.slcAppointment, state.slcStatus, user.user_id)
-        // state.slcAppointment = value
-        // const user = JSON.parse(session.getItem("cexup-user"))
-        // getListOrder(state.slcAppointment, "", user.user_id)
-    }
-
     const getListOrder = (appointment, type, user_id) => {
-        stateOrder.isLoading = true
-        dashboard.getListOrder(appointment, type, user_id).then(
-            res => {
-                stateOrder.isData = res.data
-                stateOrder.isLoading = false
-                stateOrder.isStatus = "success"
-            }
-        ).catch(
-            err => {
-                stateOrder.isLoading = false
-                stateOrder.isStatus = "error"
-            }
-        )
-        // state.isLoading = false
+        order.getListOrder(appointment, type, user_id)
     }
 
     onMounted(() => {
         const user = JSON.parse(session.getItem("cexup-user"))
-        getListOrder(state.slcAppointment, "", user.user_id)
+        getListOrder(order.state.slcAppointment, "", user.user_id)
     })
 
 
@@ -84,7 +41,7 @@
             </div>
 
 
-            <Tabs bgBody="bg-blue-50" @update:select="updateSelect" @update:status="updateStatus">
+            <Tabs bgBody="bg-blue-50" @update:select="order.updateSelect" @update:status="order.updateStatus">
                 <template v-slot:tabHeader>
                     <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="">
                         All
@@ -121,14 +78,14 @@
                 </template>
                 <template v-slot:tabBody>
                     <div class="tab-body-item active w-full pb-44">
-                        <div v-if="stateOrder.isLoading">
+                        <div v-if="order.stateOrder.isLoading">
                             <div v-for="(item, index) in 5" :key="index">
                                 <ShimmerCardOrder />
                             </div>
                         </div>
 
-                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
-                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
                         </div>
@@ -137,14 +94,14 @@
                         <div class="mt-14"></div>
                     </div>
                     <div class="tab-body-item w-full pb-44">
-                        <div v-if="stateOrder.isLoading">
+                        <div v-if="order.stateOrder.isLoading">
                             <div v-for="(item, index) in 5" :key="index">
                                 <ShimmerCardOrder />
                             </div>
                         </div>
                         
-                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
-                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
                         </div>
@@ -153,14 +110,14 @@
                     </div>
                     <div class="tab-body-item w-full pb-44">
 
-                        <div v-if="stateOrder.isLoading">
+                        <div v-if="order.stateOrder.isLoading">
                             <div v-for="(item, index) in 5" :key="index">
                                 <ShimmerCardOrder />
                             </div>
                         </div>
 
-                        <div v-if="!stateOrder.isLoading && stateOrder.isStatus === 'success'">
-                            <div v-for="(item, index) in stateOrder.isData" :key="index">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
                         </div>
