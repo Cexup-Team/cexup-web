@@ -26,7 +26,7 @@
         <div class="flex justify-between items-center">
             <div class="w-3/6">
                 <h2 class="text-sm font-medium text-primary-color font-poppins mb-2">{{ title }}</h2>
-                <p class="text-base font-poppins font-medium">{{ subTitle }}</p>
+                <p class="text-base font-poppins font-medium line-clamp-3">{{ subTitle }}</p>
             </div>
             <div class="w-2/6">
                 <img :src="img" class="w-24 h-24 object-cover rounded-lg" :alt="alt">

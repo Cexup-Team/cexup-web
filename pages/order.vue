@@ -2,6 +2,29 @@
     import BottomNav from '~~/parts/BottomNav.vue';
     import Tabs from '~~/parts/Tabs.vue';
 
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useOrderStore } from '~~/stores/order-store';
+
+
+
+
+    const order = useOrderStore()
+
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()
+
+    const getListOrder = (appointment, type, user_id) => {
+        order.getListOrder(appointment, type, user_id)
+    }
+
+    onMounted(() => {
+        const user = JSON.parse(session.getItem("cexup-user"))
+        getListOrder(order.state.slcAppointment, "", user.user_id)
+    })
+
 
 </script>
 <template>
@@ -18,15 +41,15 @@
             </div>
 
 
-            <Tabs bgBody="bg-blue-50">
+            <Tabs bgBody="bg-blue-50" @update:select="order.updateSelect" @update:status="order.updateStatus">
                 <template v-slot:tabHeader>
-                    <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="">
                         All
                     </div>
-                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="call">
                         Call Doctor
                     </div>
-                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
+                    <div class="font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5" select="meet">
                         Meet Doctor
                     </div>
                     
@@ -34,46 +57,73 @@
                 <template v-slot:tabFilter>
                     <div class="pt-4 pb-5 bg-blue-50 overflow-x-scroll no-scrollbar">
                         <div class="tab-status flex items-center w-full min-w-max mx-3">
-                            <div class="tab-status-item mr-3 active_tab_filter">
+                            <div class="tab-status-item mr-3 active_tab_filter" status="">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">All</p>
                             </div>
-                            <div class="tab-status-item mr-3">
+                            <div class="tab-status-item mr-3" status="pending">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Payment</p>
                             </div>
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Progress</p>
+                            <div class="tab-status-item mr-3" status="booked">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Processed</p>
                             </div>
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Meeting </p>
-                            </div>
-
-                            <div class="tab-status-item mr-3">
-                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Meeting </p>
+                            <div class="tab-status-item mr-3" status="finish">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Completed</p>
                             </div>
 
-                            <div class="tab-status-item">
-                                <p class="px-4 py-2 font-poppins font-medium text-sm">Waiting Meeting </p>
+                            <div class="tab-status-item" status="failed">
+                                <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Canceled</p>
                             </div>
                         </div>
                     </div>
                 </template>
                 <template v-slot:tabBody>
                     <div class="tab-body-item active w-full pb-44">
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
-                        <CardOrder />
+                        <div v-if="order.stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                      
                         <div class="mt-14"></div>
                     </div>
-                    <div class="tab-body-item">
-                        <h2>Call Doctor</h2>
-        
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem tempore corrupti eius rerum dolore, natus id, consequuntur magni deleniti alias et delectus porro corporis optio nisi aliquid! Ad, natus?</p>
+                    <div class="tab-body-item w-full pb-44">
+                        <div v-if="order.stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+                        
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                        <div class="mt-14"></div>
                     </div>
-                    <div class="tab-body-item">
-                        <h2> Meet Doctor</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum autem tempore corrupti eius rerum dolore, natus id, consequuntur magni deleniti alias et delectus porro corporis optio nisi aliquid! Ad, natus?</p>
+                    <div class="tab-body-item w-full pb-44">
+
+                        <div v-if="order.stateOrder.isLoading">
+                            <div v-for="(item, index) in 5" :key="index">
+                                <ShimmerCardOrder />
+                            </div>
+                        </div>
+
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                            <div v-for="(item, index) in order.stateOrder.isData" :key="index">
+                                <CardOrder :order="item" />
+                            </div>
+                        </div>
+
+                        <div class="mt-14"></div>
+                    
                     </div>
                     
                 </template>

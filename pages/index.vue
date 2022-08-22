@@ -1,11 +1,28 @@
 <script setup lang="ts">
 
-import HealthStatusVue from "../parts/HealthStatus.vue";
-import HealthFeatureVue from "../parts/HealthFeature.vue";
-import BottomNav from '~~/parts/BottomNav.vue';
+    import HealthStatusVue from "../parts/HealthStatus.vue";
+    import HealthFeatureVue from "../parts/HealthFeature.vue";
+    import BottomNav from '~~/parts/BottomNav.vue';
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useDashboardStore } from '~~/stores/dashboard-store';
 
+    const dashboard = useDashboardStore()
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()    
 
-      
+    onMounted(() => {
+        const user = JSON.parse(session.getItem("cexup-user"))
+        dashboard.getListDoctor(4)
+        dashboard.getListProduct("")
+        dashboard.getListArticle("")
+        dashboard.getLatestVitalSign(user.user_code)
+        dashboard.getCurrentEWS(user.user_code)
+        
+    })
+
 </script>
 
 <template>
@@ -29,8 +46,13 @@ import BottomNav from '~~/parts/BottomNav.vue';
                     </div>
 
                     <!-- Health Status -->
+                    <div v-if="dashboard.stateVitalSign.isLoading && dashboard.stateCurrentEWS.isLoading">
+                        <ShimmerHealthStatus />
+                    </div>
+                    <div v-if="!dashboard.stateVitalSign.isLoading && dashboard.stateVitalSign.isStatus === 'success' && !dashboard.stateCurrentEWS.isLoading && dashboard.stateCurrentEWS.isStatus === 'success'">
+                        <HealthStatusVue :vital="dashboard.stateVitalSign.isData" :ews="dashboard.stateCurrentEWS.isData" />
+                    </div>
 
-                    <HealthStatusVue />
 
                     <!-- Feature -->
                     <HealthFeatureVue />  
@@ -43,16 +65,26 @@ import BottomNav from '~~/parts/BottomNav.vue';
                                 <h2 class="font-poppins text-base leading-6 font-medium mb-1">Kesehatanmu Nomor Satu!</h2>
                                 <p class="text-sm text-gray-350 font-poppins font-normal leading-5">Temukan solusi disini untuk tetap sehat!</p>
                             </div>
-                            <nuxt-link to="/telemedicine" class="">
+                            <nuxt-link to="/teleconsultation" class="">
                                 <img class="w-8 h-8" src="../assets/images/icon_right_background_rounded.svg" alt="">
                             </nuxt-link>
                         </div>
                         <div class="doctor-list w-full mb-4">
-                            <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
-                                <CardDoctor title="dr Yakob Togar" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor title="dr Iqbal Nur Haq Binkidi" subTitle="Cardiac" price="Rp. 89.999.999"  icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor  title="dr Wati" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
-                                  <CardDoctor title="dr Ayu Alga" subTitle="Dermatologist" price="Rp. 5.000" icon="../../assets/images/dummy_doctor.png" />
+                            
+                            <div v-if="dashboard.stateDoctor.isLoading">
+                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
+                                    <div v-for="(i, index) in 4" :key="index">
+                                        <ShimmerCardDoctor />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div v-if="!dashboard.stateDoctor.isLoading && dashboard.stateDoctor.isStatus === 'success'">
+                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
+                                    <div v-for="(item, index) in dashboard.stateDoctor.isData" :key="index">
+                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,13 +116,23 @@ import BottomNav from '~~/parts/BottomNav.vue';
                         </div>
 
                         <div class="product-list w-full mb-5">
-                            <div class="slide-product pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png"  />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
-                                <CardDoctor title="Cexme Health Smartwatch" subTitle="Start From" price="Rp. 2.250.000" icon="../../assets/images/katalog.png" />
+                            <div v-if="dashboard.stateDoctor.isLoading">
+                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">
+                                    <div v-for="(i, index) in 4" :key="index">
+                                        <ShimmerCardDoctor />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
+                                <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
+                                    <div v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="">
+                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    
                     </div>
 
                     <div class="article">
@@ -105,28 +147,33 @@ import BottomNav from '~~/parts/BottomNav.vue';
                         </div>
                         
                         <div class="overflow-x-scroll no-scrollbar">
+                            <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                             <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
-                              
-                              <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
-                            
-                              <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
-                                                 
+                                <div v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="">
+                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                </div>  
                             </div>
+                            </div>
+
+
+                            <div v-if="dashboard.stateProduct.isLoading">
+                                <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
+                                    <div v-for="(i, index) in 4" :key="index">
+                                        <ShimmerCardArticle />
+                                    </div> 
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                     <div class="pb-16">
 
                     </div>
                 </section>
-
-                  
-            
             </div>
         </nuxt-layout>
     </div>  
 </template>
-
 
 <style>
     .dashboard-wrapper {
@@ -143,10 +190,9 @@ import BottomNav from '~~/parts/BottomNav.vue';
         display: none;
     }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
     .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;  
     }
 
   

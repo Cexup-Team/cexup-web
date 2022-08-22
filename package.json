@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.1.9",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@vuepic/vue-datepicker": "^3.4.0",
     "@vueuse/core": "^9.0.0",
     "apexcharts": "^3.35.3",
     "npm": "^8.12.2",

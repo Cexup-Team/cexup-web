@@ -1,5 +1,13 @@
 <script setup lang="ts">
     import { Ref } from "vue"
+    import { useRegionStore } from '~~/stores/region-store';
+    import { useUserStore } from '~~/stores/user-store';
+    import {getMapValue} from '../../../utils/getMapValue';
+    import Datepicker from '@vuepic/vue-datepicker'
+    import '@vuepic/vue-datepicker/dist/main.css'
+    import { useToast, useModal } from 'tailvue'
+    import { useRouter } from 'vue-router';
+
 
     interface CompleteState{
         slcValue : string,
@@ -8,17 +16,50 @@
 
     let openModal: Ref<boolean> = ref(false)
     const state  = reactive({
+        phone : '',
         gender : '',
         identity : '',
+        address: '',
+        province_id : '',
         province: '',
+        regency_id : '',
         regency : '',
+        district_id : '',
         district :'',
+        village_id : '',
         village : '',
         selection : [],
         item : null,
+        date : null,
         selectActive : '',
-        searchIcon : ["province", "regency", "district", "village"]
+        searchIcon : ["province", "regency", "district", "village"],
+        mapProvince: new Map(),
+        listProvince: [],
+        mapRegency: new Map(),
+        listRegency: [],
+        mapDistrict: new Map(),
+        listDistrict: [],
+        mapVillage: new Map(),
+        listVillage: [],
+        isLoading: false,
+        isData : null,
+        isStatus: 'idle',
+        isErrorMessage: {
+            'phone': '',
+            'date_of_birth' : '',
+            'gender' : '',
+            'identity': '',
+            'province': '',
+            'regency' : '',
+            'district' : '',
+            'village':''
+        }
     })
+    const listMap = new Map()
+    const region = useRegionStore()
+    const user = useUserStore()
+    const $toast = useToast()
+    const router = useRouter()
 
     
 
@@ -62,17 +103,127 @@
         openModal.value = false
     }
 
-    const listMap = new Map()
+    const getRegion = (id, reg) => {
+        
+        region.getRegion(id).then(
+            res => {
+                reg === "province" ? 
+                    res.data.map((item, index) => {
+                        state.mapProvince.set(item.kode, item.name)
+                        state.listProvince.push(item.name)
+                    }) :
+                reg === "regency" ?
+                    res.data.map((item, index) => {
+                        state.mapRegency.set(item.kode, item.name)
+                        state.listRegency.push(item.name)
+                    })  :
+                reg === "district" ?
+                    res.data.map((item, index) => {
+                        state.mapDistrict.set(item.kode, item.name)
+                        state.listDistrict.push(item.name)
+                    }) :
+                reg === "village" ?
+                    res.data.map((item, index) => {
+                        state.mapVillage.set(item.kode, item.name)
+                        state.listVillage.push(item.name)
+                    }) : ""
+            }
+        ).catch(
+            
+        )
+        // state.isLoading = false
+    }
 
-    listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
-    listMap.set('gender', ["Male", "Female"])
-    listMap.set('province', ["Jawa Tengah", "Jawa Barat", "DKI Jakarta", "Banten", "Aceh", "Maluku"])
-    listMap.set('regency', ["Semarang", "Tegal", "Purwokerto", "Pemalang", "Surakarta", "Kendal"])
-    listMap.set('district', ["Banjarsari", "Jebres", "Mangkunegaran", "Serengan"])
-    listMap.set('village', ["Kadipiro", "Skip", "Mojosongo"])
+
+    watch(() => [state.province, state.regency, state.district, state.village], async ([newProvince, newRegency, newDistrict, newVillage], [ oldProvince, oldRegency, oldDistrict, oldVillage]) => {
+        // console.log(newProvince)
+        if (newProvince !== '' && newProvince !== oldProvince) {
+
+            state.regency = ''
+            state.regency_id = ''
+            state.district = ''
+            state.district_id = ''
+            state.village = ''
+            state.village_id = ''
+
+            state.listRegency = []
+            state.mapRegency = new Map()
+            state.province_id = await getMapValue(state.mapProvince, newProvince)
+            await getRegion(state.province_id, "regency")
+            listMap.set('regency', state.listRegency)
+        }else if (newRegency !== '' && newRegency !== oldRegency){
+            state.district = ''
+            state.district_id = ''
+            state.village = ''
+            state.village_id = ''
+            state.listDistrict = []
+            state.mapDistrict = new Map()
+            state.regency_id = await getMapValue(state.mapRegency, newRegency)
+            await getRegion(state.regency_id, "district")
+            listMap.set('district', state.listDistrict)
+        }else if (newDistrict !== '' && newDistrict !== oldDistrict){
+            state.village = ''
+            state.village_id = ''
+            state.listVillage = []
+            state.mapVillage = new Map()
+            state.district_id = await getMapValue(state.mapDistrict, newDistrict)
+            await getRegion(state.district_id, "village")
+            listMap.set('village', state.listVillage)
+        }else if (newVillage !== '' && newVillage !== oldVillage){
+            state.village_id = await getMapValue(state.mapVillage, newVillage)
+        }
+        
+    })
 
 
     const searchIcon = ["province", "regency", "district", "village"]
+
+        
+    
+    onMounted(() => {
+
+       
+        getRegion("", "province")
+        listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
+        listMap.set('gender', ["Male", "Female"])
+        listMap.set('province', state.listProvince)
+ 
+        
+    })
+
+    const next = () => {
+        const month = state.date?.getMonth()+1 < 10 ? `0${state.date?.getMonth()+1}` : state.date?.getMonth()+1
+        
+        const date = state.date ? `${state.date?.getFullYear()}-${month}-${state.date?.getDate()}` : ""
+
+
+        // console.log(state.province_id)
+        user.updatePatient(
+            state.phone,
+            state.gender,
+            date,
+            state.address,
+            state.identity,
+            state.province_id,
+            state.regency_id,
+            state.district_id,
+            state.village_id
+        ).then(
+            res => {
+                router.push("/")
+            }
+        ).catch(
+            err => {
+                $toast.show({
+                    type: 'danger',
+                    message: err.message,
+                    timeout: 4,
+                })
+            }
+        )
+        
+    } 
+    
     
 
 </script>
@@ -83,10 +234,11 @@
         <div class="mt-9 p-4">
             <h2 class="text-lg text-primary-color font-bold mt-9 w-full text-center font-poppins">Complete Profile</h2>
             <div class="inputForm mt-6">
-                <InputText className="rounded-md" type="text" placeholder="Phone Number" />
+                <InputText className="rounded-md" v-model="state.phone" type="number" placeholder="Phone Number" />
             </div>
             <div class="inputForm mt-7">
-                <InputText className="rounded-md" type="text" placeholder="Date of Birth" src="../../assets/images/calendar.svg" :icon="true" slc @update:slc-value="slcValue" select="date" />
+                <!-- <InputText className="rounded-md" type="text" placeholder="Date of Birth" src="../../assets/images/calendar.svg" :icon="true" slc @update:slc-value="slcValue" select="date" /> -->
+                <Datepicker :input-class-name="'h-14'" v-model="state.date" :enable-time-picker="false" :placeholder="'Date of Birth'"  />
             </div>
             <div class="inputForm mt-7">
                 <InputText className="rounded-md"  type="text" placeholder="Gender" v-model="state.gender" src="../../assets/images/arrow_down.svg" :icon="true" select="gender" slc @update:slc-value="slcValue" />
@@ -95,6 +247,10 @@
               <InputText className="rounded-md"  type="text" placeholder="Identity" v-model="state.identity" src="../../assets/images/arrow_down.svg" :icon="true" select="identity" slc @update:slc-value="slcValue" />
             </div>
 
+            <div class="inputForm mt-6">
+                <InputText className="rounded-md" v-model="state.address" type="text" placeholder="Address" />
+            </div>
+            
             <div class="inputForm mt-7">
               <InputText className="rounded-md"  type="text" placeholder="Province" v-model="state.province" src="../../assets/images/arrow_down.svg" :icon="true" select="province" slc @update:slc-value="slcValue" />
             </div>
@@ -133,7 +289,7 @@
        
 
         <div class="bottom-box floating-next fixed bottom-0 right-0 w-full bg-white pt-5 px-6 pb-10 z-10">
-                <Button className="w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Next" />
+            <Button className="w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Next" @click="next" />
             <p class="w-full text-center text-primary-color mt-5">Skip</p>
         </div>
 

@@ -1,4 +1,82 @@
 <script setup lang="ts">
+    import { Ref } from "vue"
+    import { useRouter } from 'vue-router';
+    import { useSession } from "~~/composables/useSession"
+    import { useToast, useModal } from 'tailvue'
+    import { useTeleconsultationStore } from '~~/stores/teleconsultation-store';
+
+
+    const $toast = useToast()
+    const router = useRouter()
+    const session = useSession()
+    const listMap = new Map()
+
+    const teleconsultation = useTeleconsultationStore()
+
+
+    let openModal: Ref<boolean> = ref(false)
+
+    let typingTimer;
+    let doneTypingInterval = 2000;
+
+    const slcValue = (value) =>  {
+        teleconsultation.stateTele.item = listMap.get(value)
+        teleconsultation.stateTele.selectActive = value
+        openModal.value = true
+    }
+
+    const changeOpen = (value) => {
+        openModal.value = value
+    }
+
+    const selectOption = (value) => {
+        teleconsultation.stateTele.speciality = value
+        openModal.value = false
+    }
+    const reset = () => {
+        teleconsultation.stateTele.speciality = ""
+        openModal.value = false
+    }
+
+    
+    const getListDoctorTele = (size, search, speciality, hospital) => {
+        teleconsultation.getListDoctorTele(size, search, speciality, hospital)
+    }
+
+    const getListSpeciality = () => {
+        teleconsultation.stateSpeciality.isLoading = true
+        teleconsultation.getListSpeciality()
+    }
+
+    watch(() => teleconsultation.stateTele.search, (newSearch, oldSearch) => {
+        if (newSearch !== oldSearch) {
+            teleconsultation.stateTele.isLoading = true
+            clearTimeout(typingTimer)
+            typingTimer = setTimeout(() => {
+                getListDoctorTele("", newSearch, teleconsultation.stateTele.speciality, "")
+                
+            }, doneTypingInterval);
+        }
+    })
+
+
+    watch(() => teleconsultation.stateTele.speciality, (newSpeciality) => {
+        getListDoctorTele("", "", newSpeciality, "")
+    })
+
+
+    onMounted(() => {
+        getListDoctorTele("", "", "", "")
+        if (teleconsultation.stateSpeciality.isSelect.length === 0) {
+            getListSpeciality()
+        }
+    })
+
+    listMap.set('speciality', teleconsultation.stateSpeciality.isSelect)
+
+    const searchIcon = ["speciality"]
+    
+
 </script>
 <template>
     <div>
@@ -14,15 +92,16 @@
                     </div>
                 </div>
 
-                <div class="fixed bottom-8 z-50 w-full">
+                <div class="fixed bottom-8 z-30 w-full">
                     <div class="w-full text-center">
-                        <span class="choose-span rounded-2xl bg-white px-4 py-3">Choose Specialization</span>
+                        <span class="choose-span rounded-2xl bg-white px-4 py-3" @click="slcValue('speciality')">Choose Specialization</span>
+                        <!-- <InputText className="choose-span rounded-2xl bg-white px-4 py-3" /> -->
                     </div>
                 </div>
 
                 <section class="history-profile px-4 pt-20 relative">                   
                     <div class="relative h-11">
-                        <input class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search for doctor" type="text">
+                        <input v-model="teleconsultation.stateTele.search" class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search for doctor (min 3 word)" type="text">
                         <img src="../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                     </div> 
                 </section>
@@ -31,56 +110,10 @@
                         <h2 class="font-poppins text-sm font-semibold">Doctor available now</h2>
                         <span class="text-primary-color font-poppins text-sm font-semibold">See All</span>
                     </div>
-                    <div class="mt-4 bg-blue-50 relative">
-
-                    
-                        
-                            <div class="tele-doctor overflow-x-scroll no-scrollbar pb-20" >
-                                <div class="min-w-max px-4 py-3 flex">
-                                <nuxt-link to="/teleconsultation/doctor/kamskmas">
-
-                               
-                                <div class="tele-doctor-item flex justify-between items-center px-5 py-4 bg-white rounded-xl mr-3  ">
-                                    <div>
-                                        <h3 class="text-base font-poppins font-medium leading-6">Dr. Iqbal Nur Haq Yamah</h3>
-                                        <p class="mt-1 font-poppins text-gray-350 text-xs">Dermatologist</p>
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <div class="bg-teal-550 h-3 w-3 rounded-full mr-2"></div>
-                                            <h5 class="text-teal-550 font-poppins font-medium text-xs">Online</h5>
-                                        </div>
-                                        <h3 class="text-primary-color font-poppins font-semibold text-sm mt-4">Rp 5.000</h3>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-20 h-20 rounded-full overflow-hidden">
-                                            <img src="../../assets/images/doctor_img.png" class="object-cover" alt="">
-                                        </div>
-                                            <div class="mt-2">
-                                                <button class="outline-none bg-primary-color py-1 px-6 text-white font-poppins font-medium rounded-lg text-sm whitespace-pre">Start Call</button>
-                                            </div>
-                                    </div>
-                                </div>
-
-                                 </nuxt-link>
-                                <div class="tele-doctor-item flex justify-between items-center px-5 py-4 bg-white rounded-xl">
-                                    <div>
-                                        <h3 class="text-base font-poppins font-medium leading-6">Dr. Iqbal Nur Haq</h3>
-                                        <p class="mt-1 font-poppins text-gray-350 text-xs">Dermatologist</p>
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <div class="bg-teal-550 h-3 w-3 rounded-full mr-2"></div>
-                                            <h5 class="text-teal-550 font-poppins font-medium text-xs">Online</h5>
-                                        </div>
-                                        <h3 class="text-primary-color font-poppins font-semibold text-sm mt-4">Rp 5.000</h3>
-                                    </div>
-                                    <div class="flex flex-col items-center justify-center">
-                                        <div class="w-20 h-20 rounded-full overflow-hidden">
-                                            <img src="../../assets/images/doctor_img.png" class="object-cover" alt="">
-                                        </div>
-                                        <div class="mt-2">
-                                            <button class="outline-none bg-primary-color py-1 px-6 text-white font-poppins font-medium rounded-lg text-sm whitespace-pre">Start Call</button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                    <div class="mt-4 bg-blue-50 relative"> 
+                        <div class="tele-doctor overflow-x-scroll no-scrollbar pb-20" >
+                            <div class="min-w-max px-4 py-3 flex">
+                                <!-- <CardTeleconsultationDoctorAvailable  name="Dr. Iqbal Nur Ha" speciality="Dermatologist" online :price=5000 link="/teleconsultation/doctor/kamskmas" /> -->
                             </div>
                         </div>
                         <div class="w-full flex px-4 mt-4 absolute bottom-0 transform translate-y-10 h-28 rounded-2xl overflow-hidden">
@@ -89,70 +122,42 @@
                     </div>
                 </section>
 
-                <section class="mt-14 px-4">
-                    <div class="tele-doctor-list bg-white py-3 px-4 rounded-xl">
-                        <div class="flex">
-                            <div class="w-2/6 h-auto rounded-xl overflow-hidden mr-4 relative">
-                                <img src="../../assets/images/doctor_img.png" class="rounded-xl overflow-hidden object-cover w-full h-full" alt="">
-                            </div>
-                            <div class="w-4/6">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="text-base font-poppins font-medium leading-6">Dr. Iqbal Nur Haq</h3>
-                                    <img src="../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
-                                </div>
-                                 <h5 class="mt-1 font-poppins text-primary-color text-xs">Dermatologist</h5>
-                                 <h6 class="mt-3 font-poppins text-3">RS. Sari Asih</h6>
-                                 <div class="flex justify-between items-center">
-                                    <div class="flex flex-col">
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <div class="bg-teal-550 h-3 w-3 rounded-full mr-2"></div>
-                                            <h5 class="text-teal-550 font-poppins font-medium text-xs">Online</h5>
-                                        </div>
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <img src="../../assets/images/bag_icon.svg" class="mr-1" alt="">
-                                            <h5 class="text-gray-350 font-poppins font-medium text-xs">5 Years</h5>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-gray-350 font-poppins font-semibold text-xs discount relative">Rp 10.000</span>
-                                        <span class="text-primary-color font-semibold text-sm font-poppins">Rp 5.000</span>
-                                    </div>
-                                 </div>
-                            </div>
+                <section class="mt-14 px-4"> 
+                    <div v-if="!teleconsultation.stateTele.isLoading && teleconsultation.stateTele.isStatus === 'success'">
+                        <div v-for="(item, index) in teleconsultation.stateTele.isData" :key="index">
+                            <CardTeleconsultationDoctor :name="item.name" :speciality="item.speciality" :rs="item.hospital[0].name" online :year=5 :price=100000 :image="item.thumb" :link="'/teleconsultation/doctor/'+item.slug" />
                         </div>
                     </div>
-                     <div class="tele-doctor-list bg-white py-3 px-4 rounded-xl mt-4 mb-5">
-                        <div class="flex">
-                            <div class="w-2/6 h-auto rounded-xl overflow-hidden mr-4 relative">
-                                <img src="../../assets/images/doctor_img.png" class="rounded-xl overflow-hidden object-cover w-full h-full" alt="">
-                            </div>
-                            <div class="w-4/6">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="text-base font-poppins font-medium leading-6">Dr. Iqbal Nur Haq</h3>
-                                    <img src="../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
-                                </div>
-                                 <h5 class="mt-1 font-poppins text-primary-color text-xs">Dermatologist</h5>
-                                 <h6 class="mt-3 font-poppins text-3">RS. Sari Asih</h6>
-                                 <div class="flex justify-between items-center">
-                                    <div class="flex flex-col">
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <div class="bg-teal-550 h-3 w-3 rounded-full mr-2"></div>
-                                            <h5 class="text-teal-550 font-poppins font-medium text-xs">Online</h5>
-                                        </div>
-                                        <div class="flex mt-2 items-center justify-start">
-                                            <img src="../../assets/images/bag_icon.svg" class="mr-1" alt="">
-                                            <h5 class="text-gray-350 font-poppins font-medium text-xs">5 Years</h5>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-gray-350 font-poppins font-semibold text-xs discount relative">Rp 10.000</span>
-                                        <span class="text-primary-color font-semibold text-sm font-poppins">Rp 5.000</span>
-                                    </div>
-                                 </div>
-                            </div>
+
+                    <div v-if="teleconsultation.stateTele.isLoading || teleconsultation.stateTele.isStatus === 'error'">
+                        <div v-for="(item, index) in 5" :key="index">
+                            <ShimmerCardTeleconsultationDoctor />
                         </div>
                     </div>
                 </section>
+                <div class="mt-9"></div>
+
+                <BottomSheet :openModal="openModal" @update:change-open="changeOpen" type="blank">
+                    <template v-slot:bottomSheet>
+                        <div class="">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-sm font-semibold font-poppins leading-5 w-full">Choose Specialization</h3>
+                                <h3 class="font-poppins text-sm text-primary-color" @click="reset">Reset</h3>
+                            </div>
+                            <div class="relative h-16 max-h-16 min-h-max mb-2" v-if="teleconsultation.stateTele.searchIcon.indexOf(teleconsultation.stateTele.selectActive) > -1">
+                                <input class="search_input outline-none border border-gray-150 w-full bg-none p-3 font-poppins text-sm absolute top-0 left-0" placeholder="Search" type="text">
+                                <img src="../../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
+                            </div>
+                            <ul class="w-full h-full overflow-y-scroll mt-2 no-scrollbar">
+                                <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in teleconsultation.stateTele.item" :key="index">
+                                    <p :class="'text-base leading-6 font-poppins '+(teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
+                                    <img v-if="teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </BottomSheet>
+
             </div>
         </nuxt-layout>
     </div>

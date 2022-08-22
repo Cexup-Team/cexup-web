@@ -4,20 +4,23 @@ export type BaseResponse = {
     data: any
 }
 export interface api{
-    get(url:string):Promise<BaseResponse>
-    post(url:string,body:any):Promise<BaseResponse>
+    get(base: string, url: string, key: string, token: string):Promise<BaseResponse>
+    post(url:string,body:any,token?:string):Promise<BaseResponse>
     postForm(url:string,body:FormData):Promise<BaseResponse>
     put(url:string,body:any):Promise<BaseResponse>
     delete(url:string):Promise<BaseResponse>
 }
 export class Api implements api{
 
-    async get(url: string): Promise<BaseResponse> {
-
-        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
+    async get(base: string, url: string, key: string, token: string): Promise<BaseResponse> {
+        // import.meta.env.VITE_APP_BASE_URL
+        return await fetch(`${base}/${url}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
+                'Accept' : 'application/json',
+                'Authorization' : token ? `Bearer ${token}` : '',
+                'x-api-key' : key
             })
         })
             .then((res) => res.json())
@@ -25,7 +28,7 @@ export class Api implements api{
                 //todo extract respose
                 return {
                     success: true,
-                    data: "",
+                    data: val.data,
                     message: ""
                 }
             })
@@ -38,13 +41,14 @@ export class Api implements api{
             })
     }
 
-    async post(url: string, body: any): Promise<BaseResponse> {
+    async post(url: string, body: any, token?:string): Promise<BaseResponse> {
         return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
             method: 'POST',
             body:JSON.stringify(body),
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
-                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX'
+                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX',
+                'Authorization' : token ? `Bearer ${token}` : ''
             })
         })
             .then((res) => res.json())
