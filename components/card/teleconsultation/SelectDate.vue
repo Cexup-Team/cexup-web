@@ -25,7 +25,6 @@
 
     const cardSelect = ref(null);
 
-    // console.log(props.allDay)
 
     onMounted(() => {
         
@@ -55,12 +54,8 @@
             </div>
 
         </div>                        
-         
     </div>
                          
-   
-
-   
 
 </template>
 
