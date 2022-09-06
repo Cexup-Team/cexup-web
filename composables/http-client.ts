@@ -5,7 +5,7 @@ export type BaseResponse = {
 }
 export interface api{
     get(base: string, url: string, key: string, token: string):Promise<BaseResponse>
-    post(url:string,body:any,token?:string):Promise<BaseResponse>
+    post(base: string, url: string, key: string, body: any, token?: string):Promise<BaseResponse>
     postForm(url:string,body:FormData):Promise<BaseResponse>
     put(url:string,body:any):Promise<BaseResponse>
     delete(url:string):Promise<BaseResponse>
@@ -41,13 +41,13 @@ export class Api implements api{
             })
     }
 
-    async post(url: string, body: any, token?:string): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
+    async post(base: string, url: string, key: string, body: any, token?:string): Promise<BaseResponse> {
+        return await fetch(`${base}/${url}`, {
             method: 'POST',
             body:JSON.stringify(body),
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
-                'x-api-key' : 'nIqZx30tN1UVVVwXiOh4davvvkhvLzlKI4HcBbic3gtxJS1HCX',
+                'x-api-key' : key,
                 'Authorization' : token ? `Bearer ${token}` : ''
             })
         })

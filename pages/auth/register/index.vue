@@ -41,8 +41,17 @@ function signUp(){
           user.stateRegister.password
       ).then(
           res => {
-            router.push("auth/register/complete")
-          }
+          $toast.show({
+            type: 'success',
+            message: 'Please confirm your email address',
+            timeout: 4,
+          })
+
+          setTimeout(() => {
+            router.push("/auth")
+          }, 400);
+          
+        }
       ).catch(
           err => {
               $toast.show({

@@ -6,7 +6,7 @@ export function formatDate(date) {
       
 }
 
-function nameMonth(month){
+export function nameMonth(month){
     const name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
     return name[month];
 }
@@ -19,3 +19,11 @@ export function selectSafeZero(date){
     const result = `${year}-${month}-${day}`
     return result
 } 
+
+
+export function nameDay(date) {
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let d = new Date(date);
+    let dayName = days[d.getDay()];
+    return dayName
+}

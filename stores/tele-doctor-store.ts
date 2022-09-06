@@ -149,7 +149,12 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
                     "type" : "call",
                     "note" : this.state.note,
                     "allow_access_data" : true,
-                    "data_questionnaire" :  null
+                    "data_questionnaire" :  null,
+                    "doctor" : {
+                        "name" : this.state.isData.name,
+                        "speciality" : this.state.isData.speciality,
+                        "hospital" : this.state.isData.hospital[0].name
+                    }
                 }
 
                 useSession().setItem("cexup-chekout", JSON.stringify(json))

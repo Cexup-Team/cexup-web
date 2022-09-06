@@ -9,10 +9,11 @@ export class DataStoreImpl implements DataStore{
     }
 
    async signIn(email: string, password: string): Promise<{success:Boolean,message:string, data:any}> {
-        const {success,message,data} = await this.api.post('login/patient',{
+       const token = useSession().getItem("cexup-token")
+       const { success, message, data } = await this.api.post(`${import.meta.env.VITE_APP_BASE_URL}`, 'login/patient', `${import.meta.env.VITE_APP_API_KEY}`, {
             email:email,
             password:password
-        })
+       }, token)
     
         return{
             success:success,
@@ -22,11 +23,12 @@ export class DataStoreImpl implements DataStore{
     }
 
     async signUp(name: string, email: string, password: string): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.post('register/patient', {
+        const token = useSession().getItem("cexup-token")
+        const { success, message, data } = await this.api.post(`${import.meta.env.VITE_APP_BASE_URL}`, 'register/patient', `${import.meta.env.VITE_APP_API_KEY}`, {
             name: name,
             email: email,
             password: password
-        })
+        }, token)
 
         return {
             success:success,
@@ -61,7 +63,7 @@ export class DataStoreImpl implements DataStore{
         village_id?: string
     ): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
-        const {success,message,data} = await this.api.post('update/patient', {
+        const { success, message, data } = await this.api.post(`${import.meta.env.VITE_APP_BASE_URL}`, 'update/patient', `${import.meta.env.VITE_APP_API_KEY}`, {
             user_id: user_id,
             name: name,
             phone_number: phone, 
@@ -188,7 +190,7 @@ export class DataStoreImpl implements DataStore{
 
     async getTimeList(doctor_has_hospital, date, appointment): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
-        const {success,message,data} = await this.api.post('doctor/get-time-list', {
+        const { success, message, data } = await this.api.post(`${import.meta.env.VITE_APP_BASE_URL}`, 'doctor/get-time-list', `${import.meta.env.VITE_APP_API_KEY}`, {
             doctor_has_hospital_id : doctor_has_hospital,
             date: date,
             appointment : appointment
@@ -200,6 +202,20 @@ export class DataStoreImpl implements DataStore{
             data:data
         }
     }
+
+    //
+    
+    async getListQuiz(speciality_id): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, `questionnaire-patient/${speciality_id}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+    
 
 
 }

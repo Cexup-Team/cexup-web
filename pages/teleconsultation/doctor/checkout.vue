@@ -157,7 +157,7 @@
                     </div>
                  </div>
 
-                 <BottomSheet :openModal="openModal" @update:change-open="changeOpen" @update:change-select="changeSelect" type="blank">
+                <BottomSheet :openModal="openModal" @update:change-open="changeOpen" @update:change-select="changeSelect" type="blank">
                     <template v-slot:bottomSheet>
                         <div class="">
                             <div class="flex flex-col justify-center w-full items-center">

@@ -32,4 +32,7 @@ interface DataStore{
     getListDoctorTele(size, search, speciality, hospital): Promise<{success:Boolean,message:string,data:any}>
     getDoctorTele(id): Promise<{success:Boolean,message:string,data:any}>
     getTimeList(doctor_has_hospital, date, appointment): Promise<{success:Boolean,message:string,data:any}>
+    // Quiz
+
+    getListQuiz(speciality_id): Promise<{success:Boolean,message:string,data:any}>
 }
