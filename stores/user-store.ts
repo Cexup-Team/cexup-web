@@ -49,19 +49,45 @@ export const useUserStore = defineStore('userStore',{
                 useSession().setItem("cexup-user", JSON.stringify(data.user))
                 const users = JSON.parse(useSession().getItem("cexup-user"))
                 if (
-                    !users.phone_number ||
-                    !users.gender || 
-                    !users.date_of_birth || 
-                    !users.no_type || 
-                    !users.type ||
-                    !users.no_type ||  
-                    !users.provinsi_id || 
-                    !users.kabupaten_id || 
-                    !users.kecamatan_id ||
-                    !users.desa_id
+                    !users.country_id||
+                    !users.country_name||
+                    !users.current_address||
+                    !users.current_country_id||
+                    !users.current_country_name||
+                    !users.current_districts_id||
+                    !users.current_districts_name||
+                    !users.current_postal_code||
+                    !users.current_provinces_id||
+                    !users.current_provinces_name||
+                    !users.current_regencies_cities_id||
+                    !users.current_regencies_cities_name||
+                    !users.current_rt||
+                    !users.current_rw||
+                    !users.current_villages_id||
+                    !users.current_villages_name||
+                    !users.date_of_birth||
+                    !users.districts_id||
+                    !users.districts_name||
+                    !users.gender||
+                    !users.home_address||
+                    !users.name||
+                    !users.no_type||
+                    !users.phone_number||
+                    !users.place_of_birth||
+                    !users.postal_code||
+                    !users.provinces_id||
+                    !users.provinces_name||
+                    !users.regencies_cities_id||
+                    !users.regencies_cities_name||
+                    !users.rt||
+                    !users.rw||
+                    !users.type||
+                    !users.villages_id||
+                    !users.villages_name
                 ) {
+                    console.log('wkwkwkw')
                     return {
-                        location : '/auth/register/complete'
+                        location : '/auth/register/rsui/complete_first'
                     }
                 }else{
                     return {
@@ -99,33 +125,12 @@ export const useUserStore = defineStore('userStore',{
         },
 
         async updatePatient(
-            phone?: string,
-            gender?: string, 
-            date_of_birth?: string,
-            address?: string,
-            identity?: string,
-            province_id?: string, 
-            regency_id?: string, 
-            district_id?: string, 
-            village_id?: string
+          json: Object
         ){
-
             const api = useApi()
             const users = JSON.parse(useSession().getItem("cexup-user"))
             console.log(users)
-            const {success, message, data} = await api.updatePatient(
-                users.user_id,
-                users.name,
-                phone, 
-                gender, 
-                date_of_birth,
-                address,
-                identity,
-                province_id, 
-                regency_id, 
-                district_id, 
-                village_id
-            )
+            const {success, message, data} = await api.updatePatient(json)
             if(success){
                 return {
                     route : '/'

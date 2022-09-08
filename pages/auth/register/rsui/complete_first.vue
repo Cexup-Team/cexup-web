@@ -8,6 +8,11 @@
     import { useToast, useModal } from 'tailvue'
     import { useRouter } from 'vue-router';
     import { useSession } from "~~/composables/useSession"
+    import {aesEncrypt, aesDecrypt} from '../../../../utils/crypto';
+
+
+
+    
 
 
     const session = useSession()
@@ -98,43 +103,88 @@
         
     
     onMounted(() => {
+        
+        try {
+            
+            const users = JSON.parse(session.getItem('cexup-user'))
+            state.name = users.name
 
-    
-        listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
-        listMap.set('gender', ["Male", "Female"])
+            const getProfile = session.getItem('cexup-profile')
+
+            if (getProfile) {
+                const profile = JSON.parse(aesDecrypt(getProfile))
+                state.gender = profile.gender ?? ''
+                state.phone = profile.phone ?? ''
+                state.place_of_birth = profile.place_of_birth ?? ''
+                state.date = profile.date_of_birth ?? '' 
+                state.home_address = profile.home_address ?? ''
+                state.identity = profile.identity_type
+                state.identity_number  = profile.identity_number ?? ''
+            }
+            
+
+            listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
+            listMap.set('gender', ["Male", "Female"])
+        } catch (error) {
+            console.log(error)
+        }
+
  
         
     })
 
     const next = () => {
-        const month = state.date?.getMonth()+1 < 10 ? `0${state.date?.getMonth()+1}` : state.date?.getMonth()+1
-        const date = state.date ? `${state.date?.getFullYear()}-${month}-${state.date?.getDate()}` : ""
+        try {
+            const d = new Date(state.date)
+            const month = d?.getMonth()+1 < 10 ? `0${d?.getMonth()+1}` : d?.getMonth()+1
+            const date = state.date ? `${d?.getFullYear()}-${month}-${d?.getDate()+1 < 10 ? `0${d?.getDate()+1}` : d?.getDate()+1}` : ""
 
-        const json = {
-            'name' : state.name,
-            'gender': state.gender,
-            'phone': state.phone,
-            'place_of_birth': state.place_of_birth,
-            'date_of_birth': date,
-            'home_address': state.home_address,
-            'identity_type': state.identity,
-            'identity_number' : state.identity_number
+            const json = {
+                'name' : state.name,
+                'gender': state.gender,
+                'phone': state.phone,
+                'place_of_birth': state.place_of_birth,
+                'date_of_birth': date,
+                'home_address': state.home_address,
+                'identity_type': state.identity,
+                'identity_number' : state.identity_number
+            }
+
+            if (!state.name || !state.gender || !state.phone || !state.place_of_birth || !state.date || !state.home_address || !state.identity || !state.identity_number) return $toast.show({
+                type: 'danger',
+                message: 'Please enter all field',
+                timeout: 4,
+            }) 
+
+            if (state.identity_number.length !== 16) return $toast.show({
+                type: 'danger',
+                message: 'Please check again',
+                timeout: 4,
+            })
+
+            const getUsers = session.getItem('cexup-profile')
+            if (!getUsers) {
+                session.setItem('cexup-profile', aesEncrypt(JSON.stringify(json)))
+            }else{
+                const users = JSON.parse(aesDecrypt(getUsers))
+                users['name'] = state.name,
+                users['gender']= state.gender,
+                users['phone']= state.phone,
+                users['place_of_birth']= state.place_of_birth,
+                users['date_of_birth']= date,
+                users['home_address']= state.home_address,
+                users['identity_type']= state.identity,
+                users['identity_number'] = state.identity_number
+                session.setItem('cexup-profile', aesEncrypt(JSON.stringify(users)))
+            }
+
+            
+
+            router.push('/auth/register/rsui/complete_second')
+                
+        } catch (error) {
+            console.log(error)
         }
-
-        if (!state.name || !state.gender || !state.phone || !state.place_of_birth || !state.date || !state.home_address || !state.identity || !state.identity_number) return $toast.show({
-            type: 'danger',
-            message: 'Please enter all field',
-            timeout: 4,
-        }) 
-
-        // if (state.identity_number.length !== 16) return $toast.show({
-        //     type: 'danger',
-        //     message: 'Please check again',
-        //     timeout: 4,
-        // }) 
-
-        session.setItem('cexup-profile', JSON.stringify(json))
-        router.push('/auth/register/rsui/complete_second')
     } 
 
 watch(() => state.identity_number, (newNumber) => {
@@ -152,7 +202,7 @@ watch(() => state.identity_number, (newNumber) => {
                 <h2 class="text-lg text-primary-color font-bold mt-9 w-full text-center font-poppins">Complete Profile
                 </h2>
                 <div class="inputForm mt-6">
-                    <InputText className="rounded-md" v-model="state.name" type="text" placeholder="Full Name" />
+                    <InputText className="rounded-md" v-model="state.name" type="text" placeholder="Full Name" read />
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Gender" v-model="state.gender"
