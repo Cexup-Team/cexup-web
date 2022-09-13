@@ -194,6 +194,21 @@ export class DataStoreImpl implements DataStore{
             data:data
         }
     }
+
+    //Booking
+
+    async booking(
+        json: Object
+     ): Promise<{ success: Boolean; message: string; data: any }> {
+         const token = useSession().getItem("cexup-token")
+         const { success, message, data } = await this.api.post(`${import.meta.env.VITE_APP_BASE_URL}`, 'doctor/booking-new', `${import.meta.env.VITE_APP_API_KEY}`, json, token)        
+         return {   
+             success:success,
+             message:message,
+             data:data
+         }
+     }
+
     
 
 

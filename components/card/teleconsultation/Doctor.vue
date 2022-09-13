@@ -32,16 +32,16 @@
 <template>
     <nuxt-link :to="link">
         <div class="tele-doctor-list bg-white py-3 px-4 rounded-xl mt-4 mb-4">
-            <div class="flex">
-                <div class="w-2/6 h-auto rounded-xl overflow-hidden mr-4 relative">
+            <div class="flex items-center">
+                <div class="w-2/6 rounded-xl overflow-hidden mr-4 relative h-32"  >
                     <img :src="image" class="rounded-xl overflow-hidden object-cover w-full h-full" alt="">
                 </div>
                 <div class="w-4/6">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-base font-poppins font-medium leading-6">{{name}}</h3>
+                        <h3 class="text-base font-poppins font-medium leading-6 line-clamp-1">{{name}}</h3>
                         <img src="../../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
                     </div>
-                        <h5 class="mt-1 font-poppins text-primary-color text-xs">{{speciality}}</h5>
+                        <h5 class="mt-1 font-poppins text-primary-color text-xs line-clamp-1">{{speciality}}</h5>
                         <h6 class="mt-3 font-poppins text-3">{{rs}}</h6>
                         <div class="flex justify-between items-center">
                         <div class="flex flex-col">

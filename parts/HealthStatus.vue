@@ -38,7 +38,7 @@ import VueApexCharts from "vue3-apexcharts";
                 }
               },
             },
-            labels: [props.ews.result],
+            labels: [props.ews?.result],
             fill: {
                 type: 'gradient',
                 gradient: {

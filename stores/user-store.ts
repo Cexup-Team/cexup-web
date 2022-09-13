@@ -85,7 +85,6 @@ export const useUserStore = defineStore('userStore',{
                     !users.villages_id||
                     !users.villages_name
                 ) {
-                    console.log('wkwkwkw')
                     return {
                         location : '/auth/register/rsui/complete_first'
                     }

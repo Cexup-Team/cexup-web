@@ -9,4 +9,8 @@ export class SessionStoreImpl implements SessionStore{
         return val
     }
 
+    delItem(key: any) {
+        sessionStorage.removeItem(key);
+    }
+
 }

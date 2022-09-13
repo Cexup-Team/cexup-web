@@ -19,7 +19,7 @@
 
     const next = () => {
         router.push(tele.next().router)
-    }
+    }   
 
     watch(() => tele.stateTime.isData, (newCardItem) => {
         tele.stateTime.slcTime = null
@@ -62,7 +62,7 @@
                     <div class="relative">
                         <div class="flex items-center justify-start">
                             <div class="w-24 h-24 rounded-full overflow-hidden">
-                                <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
+                                <img :src="tele.state.isData.thumb" class="object-cover" alt="">
                             </div>
                             <div class="flex flex-col ml-4">
                                 <h2 class="font-poppins font-semibold text-lg">{{tele.state.isData.name}}</h2>
@@ -94,7 +94,7 @@
                     <div class="flex justify-between items-center">
                         <div class="">
                             <h4 class="font-medium font-poppins text-lg">Rp {{tele.state.isData.hospital[0].offline_price }}</h4>
-                            <span class="text-gray-350 font-poppins font-medium text-xs discount relative">{{tele.state.isData.hospital[0].offline_price === 0 ? '' : tele.state.isData.hospital[0].offline_price}}</span>
+                            <!-- <span class="text-gray-350 font-poppins font-medium text-xs discount relative">{{tele.state.isData.hospital[0].offline_price === 0 ? '' : tele.state.isData.hospital[0].offline_price}}</span> -->
                         </div>
                         
                         <div class="px-3 py-2 rounded-md border-dashed border-teal-750 border-2">
@@ -109,7 +109,7 @@
                 <section class="mt-6">
                     <div class="chest-pain px-5">
                         <h2 class="text-base font-poppins font-semibold">My Simptons</h2>
-                        <input v-model="tele.state.note" type="text" class="mt-4 p-4 text-sm w-full rounded-md font-poppins border border-gray-150 text-gray-900 outline-none placeholder:text-gray-900" placeholder="Chest pain">
+                        <input v-model="tele.state.note" type="text" class="mt-4 p-4 text-sm w-full rounded-md font-poppins border border-gray-150 text-gray-900 outline-none placeholder:text-gray-350" placeholder="Chest pain">
                     </div>
                     <div class="avaibility-schedule">
                         <div class="flex justify-between mt-4 items-center px-5">

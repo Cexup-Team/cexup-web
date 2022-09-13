@@ -61,7 +61,7 @@ export class Api implements api{
                 }
                 return {
                     success: val.success,
-                    message: "",
+                    message: val.message,
                     data: val.data
                 }
             })

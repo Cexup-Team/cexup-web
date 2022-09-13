@@ -20,9 +20,8 @@
 <template>
     <div class="card-doctor pr-3">
         <div class="card-item w-36 mt-4 rounded-lg bg-white overflow-hidden">
-            <div class="w-full" style="height: 122px;">
+            <div class="w-full overflow-hidden" style="height: 122px;">
                 <img :src="icon" class="object-cover w-full h-full" alt="">
-
             </div>
             <div class="w-full flex flex-col px-3 pb-3">
                 <h3 class="text-sm font-poppins font-medium mt-2 line-clamp-2">{{title}}</h3>
