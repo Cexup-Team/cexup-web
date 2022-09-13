@@ -1,5 +1,25 @@
 <script setup lang="ts">
+    import { ref } from "vue"
+    import { useRouter } from 'vue-router';
+    import { useToast, useModal } from 'tailvue'
+    import { useTeleRegisterStore } from '~~/stores/tele-register-store';
 
+
+    const $toast = useToast()
+    const router = useRouter()
+    const tele = useTeleRegisterStore()
+    const session = useSession()
+
+
+    onMounted(() => {
+        tele.stateMessageFailed.isLoading = true
+        const message = session.getItem('cexup-checkout')
+        if (message && typeof message === 'string') {
+            tele.stateMessageFailed.isStatus = 'success'
+            tele.stateMessageFailed.isLoading = false
+            tele.stateMessageFailed.isData = message
+        }
+    })
 </script>
 
 <template>
@@ -18,16 +38,12 @@
 
                 <div class="px-4 pt-20">
                     <img src="../../../assets/images/card_failed_order.png" alt="">
-                    <h2 class="mt-6 font-poppins text-sm w-full text-center">Canceled due to overdue payment</h2>
-
-
-
-            
+                    <h2 class="mt-6 font-poppins text-sm w-full text-center" v-if="tele.stateMessageFailed.isStatus === 'success'">{{tele.stateMessageFailed.isData}}</h2>            
                 </div>
 
                 <div class="mt-4 flex items-center absolute bottom-0 px-4 w-full mb-20">
-                    <button class="w-3/6 bg-blue-150 mr-3 font-poppins px-4 py-3 font-medium text-sm text-primary-color rounded-xl">Back to browse</button>
-                    <button class="w-3/6 font-poppins px-4 py-3 font-medium text-sm text-white rounded-xl bg-primary-color">Order Again</button>
+                    <nuxt-link to="/teleconsultation" class="w-3/6 bg-blue-150 mr-3 font-poppins px-4 py-3 font-medium text-center text-sm text-primary-color rounded-xl">Back to browse</nuxt-link>
+                    <nuxt-link class="w-3/6 text-center font-poppins px-4 py-3 font-medium text-sm text-white rounded-xl bg-primary-color">Order Again</nuxt-link>
                 </div>
             </div>
         </nuxt-layout>

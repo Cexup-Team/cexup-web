@@ -65,7 +65,7 @@
     const getCheckout = async () => {
         
         tele.stateCheckout.isLoading = true
-        const checkout = await JSON.parse(session.getItem("cexup-chekout"))
+        const checkout = await JSON.parse(session.getItem("cexup-checkout"))
         tele.stateCheckout.isData = checkout
         tele.stateCheckout.date = getDateFormat(tele.stateCheckout.isData.date)
         tele.stateCheckout.isLoading = false
@@ -105,7 +105,7 @@
     }
 
     const pay = () => {
-        const sessioData = JSON.parse(session.getItem('cexup-chekout'))
+        const sessioData = JSON.parse(session.getItem('cexup-checkout'))
         const sessionQuiz = JSON.parse(session.getItem('cexup-quiz'))
         const quiz = []
         sessionQuiz.map((item, index) => {

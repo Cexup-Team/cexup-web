@@ -26,6 +26,13 @@ export const useTeleRegisterStore = defineStore('TeleRegisterStore',{
             isError : false,
             isData : null,
             isSession : null,
+        },
+        
+        stateMessageFailed : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
         }
 
     }),
@@ -59,13 +66,13 @@ export const useTeleRegisterStore = defineStore('TeleRegisterStore',{
             const api = useApi()
             const {success, message, data} = await api.booking(json)
             if(success){
-                // useSession().delItem("cexup-chekout")
+                // useSession().delItem("cexup-checkout")
                 // useSession().delItem("cexup-quiz")
                 return {
                     route : '/'
                 }
             }else{
-                useSession().setItem("cexup-chekout", message)
+                useSession().setItem("cexup-checkout", message)
                 useSession().delItem("cexup-quiz")
                 return {
                     route : '/teleconsultation/order/failed'

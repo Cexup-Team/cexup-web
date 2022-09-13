@@ -151,7 +151,7 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
                 }
             }
             try {
-                const chekout = useSession().getItem("cexup-chekout")
+                const chekout = useSession().getItem("cexup-checkout")
                 const users = JSON.parse(useSession().getItem("cexup-user"))
                 if (!this.stateTime.isData) {
                 }else {
@@ -177,7 +177,7 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
 
                     
 
-                    useSession().setItem("cexup-chekout", JSON.stringify(json))
+                    useSession().setItem("cexup-checkout", JSON.stringify(json))
                     return {
                         router : 'register'
                     }

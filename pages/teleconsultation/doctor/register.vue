@@ -55,7 +55,7 @@
     const getCheckout = async () => {
         
         tele.stateCheckout.isLoading = true
-        const checkout = await JSON.parse(session.getItem("cexup-chekout"))
+        const checkout = await JSON.parse(session.getItem("cexup-checkout"))
         tele.stateCheckout.isData = checkout
         tele.stateCheckout.date = getDateFormat(tele.stateCheckout.isData.date)
         tele.stateCheckout.isLoading = false
