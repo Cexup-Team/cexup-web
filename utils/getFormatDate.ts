@@ -1,6 +1,6 @@
 export function formatDate(date) {
    const split = date.split("-")
-   const format = `${split[2]} ${nameMonth(Number(split[1]))} ${split[0]}`
+   const format = `${split[2]} ${nameMonth(Number(split[1] - 1))} ${split[0]}`
 
    return format
       
@@ -26,4 +26,15 @@ export function nameDay(date) {
     let d = new Date(date);
     let dayName = days[d.getDay()];
     return dayName
+}
+
+export const getDateFormatBooking = (value, time?) => {
+    const newDate = new Date(value)
+    const day = nameDay(value)
+    const date = newDate.getDate()
+    const month = nameMonth(newDate.getMonth())
+    const year = newDate.getFullYear()
+
+    const format = `${day}, ${date} ${month} ${year} ${time ?? ''}`
+    return format
 }

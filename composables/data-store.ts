@@ -15,6 +15,7 @@ interface DataStore{
 
     // order
     getListOrder(appointment, type, user_id): Promise<{success:Boolean,message:string,data:any}>
+    showOrder(transaction_id): Promise<{success:Boolean,message:string,data:any}>
 
     // tele
     getListDoctorTele(size, search, speciality, hospital): Promise<{success:Boolean,message:string,data:any}>
@@ -26,4 +27,5 @@ interface DataStore{
 
     // Booking
     booking(json: object): Promise<{success:Boolean,message:string,data:any}>
+    reschedule(json: object): Promise<{success:Boolean,message:string,data:any}>
 }

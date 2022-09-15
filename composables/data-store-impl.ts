@@ -120,6 +120,8 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+    // Order
+
     async getListOrder(appointment, type, user_id): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
         const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`orders/${user_id}?appointment=${appointment}&type=${type}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
@@ -130,6 +132,21 @@ export class DataStoreImpl implements DataStore{
             data:data
         }
     }
+
+    async showOrder(transaction_id: any): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`orders/show/${transaction_id}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+
+    // ===
+    
 
     async getListSpeciality(): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
@@ -208,6 +225,18 @@ export class DataStoreImpl implements DataStore{
              data:data
          }
      }
+
+    async reschedule(
+        json: object
+    ): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const { success, message, data } = await this.api.put(`${import.meta.env.VITE_APP_BASE_URL}`, 'user/orders', `${import.meta.env.VITE_APP_API_KEY}`, json, token)        
+        return {   
+            success:success,
+            message:message,
+            data:data
+        }
+    }
 
     
 

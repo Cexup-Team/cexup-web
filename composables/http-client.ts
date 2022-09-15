@@ -7,7 +7,7 @@ export interface api{
     get(base: string, url: string, key: string, token: string):Promise<BaseResponse>
     post(base: string, url: string, key: string, body: any, token?: string):Promise<BaseResponse>
     postForm(url:string,body:FormData):Promise<BaseResponse>
-    put(url:string,body:any):Promise<BaseResponse>
+    put(base: string, url: string, key: string, body: any, token?:string):Promise<BaseResponse>
     delete(url:string):Promise<BaseResponse>
 }
 export class Api implements api{
@@ -99,20 +99,28 @@ export class Api implements api{
             })
     }
 
-    async put(url: string, body: any): Promise<BaseResponse> {
-        return await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${url}`, {
+    async put(base: string, url: string, key: string, body: any, token?:string): Promise<BaseResponse> {
+        return await fetch(`${base}/${url}`, {
             method: 'PUT',
             body:JSON.stringify(body),
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8',
+                'x-api-key' : key,
+                'Authorization' : token ? `Bearer ${token}` : ''
             })
         })
             .then((res) => res.json())
             .then((val) => {
+                if (!val.success) {
+                    return Promise.reject({
+                        message: val.message
+                    });
+                    
+                }
                 return {
-                    success: false,
-                    message: "",
-                    data: ""
+                    success: val.success,
+                    message: val.message,
+                    data: val.data
                 }
             })
             .catch(e => {

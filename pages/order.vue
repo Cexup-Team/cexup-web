@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         
-                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success' && order.stateOrder.isData.type === 'call'">
                             <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
@@ -116,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success' && order.stateOrder.isData.type === 'reservation'">
                             <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
