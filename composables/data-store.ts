@@ -28,4 +28,7 @@ interface DataStore{
     // Booking
     booking(json: object): Promise<{success:Boolean,message:string,data:any}>
     reschedule(json: object): Promise<{success:Boolean,message:string,data:any}>
+
+    //meet
+    joinRoom(json: object): Promise<{success:Boolean,message:string,data:any}>
 }

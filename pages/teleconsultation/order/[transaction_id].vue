@@ -85,9 +85,31 @@
         modalRe.value = !modalRe.value
     }
 
-    const actionStatus = (status) => {
-        status === 'waiting_payment' ? window.open(order.stateShow.isData.payment_url, '_blank') : 
-        status === 'reschedule_from_doctor' ?  modalRe.value = !modalRe.value : '' 
+    const actionStatus = async (status) => {
+        if(status === 'waiting_payment') return window.open(order.stateShow.isData.payment_url, '_blank') 
+        if(status === 'reschedule_from_doctor') return  modalRe.value = !modalRe.value
+        if(status === 'on_air') return router.push('/meet')
+        if(status === 'join_now') {
+            order.joinRoom({'transaction_id' : order.stateShow.isData.transaction_id, 'type': 'patient'})
+                .then(async res => {
+                    const user = await JSON.parse(session.getItem('cexup-user'))
+                    const meet = {
+                        'id' : order.stateShow.isData.transaction_id,
+                        'name': order.stateShow.isData.patient_account.name,
+                        'email' : user.email
+                    }
+                    await session.setItem('cexup-meet' , JSON.stringify(meet))
+                    router.push('/meet')
+                }).catch(err => {
+                    $toast.show({
+                        type: 'danger',
+                        message: 'Something went wrong',
+                        timeout: 4,
+                    })
+                })
+            
+        }
+         
     }
 
 
@@ -300,14 +322,18 @@
             
                         
                         <div class="w-full">
-                            <button @click="actionStatus(order.stateShow.isData.status)" :class="'text-white w-full font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg '+(order.stateShow.isData.status === 'waiting_payment' || order.stateShow.isData.status === 'reschedule_from_doctor'  ? 'bg-primary-color' : 'bg-gray-550')" v-if="!order.stateShow.isLoading && order.stateShow.isStatus === 'success'">
-                                {{order.stateShow.isData.status === 'waiting_payment' ? 'Pay Now' : 
+                            <Button @click="actionStatus(order.stateShow.isData.status)" :class="'text-white w-full font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg text-center '+(order.stateShow.isData.status === 'waiting_payment' || order.stateShow.isData.status === 'reschedule_from_doctor' || order.stateShow.isData.status === 'join_now' || order.stateShow.isData.status === 'on_air'  ? 'bg-primary-color' : 'bg-gray-550')" v-if="!order.stateShow.isLoading && order.stateShow.isStatus === 'success'" :title="
+                                 order.stateShow.isData.status === 'waiting_payment' ? 'Pay Now' : 
                                     order.stateShow.isData.status === 'waiting_meeting' ? 'Waiting Meeting' : 
                                     order.stateShow.isData.status === 'reschedule_from_doctor' ? 'Reschedule By Doctor' : 
                                     order.stateShow.isData.status === 'reschedule_from_patient' ? 'Reschedule By Patient' :
-                                    order.stateShow.isData.status === 'waiting_doctor_join' ? 'Waiting Doctor Join' : ''
-                                }}
-                            </button>
+                                    order.stateShow.isData.status === 'waiting_doctor_join' ? 'Waiting Doctor Join' :
+                                    order.stateShow.isData.status === 'missed_meeting' ? 'Missed Meeting' :
+                                    order.stateShow.isData.status === 'on_air' ? 'Meet' :
+                                    order.stateShow.isData.status === 'on_air' ? 'On Air' :
+                                    order.stateShow.isData.status === 'done' ? 'Finish' :
+                                    order.stateShow.isData.status === 'join_now' ? 'Start Meeting' : ''
+                            " :loading="order.state.isLoadingRe" />
                         </div>
                         <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88" class="w-full mb-3 mt-5">
                             <button class="text-red-650 w-full font-poppins outline-none font-medium text-sm px-10 rounded-lg bg-white">Cancel</button>

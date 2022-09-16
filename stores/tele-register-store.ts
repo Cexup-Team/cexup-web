@@ -69,7 +69,7 @@ export const useTeleRegisterStore = defineStore('TeleRegisterStore',{
                 // useSession().delItem("cexup-checkout")
                 // useSession().delItem("cexup-quiz")
                 return {
-                    route : '/'
+                    route : `'/teleconsultation/order/'${data.transaction_id}`
                 }
             }else{
                 useSession().setItem("cexup-checkout", message)

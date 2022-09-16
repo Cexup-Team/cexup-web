@@ -15,6 +15,7 @@
     "tailwindcss": "^3.0.24"
   },
   "dependencies": {
+    "@mycure/vue-jitsi-meet": "^0.0.7",
     "@pinia/nuxt": "^0.1.9",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@vuepic/vue-datepicker": "^3.4.0",

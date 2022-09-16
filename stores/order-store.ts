@@ -90,6 +90,23 @@ export const useOrderStore = defineStore('OrderStore',{
                 });    
             }
         },
+
+        async joinRoom(json: Object){
+            const api = useApi()
+            this.state.isLoadingRe = true
+            const {success, message, data} = await api.joinRoom(json)
+            if(success){                
+                this.state.isLoadingRe = false
+                return {
+                    data : data
+                }
+            }else{
+                this.state.isLoadingRe = false
+                return Promise.reject({
+                    message: message
+                });    
+            }
+        },
         
 
         updateSelect(value) {
