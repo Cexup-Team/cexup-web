@@ -7,6 +7,8 @@
     import { nameDay, nameMonth } from "../../../utils/getFormatDate";
     import Datepicker from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
+import NavBar from "~~/parts/NavBar.vue";
+import { aesDecrypt } from "~~/utils/crypto";
 
     
 
@@ -65,7 +67,7 @@
     const getUser = async () => {
         
         tele.stateUser.isLoading = true
-        const user = await JSON.parse(session.getItem("cexup-user"))
+        const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
         tele.stateCheckout.birth = getDateFormatBirth(user.date_of_birth)
         tele.stateUser.isData = user
         tele.stateUser.isLoading = false
@@ -97,6 +99,11 @@
     }
 
     onMounted( async () => {
+        try {
+            const checkout = JSON.parse(session.getItem('cexup-checkout'))
+        } catch (error) {
+            router.push('/')
+        }
         await getCheckout()
         await getUser()
         await tele.getListQuiz(tele.stateCheckout.isData.doctor.speciality_id)
@@ -133,14 +140,8 @@
   <div>
      <nuxt-layout name="main">
         <div class="register-schedule-wrapper relative">
-            <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
-                
-                <div class="flex justify-between mt-6 mx-6 items-center">
-                    <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                    <h1 class="font-poppins text-xl font-semibold">Register Call Doctor</h1>
-                    <div></div>
-                </div>
-            </div>
+            
+            <NavBar title="Register Teleconsultation" v-if="!tele.stateCheckout.isLoading && tele.stateCheckout.isStatus === 'success'" :link="tele.stateCheckout.isData.doctor.slug" />
             <div class="mt-20 px-4">
                 <section class="">
                     <h2 class="font-poppins font-semibold text-sm">Doctor Information</h2>

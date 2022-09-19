@@ -3,6 +3,10 @@ import { useSession } from "~~/composables/useSession"
 
 export const useDashboardStore = defineStore('DashboardStore',{
     state:()=>({
+        state : {
+            name : ''
+        },
+        
         stateProduct : {
             isLoading: false,
             isStatus: 'idle',

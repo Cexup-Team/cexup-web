@@ -8,6 +8,7 @@
     import Datepicker from '@vuepic/vue-datepicker'
     import '@vuepic/vue-datepicker/dist/main.css'
     import {idrFormat} from '../../../utils/currencyFormat'
+    import { aesDecrypt } from "~~/utils/crypto";
 
     
     const $toast = useToast()
@@ -75,7 +76,7 @@
     const getUser = async () => {
         
         tele.stateUser.isLoading = true
-        const user = await JSON.parse(session.getItem("cexup-user"))
+        const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
         tele.stateCheckout.birth = getDateFormatBirth(user.date_of_birth)
         tele.stateUser.isData = user
         tele.stateUser.isLoading = false
@@ -125,17 +126,23 @@
             "data_questionnaire" : quiz
         }
 
-        tele.booking(data).then( res =>
+        tele.booking(data).then( res => {
+            window.open(res.payment_url, '_blank');
             router.push(res.route)
-        ).catch( err =>
+        }).catch( err =>
             router.push(err.route)
         )
         
     }
 
     onMounted( async () => {
-        await getCheckout()
-        await getUser()
+        try {
+            const checkout = session.getItem('cexup-checkout')
+            await getCheckout()
+            await getUser()
+        } catch (error) {
+            router.push('/')
+        }
     })
     
 </script>
@@ -237,7 +244,7 @@
                             <h5 class="text-primary-color font-semibold font-poppins">{{idrFormat(tele.stateCheckout.isData.doctor.online_price.toString(), "Rp. ")}}</h5>
                         </div>
                        
-                        <button :class="'text-white font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg bg-primary-color'" @click="pay">Pay now</button>
+                        <Button class="text-white font-poppins outline-none font-medium text-sm py-3 px-10 rounded-lg bg-primary-color" @click="pay" title="Pay now" :loading="tele.state.payLoading"  />
                     </div>
                  </div>
 

@@ -8,6 +8,8 @@
     import {getDateFormatBooking} from '~~/utils/getFormatDate'
     import {getStatus} from '~~/utils/statusOrder'
     import { useTeleDoctorStore } from '~~/stores/tele-doctor-store';
+    import { aesDecrypt } from "~~/utils/crypto";
+    import { idrFormat } from "~~/utils/currencyFormat";
 
 
     const $toast = useToast()
@@ -92,7 +94,7 @@
         if(status === 'join_now') {
             order.joinRoom({'transaction_id' : order.stateShow.isData.transaction_id, 'type': 'patient'})
                 .then(async res => {
-                    const user = await JSON.parse(session.getItem('cexup-user'))
+                    const user = await JSON.parse(aesDecrypt(session.getItem('cexup-user')))
                     const meet = {
                         'id' : order.stateShow.isData.transaction_id,
                         'name': order.stateShow.isData.patient_account.name,
@@ -101,6 +103,7 @@
                     await session.setItem('cexup-meet' , JSON.stringify(meet))
                     router.push('/meet')
                 }).catch(err => {
+                    console.log(err)
                     $toast.show({
                         type: 'danger',
                         message: 'Something went wrong',
@@ -254,7 +257,7 @@
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center w-2/4">
                                     <div class="w-12 h-12 overflow-hidden rounded-full mr-4">
-                                        <img src="../../../assets/images/profile_header.png" class="object-cover" alt="">
+                                        <img :src="order.stateShow.isData.patient_account.thumb" class="object-cover" alt="">
                                     </div>
                                     <div class="flex flex-col">
                                         <h4 class="font-poppins font-medium text-sm">{{order.stateShow.isData.patient_account.name}}</h4>
@@ -304,7 +307,7 @@
                         <h2 class="font-poppins font-medium text-base mt-6">Payment Detail</h2>
                         <div class="flex justify-between items-center mt-4"> 
                             <h5 class="font-poppins text-sm">Consultation</h5>
-                            <span class="font-poppins text-sm">Rp 5.000</span>
+                            <span class="font-poppins text-sm">{{idrFormat(order.stateShow.isData.price.toString(), "Rp ")}}</span>
                         </div>
                         <div class="flex justify-between items-center mt-2"> 
                             <h5 class="font-poppins text-sm">Aditional Discount</h5>
@@ -312,7 +315,7 @@
                         </div>
                         <div class="flex justify-between items-center mt-2"> 
                             <h5 class="font-poppins text-sm font-semibold">Total</h5>
-                            <span class="font-poppins text-sm font-semibold">Rp 5.000</span>
+                            <span class="font-poppins text-sm font-semibold">{{idrFormat(order.stateShow.isData.price.toString(), "Rp ")}}</span>
                         </div>
                     </section>
                 </div>

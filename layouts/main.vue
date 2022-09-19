@@ -1,5 +1,19 @@
 <script setup lang="ts">
-
+    import { aesDecrypt } from "~~/utils/crypto";
+    import { useSession } from "~~/composables/useSession"
+    
+    const session = useSession()
+    const router = useRouter()
+    try {
+        aesDecrypt(session.getItem('cexup-user'))
+    } catch (error) {
+        session.delItem('cexup-token')
+        session.delItem('cexup-user')
+        session.delItem('cexup-quiz')
+        session.delItem('cexup-checkout')
+        window.location.href = '/auth'
+    }
+    
 
 
 </script>

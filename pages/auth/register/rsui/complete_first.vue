@@ -106,7 +106,7 @@
         
         try {
             
-            const users = JSON.parse(session.getItem('cexup-user'))
+            const users = JSON.parse(aesDecrypt(session.getItem("cexup-user")))
             state.name = users.name
 
             const getProfile = session.getItem('cexup-profile')

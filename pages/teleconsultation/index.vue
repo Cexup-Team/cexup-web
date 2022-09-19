@@ -66,6 +66,9 @@
 
 
     onMounted(() => {
+        
+        session.delItem('cexup-checkout')
+        session.delItem('cexup-quiz')
         getListDoctorTele("", "", "", "")
         if (teleconsultation.stateSpeciality.isSelect.length === 0) {
             getListSpeciality()

@@ -7,19 +7,24 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useDashboardStore } from '~~/stores/dashboard-store';
+    import { aesDecrypt } from "~~/utils/crypto";
 
     const dashboard = useDashboardStore()
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()    
 
-    onMounted(() => {
-        const user = JSON.parse(session.getItem("cexup-user"))
+    onMounted(async () => {
+        const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
+        session.delItem('cexup-checkout')
+        session.delItem('cexup-quiz')
+        dashboard.state.name = user.name 
         dashboard.getListDoctor(4)
         dashboard.getListProduct("")
         dashboard.getListArticle("")
         dashboard.getLatestVitalSign(user.user_code)
         dashboard.getCurrentEWS(user.user_code)
+        
         
     })
 
@@ -37,7 +42,7 @@
 
                     <div class="flex justify-between items-center w-full mt-6 px-4">
                         <div class="">
-                            <h1 class="font-poppins text-white font-semibold text-base leading-6">Hi, Mario Prasetyo <span>👋</span> </h1>
+                            <h1 class="font-poppins text-white font-semibold text-base leading-6">Hi, {{dashboard.state.name}} <span>👋</span> </h1>
                             <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span>Jl. Haji Merlin, Jakarta <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
                         </div>
                         <div class="">
@@ -82,7 +87,7 @@
                             <div v-if="!dashboard.stateDoctor.isLoading && dashboard.stateDoctor.isStatus === 'success'">
                                 <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
                                     <div v-for="(item, index) in dashboard.stateDoctor.isData" :key="index">
-                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" />
+                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" :link="`/teleconsultation/doctor/${item.slug}`" />
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +132,7 @@
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                                 <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
                                     <div v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="">
-                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" />
+                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" :link="item.link" type="product" />
                                     </div>
                                 </div>
                             </div>

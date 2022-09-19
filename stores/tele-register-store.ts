@@ -4,6 +4,9 @@ import { selectSafeZero } from "../utils/getFormatDate";
 
 export const useTeleRegisterStore = defineStore('TeleRegisterStore',{
     state:()=>({
+        state : {
+            payLoading : false
+        },
         stateCheckout : {
             birth : null,
             date : null,
@@ -64,19 +67,24 @@ export const useTeleRegisterStore = defineStore('TeleRegisterStore',{
 
         async booking(json: Object){
             const api = useApi()
+            this.state.payLoading = true
             const {success, message, data} = await api.booking(json)
             if(success){
-                // useSession().delItem("cexup-checkout")
-                // useSession().delItem("cexup-quiz")
+                useSession().delItem("cexup-checkout")
+                useSession().delItem("cexup-quiz")
+                
+                this.state.payLoading = false
                 return {
-                    route : `'/teleconsultation/order/'${data.transaction_id}`
+                    route : `/teleconsultation/order/${data.transaction_id}`,
+                    payment_url : data.payment_url
                 }
             }else{
                 useSession().setItem("cexup-checkout", message)
                 useSession().delItem("cexup-quiz")
-                return {
+                this.state.payLoading = false
+                return Promise.reject({
                     route : '/teleconsultation/order/failed'
-                }       
+                });       
             }
         },
     

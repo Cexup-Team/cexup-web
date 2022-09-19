@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { useSession } from "~~/composables/useSession"
 import { useToast, useModal } from 'tailvue'
+import { aesDecrypt, aesEncrypt } from "~~/utils/crypto";
 
 
 const $toast = useToast()
@@ -46,8 +47,8 @@ export const useUserStore = defineStore('userStore',{
             const {success,message, data} = await api.signIn(this.stateLogin.email,this.stateLogin.password)
             if(success){
                 useSession().setItem("cexup-token", data.access_token)
-                useSession().setItem("cexup-user", JSON.stringify(data.user))
-                const users = JSON.parse(useSession().getItem("cexup-user"))
+                useSession().setItem("cexup-user", aesEncrypt(JSON.stringify(data.user)))
+                const users = JSON.parse(aesDecrypt(useSession().getItem("cexup-user")))
                 if (
                     !users.country_id||
                     !users.country_name||

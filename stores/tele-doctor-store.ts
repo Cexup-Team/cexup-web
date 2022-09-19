@@ -2,12 +2,14 @@ import { defineStore } from "pinia";
 import { useSession } from "~~/composables/useSession"
 import { selectSafeZero } from "../utils/getFormatDate";
 import { useToast } from 'tailvue'
+import { aesDecrypt } from "~~/utils/crypto";
 
 const $toast = useToast()
 
 export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
     state:()=>({
         state : {
+            back : null,
             slcDate : null,
             note: null,
             allDay : null,
@@ -152,7 +154,7 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
             }
             try {
                 const chekout = useSession().getItem("cexup-checkout")
-                const users = JSON.parse(useSession().getItem("cexup-user"))
+                const users = JSON.parse(aesDecrypt(useSession().getItem("cexup-user")))
                 if (!this.stateTime.isData) {
                 }else {
                     
@@ -171,7 +173,8 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
                             "hospital" : this.state.isData.hospital[0].name,
                             "online_price" : this.state.isData.hospital[0].online_price,
                             "offline_price" : this.state.isData.hospital[0].offline_price,
-                            "thumb" : this.state.isData.thumb
+                            "thumb" : this.state.isData.thumb,
+                            "slug" : this.state.isData.slug
                         }
                     }
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
      import BottomNav from '~~/parts/BottomNav.vue';
+import NavBar from '~~/parts/NavBar.vue';
 </script>
 <template>
     <div>
@@ -7,16 +8,7 @@
             <div class="profile-wrapper h-full relative w-full">
                 <BottomNav active="/profile" />
 
-                <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
-                    
-                    <div class="flex justify-between mt-7 mx-6 items-center">
-                        <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                        <h1 class="font-poppins text-xl font-semibold">Profile</h1>
-                        <nuxt-link to="/profile/more">
-                            <img src="../../assets/images/more_profile_icon.svg" class="w-2 h-4 cursor-pointer" alt="">
-                        </nuxt-link>
-                    </div>
-                </div>
+                <NavBar title="Profile" link="/" />
                 <section class="profile-header mt-20">
                     <div class="flex px-5 items-center">
                         <div class="w-20 h-20 rounded-full overflow-hidden mr-4">

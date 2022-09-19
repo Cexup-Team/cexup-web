@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useSession } from "~~/composables/useSession"
+import { aesDecrypt } from "~~/utils/crypto";
 
 
 const session = useSession()
@@ -111,13 +112,13 @@ export const useOrderStore = defineStore('OrderStore',{
 
         updateSelect(value) {
             this.state.slcAppointment = value
-            const user = JSON.parse(session.getItem("cexup-user"))
+            const user = JSON.parse(aesDecrypt(session.getItem("cexup-user")))
             this.getListOrder(this.state.slcAppointment, "", user.user_id)
         },
 
         updateStatus(value) {
             this.state.slcStatus= value
-            const user = JSON.parse(session.getItem("cexup-user"))
+            const user = JSON.parse(aesDecrypt(session.getItem("cexup-user")))
             this.getListOrder(this.state.slcAppointment, this.state.slcStatus, user.user_id)
         }
 
