@@ -8,8 +8,15 @@ interface DataStore{
     getListProduct(size): Promise<{success:Boolean,message:string,data:any}>
     getListArticle(size): Promise<{success:Boolean,message:string,data:any}>
     getListSpeciality(): Promise<{success:Boolean,message:string,data:any}>
+
     // vital sign
     getLatestVitalSign(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getTemperature(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getSPO2(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getHeartRate(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getRespiration(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getBloodPressure(user_code): Promise<{success:Boolean,message:string,data:any}>
+
     // ews
     getCurrentEWS(user_code): Promise<{success:Boolean,message:string,data:any}>
 

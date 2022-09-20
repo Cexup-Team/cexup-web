@@ -97,6 +97,7 @@ export class DataStoreImpl implements DataStore{
     }
 
 
+    // Vital Sign
 
     async getLatestVitalSign(user_code): Promise<{ success: Boolean; message: string; data: any }> {
         const token = useSession().getItem("cexup-token")
@@ -107,6 +108,53 @@ export class DataStoreImpl implements DataStore{
             data:data
         }
     }
+
+    async getTemperature(user_code): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`body-temperature/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getSPO2(user_code): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`blood-oxygen/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getHeartRate(user_code: any): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`heart-rate/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getRespiration(user_code: any): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`respiration/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getBloodPressure(user_code: any): Promise<{ success: Boolean; message: string; data: any }> {
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`blood-pressure/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    // ======
 
 
     async getCurrentEWS(user_code): Promise<{ success: Boolean; message: string; data: any }> {
