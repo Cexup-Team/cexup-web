@@ -38,3 +38,14 @@ export const getDateFormatBooking = (value, time?) => {
     const format = `${day}, ${date} ${month} ${year} ${time ?? ''}`
     return format
 }
+
+export const getFormatNotifDate = (timestamp) => {
+    const date = new Date(timestamp * 1000)
+
+    return `${nameDay(date)}, ${date.getDate()} ${nameMonth(date.getMonth())} ${date.getFullYear()} / ${date.getHours()}:${date.getMinutes()}`
+} 
+
+export const getFormatHealthDate = (timestamp) => {
+    const date = new Date(timestamp)
+    return `${date.getDate()} ${nameMonth(date.getMonth())} ${date.getFullYear().toString().slice(2)} / ${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
+} 

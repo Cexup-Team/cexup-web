@@ -9,6 +9,7 @@
     import { useDashboardStore } from '~~/stores/dashboard-store';
     import { aesDecrypt } from "~~/utils/crypto";
 
+
     const dashboard = useDashboardStore()
     const $toast = useToast()
     const router = useRouter()
@@ -23,9 +24,7 @@
         dashboard.getListProduct("")
         dashboard.getListArticle("")
         dashboard.getLatestVitalSign(user.user_code)
-        dashboard.getCurrentEWS(user.user_code)
-        
-        
+        dashboard.getCurrentEWS(user.user_code)        
     })
 
 </script>

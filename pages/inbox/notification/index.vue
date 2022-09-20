@@ -1,6 +1,24 @@
 <script setup lang="ts">
-
     import Tabs from '~~/parts/Tabs.vue';
+    import { useNotifStore } from '~~/stores/notif-store';
+    import { getFormatNotifDate } from "~~/utils/getFormatDate";
+    import { collection, query, where, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+    import { useRouter } from 'vue-router';
+ 
+    const notif = useNotifStore()
+    const router = useRouter()
+    const updateNotif = async (id) => {
+        await deleteDoc(doc(firestore, 'notification', notif.state.isMap.get(id))).then(res => {
+            router.push(`/teleconsultation/order/${id}`)
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+    
+    onMounted(() => {
+        notif.getNotif()
+    })
+        
 </script>
 
 <template>
@@ -24,8 +42,8 @@
                         </div>
                     </template>
                     <template v-slot:tabBody>
-                        <div class="tab-body-item active w-full pb-44">
-                            <CardNotif img="../../../assets/images/telephone_icon.svg" title="Call Doctor" time="01 Jun, 04:20 AM" notif="Order selesai! jangan lupa berikan ulasan untuk pembelianmu, ya" />
+                        <div class="tab-body-item active w-full pb-44" v-if="!notif.state.isLoading && notif.state.isStatus === 'success'">
+                            <!-- <CardNotif img="../../../assets/images/telephone_icon.svg" title="Call Doctor" time="01 Jun, 04:20 AM" notif="Order selesai! jangan lupa berikan ulasan untuk pembelianmu, ya" />
                             <hr class="bg-gray-225 w-full" style="height: 2px;">
                             
                             <CardNotif img="../../../assets/images/bag_icon.svg" title="Meet Doctor" time="30 Mei, 03:10 AM" notif="Order selesai! jangan lupa berikan ulasan untuk pembelianmu, ya" />
@@ -38,7 +56,12 @@
                             <hr class="bg-gray-225 w-full" style="height: 2px;">
 
                             <CardNotif img="../../../assets/images/telephone_icon.svg" title="Call Doctor" time="28 Mei, 02:15 AM" notif="Order dibatalkan! jangan khawatir kamu bisa order ulang disini ya." />
-                            <hr class="bg-gray-225 w-full" style="height: 2px;">
+                            <hr class="bg-gray-225 w-full" style="height: 2px;"> -->
+
+                            <div v-for="(item, index) in notif.state.isArray" :key="index">
+                                <CardNotif img="../../../assets/images/bag_icon.svg" :title="item.title" :time="getFormatNotifDate(item.created_at)" :notif="item.message" @click="updateNotif(item.transaction_id)" />
+                                <hr class="bg-gray-225 w-full" style="height: 2px;">
+                            </div>
                             
                         </div>
                         <div class="tab-body-item px-4 pb-44 w-full">
