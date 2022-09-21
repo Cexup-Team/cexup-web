@@ -19,14 +19,14 @@
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
         session.delItem('cexup-checkout')
         session.delItem('cexup-quiz')
-        dashboard.state.name = user.name 
+        dashboard.state.name = user.name
+        dashboard.state.address = `${user.current_address}, ${user.current_provinces_name}`
         dashboard.getListDoctor(4)
         dashboard.getListProduct("")
         dashboard.getListArticle("")
         dashboard.getLatestVitalSign(user.user_code)
         dashboard.getCurrentEWS(user.user_code)        
     })
-
 </script>
 
 <template>
@@ -42,11 +42,12 @@
                     <div class="flex justify-between items-center w-full mt-6 px-4">
                         <div class="">
                             <h1 class="font-poppins text-white font-semibold text-base leading-6">Hi, {{dashboard.state.name}} <span>👋</span> </h1>
-                            <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span>Jl. Haji Merlin, Jakarta <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
+                            <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span> {{dashboard.state.address}} <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
                         </div>
-                        <div class="">
+                        <nuxt-link to="/inbox/notification" class="rounded-full">
+                            <div class="w-3 h-3 bg-red-650 absolute z-20 rounded-full border-2 border-white"></div>
                             <img src="../assets/images/bell_icon.svg" alt="">
-                        </div>
+                        </nuxt-link>
                     </div>
 
                     <!-- Health Status -->
@@ -145,9 +146,9 @@
                                 <h2 class="font-poppins text-base leading-6 font-medium mb-1">Artikel Terbaru</h2>
                                 <p class="text-sm text-gray-350 font-poppins font-normal leading-5">Baca artikel seputar kesehatan</p>
                             </div>
-                            <div class="">
+                            <nuxt-link class="" to="/article">
                                 <img class="w-8 h-8" src="../assets/images/icon_right_background_rounded.svg" alt="">
-                            </div>
+                            </nuxt-link>
                         </div>
                         
                         <div class="overflow-x-scroll no-scrollbar">

@@ -6,7 +6,7 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useDashboardStore } from '~~/stores/dashboard-store';
-    import { useMedicalStore } from "~~/stores/medical-store";
+    import { useMedicalDetailStore } from "~~/stores/medical-detail-store";
     import { aesDecrypt } from "~~/utils/crypto";
     import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
 
@@ -15,7 +15,7 @@
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()  
-    const medical = useMedicalStore()
+    const medical = useMedicalDetailStore()
 
     onMounted(async () => {
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
@@ -24,6 +24,28 @@
         medical.getHeartRate(user.user_code)
         medical.getRespiration(user.user_code)
         medical.getBloodPressure(user.user_code)
+    })
+
+    onUnmounted(() => {
+        medical.stateBloodPressure.isSystole =  []
+        medical.stateBloodPressure.isDiastole =  []
+        medical.stateBloodPressure.isTime =  []
+
+        medical.stateHeartRate.isArray =  []
+        medical.stateHeartRate.isTime =  []
+
+        
+        medical.stateSpo2.isArray =  []
+        medical.stateSpo2.isTime =  []
+
+        
+        medical.stateTemperature.isArray =  []
+        medical.stateTemperature.isTime =  []
+
+        
+        medical.stateRespiration.isArray =  []
+        medical.stateRespiration.isTime =  []
+
     })
 </script>
 <template>

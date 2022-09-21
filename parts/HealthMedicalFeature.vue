@@ -16,11 +16,11 @@ export default {
                     <CardMedicalFeature icon="../../assets/images/feature_tracker.svg"  title="Medicine" />
 
                     <CardMedicalFeature icon="../../assets/images/feature_record.svg"  title="Note" />
-                    <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="ECG" />
+                    <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="ECG" link="/profile/medical/ecg" />
                     
                     <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="USG" />
                     
-                    <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="SOAP" />
+                    <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="SOAP" link="/profile/medical/soap" />
             </div>
         </div>
     </div>

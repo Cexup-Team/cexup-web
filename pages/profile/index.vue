@@ -53,13 +53,13 @@ import NavBar from '~~/parts/NavBar.vue';
                                     </div>
                                 </div>
                                 <hr class="w-full h-0.5 bg-gray-175">
-                                <div class="flex items-start pb-5 pt-5 px-6">
+                                <nuxt-link class="flex items-start pb-5 pt-5 px-6" to="/profile/medical">
                                     <img src="../../assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4">
                                         <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
                                         <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
                                     </div>
-                                </div>
+                                </nuxt-link>
                             </div>
                         </div>
                         <h2 class="font-semibold font-poppins text-base mt-5">Help</h2>

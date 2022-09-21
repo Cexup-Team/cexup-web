@@ -8,7 +8,7 @@
     import { useDashboardStore } from '~~/stores/dashboard-store';
     import { useMedicalStore } from "~~/stores/medical-store";
     import { aesDecrypt } from "~~/utils/crypto";
-import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
+    import HealthMedicalFeature from "../../../../../parts/HealthMedicalFeature.vue";
 
 
     const dashboard = useDashboardStore()
@@ -22,6 +22,7 @@ import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
         dashboard.state.name = user.name 
         dashboard.getLatestVitalSign(user.user_code)
         dashboard.getCurrentEWS(user.user_code)  
+    
     })
 
 </script>
@@ -30,23 +31,27 @@ import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
     <div>
         <nuxt-layout name="main">
             <div class="medical-record-wrapper">
-                <NavBar title="Medical Record" />
+                <NavBar title="ECG History" link="/profile/medical" />
                 
                 <!-- Health Status -->
                 <div class="pt-24">
                     
-                    <div class="w-full px-6 flex justify-between items-center">
-                        <h2 class="font-poppins text-sm font-semibold">Health Status</h2>
-                        <nuxt-link class="text-primary-color text-sm font-poppins font-semibold" to="/profile/medical/detail">Details</nuxt-link>
-                    </div>
-                    <div v-if="dashboard.stateVitalSign.isLoading && dashboard.stateCurrentEWS.isLoading">
-                        <ShimmerHealthStatus />
-                    </div>
-                    <div v-if="!dashboard.stateVitalSign.isLoading && dashboard.stateVitalSign.isStatus === 'success' && !dashboard.stateCurrentEWS.isLoading && dashboard.stateCurrentEWS.isStatus === 'success'" class="">
-                        <HealthStatusVue :vital="dashboard.stateVitalSign.isData" :ews="dashboard.stateCurrentEWS.isData" />
-                    </div>
+                    <div class="ecg-wrappper">
+                        <div class="px-4">
+                            <div class="card-ecg border border-gray-250 w-full rounded-xl flex justify-between items-center p-2">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8">
+                                        <img src="~~/assets/images/feature_record.svg" class="w-full h-full" alt="">
+                                    </div>
+                                    <p class="font-poppins font-medium text-sm ml-3">Monday, 13 Sep 2022 / 10:30</p>
+                                </div>
+                                <div class="w-4 h-4">
+                                        <img src="~~/assets/images/arrow_right_gray.svg" alt="">
+                                    </div>
+                            </div>
 
-                    <HealthMedicalFeature />
+                        </div>
+                    </div>
                     
                    
 

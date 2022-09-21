@@ -11,17 +11,20 @@
         },
         className : {
             type: String,
+        },
+        link: {
+            type: String
         }
     })
 </script>
 
 <template>
-    <div class="card-medical-feature mr-4 rounded-lg">
+    <nuxt-link class="card-medical-feature mr-4 rounded-lg" :to="link">
         <div class="flex flex-col items-center px-4 py-3 rounded-lg w-20 h-full">
             <img :src="icon" class="h-10 w-10 mb-3" alt="">
             <p class="text-sm font-poppins font-medium leading-5">{{ title }}</p>
         </div>
-    </div>
+    </nuxt-link>
 </template>
 
 

@@ -16,6 +16,7 @@ interface DataStore{
     getHeartRate(user_code): Promise<{success:Boolean,message:string,data:any}>
     getRespiration(user_code): Promise<{success:Boolean,message:string,data:any}>
     getBloodPressure(user_code): Promise<{success:Boolean,message:string,data:any}>
+    getECG(user_code): Promise<{success:Boolean,message:string,data:any}>
 
     // ews
     getCurrentEWS(user_code): Promise<{success:Boolean,message:string,data:any}>

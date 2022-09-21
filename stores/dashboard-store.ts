@@ -4,7 +4,8 @@ import { useSession } from "~~/composables/useSession"
 export const useDashboardStore = defineStore('DashboardStore',{
     state:()=>({
         state : {
-            name : ''
+            name : '',
+            address : '',
         },
         
         stateProduct : {
