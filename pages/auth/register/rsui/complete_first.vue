@@ -299,7 +299,7 @@ watch(() => state.identity_number, (newNumber) => {
         border-radius: 10px;
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
         .floating-next {
             bottom: 0;
             left: 50%; 

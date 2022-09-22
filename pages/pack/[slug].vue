@@ -174,7 +174,7 @@
     }
 
 /* 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 520px) {
         .floating-detail-package.sticky {
         top: 10px;
         position: fixed;

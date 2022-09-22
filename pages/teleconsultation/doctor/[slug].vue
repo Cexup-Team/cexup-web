@@ -43,10 +43,8 @@
 
     onMounted( async () => {
         const params = router.currentRoute.value.params.slug
-        const backStack = ['/', '/teleconsultation']
-        const back = backStack.includes(window.history.state.back)
-        back ? tele.state.back = window.history.state.back : '/'
-        typeof session.getItem("cexup-checkout") === 'string' ? router.push('/')  :''
+        tele.state.back = history.state.back
+        // typeof session.getItem("cexup-checkout") === 'string' ? router.push('/')  :''
         const checkout = await JSON.parse(session.getItem("cexup-checkout"))
         tele.state.note = checkout ? checkout.note : ''
         tele.getDoctorTele(params)
@@ -71,13 +69,13 @@
             <div class="mt-20">
                 <section class="choose-schedule-header px-5 relative">                   
                     <div class="relative">
-                        <div class="w-full grid grid-cols-5">
+                        <div class="w-full flex items-center">
                             <div class="w-fit items-center flex">
                                 <div class="w-24 h-24 rounded-full overflow-hidden">
                                     <img :src="tele.state.isData.thumb" class="object-cover w-full h-full" alt="">
                                 </div>
                             </div>
-                            <div class="flex flex-col col-span-4 ml-4">
+                            <div class="flex flex-col ml-4">
                                 <h2 class="font-poppins font-semibold text-lg">{{tele.state.isData.name}}</h2>
                                 <h4 class="font-poppins text-gray-350 text-xs">{{tele.state.isData.speciality}}</h4>
 

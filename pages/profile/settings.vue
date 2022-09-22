@@ -70,7 +70,7 @@
 
 <style>
 
-      @media only screen and (min-width: 700px) {
+      @media only screen and (min-width: 520px) {
         .nav-bar {
             top: 0;
             left: 50%; 

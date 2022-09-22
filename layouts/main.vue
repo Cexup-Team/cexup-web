@@ -52,7 +52,7 @@
         scrollbar-width: none;  /* Firefox */
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
         .navigation {
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
             bottom: 0;

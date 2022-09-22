@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="fixed bottom-8 z-30 w-full">
+                <div class="choose-speciality fixed bottom-8 z-30 w-full">
                     <div class="w-full text-center">
                         <span class="choose-span rounded-2xl bg-white px-4 py-3" @click="slcValue('speciality')">Choose Specialization</span>
                         <!-- <InputText className="choose-span rounded-2xl bg-white px-4 py-3" /> -->
@@ -192,6 +192,15 @@
 
     .choose-span {
         box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    @media only screen and (min-width: 520px) {
+        .choose-speciality {
+            left: 50%; 
+            margin-left: -255px;
+            width: 510px;   
+
+        }
     }
     
 

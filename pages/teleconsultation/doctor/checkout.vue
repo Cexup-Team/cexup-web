@@ -280,7 +280,7 @@
         border-radius: 12px 12px 0px 0px;
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
         .floating-pay-now {
             left: 50%; 
             margin-left: -255px;

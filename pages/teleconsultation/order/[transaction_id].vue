@@ -429,7 +429,7 @@ import NavBar from "~~/parts/NavBar.vue";
         color: #FFF;
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
          #modal {
             top: 0;
             left: 50%; 

@@ -33,8 +33,8 @@
     <nuxt-link :to="link">
         <div class="tele-doctor-list bg-white py-3 px-4 rounded-xl mt-4 mb-4">
             <div class="flex items-center">
-                <div class="w-2/6 rounded-xl overflow-hidden mr-4 relative h-32"  >
-                    <img :src="image" class="rounded-xl overflow-hidden object-cover w-full h-full" alt="">
+                <div class="w-2/6 rounded-xl overflow-hidden mr-4 relative h-32">
+                    <img :src="image" class="object-cover w-full h-full" alt="">
                 </div>
                 <div class="w-4/6">
                     <div class="flex justify-between items-center">

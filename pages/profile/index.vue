@@ -103,7 +103,7 @@ import NavBar from '~~/parts/NavBar.vue';
         box-shadow: 0px 2px 14px rgba(0, 0, 0, 0.09);
     }
 
-      @media only screen and (min-width: 700px) {
+      @media only screen and (min-width: 520px) {
         .nav-bar {
             top: 0;
             left: 50%; 
