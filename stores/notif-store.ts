@@ -17,6 +17,13 @@ export const useNotifStore = defineStore('NotifStore',{
             isError : false,
             isData : null,
         },
+
+        stateSize : {   
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        }
    
 
       
@@ -36,6 +43,17 @@ export const useNotifStore = defineStore('NotifStore',{
             this.state.isArray = this.state.isArray.reverse()
             this.state.isLoading = false
             this.state.isStatus = 'success'
+        },
+
+        async getSizeNotif() {
+            const api = useApi()
+            this.stateSize.isLoading = true
+            const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
+            const q = query(collection(firestore, "notification"), where("user_code", "==", user.user_code), where("is_view", "==", false));        
+            const querySnapshot = await getDocs(q);
+            this.stateSize.isData = querySnapshot.size 
+            this.stateSize.isLoading = false
+            this.stateSize.isStatus = 'success'
         }
     }
 })

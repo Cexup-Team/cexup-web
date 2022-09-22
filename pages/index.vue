@@ -7,10 +7,13 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useDashboardStore } from '~~/stores/dashboard-store';
+    import { useNotifStore } from "~~/stores/notif-store";
     import { aesDecrypt } from "~~/utils/crypto";
+    import { collection, query, where, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
 
 
     const dashboard = useDashboardStore()
+    const notif = useNotifStore()
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()    
@@ -25,7 +28,8 @@
         dashboard.getListProduct("")
         dashboard.getListArticle("")
         dashboard.getLatestVitalSign(user.user_code)
-        dashboard.getCurrentEWS(user.user_code)        
+        dashboard.getCurrentEWS(user.user_code)
+        await notif.getSizeNotif()
     })
 </script>
 
@@ -45,7 +49,7 @@
                             <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span> {{dashboard.state.address}} <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
                         </div>
                         <nuxt-link to="/inbox/notification" class="rounded-full">
-                            <div class="w-3 h-3 bg-red-650 absolute z-20 rounded-full border-2 border-white"></div>
+                            <div class="w-3 h-3 bg-red-650 absolute z-20 rounded-full border-2 border-white" v-if="notif.stateSize.isStatus === 'success' && notif.stateSize.isData > 0"></div>
                             <img src="../assets/images/bell_icon.svg" alt="">
                         </nuxt-link>
                     </div>
