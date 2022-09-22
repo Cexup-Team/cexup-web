@@ -28,7 +28,7 @@
     <div>
         <nuxt-layout name="main">
             <div class="medical-record-wrapper">
-                <NavBar title="SOAP" link="/profile/medical/soap" />
+                <NavBar title="SOAP" link="/profile/medical" />
                 
                 <!-- Health Status -->
                 <div class="pt-24">

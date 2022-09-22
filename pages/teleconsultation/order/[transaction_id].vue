@@ -334,7 +334,7 @@ import NavBar from "~~/parts/NavBar.vue";
                                     order.stateShow.isData.status === 'join_now' ? 'Start Meeting' : ''
                             " :loading="order.state.isLoadingRe" />
                         </div>
-                        <nuxt-link to="/teleconsultation/order/PSD-00348DNJDHS88" class="w-full mb-3 mt-5">
+                        <nuxt-link to="/" class="w-full mb-3 mt-5">
                             <button class="text-red-650 w-full font-poppins outline-none font-medium text-sm px-10 rounded-lg bg-white">Cancel</button>
                         </nuxt-link>
 

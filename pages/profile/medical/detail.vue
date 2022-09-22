@@ -1,5 +1,5 @@
 <script setup lang="ts">
-   
+    import { Ref } from "vue";
     import NavBar from "~~/parts/NavBar.vue";
     import DetailHealthStatus from "~~/components/card/DetailHealthStatus.vue";
     import { useRouter } from 'vue-router';
@@ -16,6 +16,8 @@
     const router = useRouter()
     const session = useSession()  
     const medical = useMedicalDetailStore()
+
+    const backstack  = history.state.back
 
     onMounted(async () => {
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
@@ -52,7 +54,7 @@
     <div>
         <nuxt-layout name="main">
             <div class="medical-record-detail-wrapper">
-                <NavBar title="Detail Health Data" />
+                <NavBar title="Detail Health Data" :link="backstack" />
                 <div class="pt-24">
                    
                     <div v-if="!medical.stateBloodPressure.isLoading && medical.stateBloodPressure.isStatus === 'success'">
@@ -76,7 +78,7 @@
                     </div>
 
                     <div v-if="!medical.stateRespiration.isLoading && medical.stateRespiration.isStatus === 'success'" class="mt-3">
-                        <DetailHealthStatus :data="medical.stateRespiration.isArray" :time="medical.stateRespiration.isTime" title="Heart Rate" :min="0" :max="30" />
+                        <DetailHealthStatus :data="medical.stateRespiration.isArray" :time="medical.stateRespiration.isTime" title="Respiration" :min="0" :max="30" />
                     </div>
 
                     

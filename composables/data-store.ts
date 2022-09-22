@@ -9,6 +9,8 @@ interface DataStore{
     getListArticle(size): Promise<{success:Boolean,message:string,data:any}>
     getListSpeciality(): Promise<{success:Boolean,message:string,data:any}>
 
+    getDetailArticle(slug): Promise<{success:Boolean,message:string,data:any}>
+
     // vital sign
     getLatestVitalSign(user_code): Promise<{success:Boolean,message:string,data:any}>
     getTemperature(user_code): Promise<{success:Boolean,message:string,data:any}>

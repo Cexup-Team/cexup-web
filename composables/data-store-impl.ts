@@ -96,6 +96,17 @@ export class DataStoreImpl implements DataStore{
         }
     }
 
+    async getDetailArticle(slug: any): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = "1234"
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`,`article/${slug}`, `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
 
     // Vital Sign
 

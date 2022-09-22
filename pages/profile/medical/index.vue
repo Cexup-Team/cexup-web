@@ -30,7 +30,7 @@ import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
     <div>
         <nuxt-layout name="main">
             <div class="medical-record-wrapper">
-                <NavBar title="Medical Record" />
+                <NavBar title="Medical Record" link="/profile" />
                 
                 <!-- Health Status -->
                 <div class="pt-24">

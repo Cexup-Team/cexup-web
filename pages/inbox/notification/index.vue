@@ -18,6 +18,11 @@
     onMounted(() => {
         notif.getNotif()
     })
+
+    onUnmounted(() => {
+        notif.state.isArray = []
+        notif.state.isMap = new Map()
+    })
         
 </script>
 
@@ -26,7 +31,10 @@
         <nuxt-layout name="main">
             <div class="notif-wrapper w-full h-full relative">
                 <div class="flex justify-between mt-7 mx-6 items-center">
-                    <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                    <nuxt-link to="/">
+
+                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                    </nuxt-link>
                     <h1 class="font-poppins text-xl font-semibold">Inbox</h1>
                     <div>
 

@@ -65,14 +65,14 @@
                     <div></div>
                 </div>
             </div>
-            <NavBar title="Choose Schedule" :link="tele.state.back" />
+            <NavBar title="Choose Schedule" link="/teleconsultation" />
             <div class="mt-20">
                 <section class="choose-schedule-header px-5 relative">                   
                     <div class="relative">
                         <div class="w-full flex items-center">
                             <div class="w-fit items-center flex">
                                 <div class="w-24 h-24 rounded-full overflow-hidden">
-                                    <img :src="tele.state.isData.thumb" class="object-cover w-full h-full" alt="">
+                                    <img :src="tele.state.isData.thumb" class="object-cover" alt="">
                                 </div>
                             </div>
                             <div class="flex flex-col ml-4">

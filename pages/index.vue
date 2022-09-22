@@ -159,7 +159,7 @@
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                             <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
                                 <div v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="">
-                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" date="24 Mei 2022" author="Iqbal Tmvn" />                         
                                 </div>  
                             </div>
                             </div>

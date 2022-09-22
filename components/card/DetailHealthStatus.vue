@@ -21,7 +21,7 @@
 
     const series = [
         {
-            name: 'series1',
+            name: props.title,
             data: props.data.reverse()
         }
     ]
