@@ -92,7 +92,9 @@ function signUp(){
   <div>
     <nuxt-layout name="auth">
       <div class="mt-9 p-4">
-        <img src="../../../assets/images/icon_back.svg" alt="" class="w-2 h-4" />
+        <nuxt-link to="/auth">
+          <img src="../../../assets/images/icon_back.svg" alt="" class="w-2 h-4" />
+        </nuxt-link>
           <h2 class="text-3xl text-primary-color font-bold mt-9 w-full text-center font-poppins">Sign Up</h2>
           <h5 class="text-sm font-medium w-full text-gray-350 text-center mt-6 font-poppins">Already have an account? <span class="text-primary-color">Sign in!</span></h5>
           <div class="inputForm mt-12">

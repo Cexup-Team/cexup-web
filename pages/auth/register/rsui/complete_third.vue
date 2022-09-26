@@ -352,6 +352,9 @@
     <div>
         <nuxt-layout name="auth">
             <div class="mt-9 p-4">
+                <nuxt-link to="/auth/register/rsui/complete_second">
+                    <img src="~~/assets/images/icon_back.svg" alt="" class="w-2 h-4" />
+                </nuxt-link>
                 <h2 class="text-lg text-primary-color font-bold mt-9 w-full text-center font-poppins">Current Address
                 </h2>
 

@@ -55,9 +55,9 @@
             <swiper-slide> 
                 <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="USG" />
             </swiper-slide>
-            <swiper-slide>
+            <!-- <swiper-slide>
                 <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="SOAP" :link="role === 'doctor' ? '/doctor/soap?tk='+tk+'&role=doctor' : '/profile/medical/soap'" />
-            </swiper-slide>
+            </swiper-slide> -->
   </swiper>
 
 

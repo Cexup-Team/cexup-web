@@ -126,7 +126,7 @@
             listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
             listMap.set('gender', ["Male", "Female"])
         } catch (error) {
-            console.log(error)
+            router.push('/auth')
         }
 
  

@@ -48,7 +48,14 @@ export const useMedicalDetailStore = defineStore('MedicalDetailStore',{
             isStatus: 'idle',
             isError : false,
             isData : null,
-        }
+        },
+
+        stateEcg : {
+            isLoading: false,
+            isStatus: 'idle',
+            isError : false,
+            isData : null,
+        },
     }),
     actions:{
    
@@ -174,6 +181,31 @@ export const useMedicalDetailStore = defineStore('MedicalDetailStore',{
                 });       
             }
         },
+
+        // ecg
+
+        async getECG(user_code){
+            const api = useApi()
+            this.stateEcg.isLoading = true
+            const {success, message, data} = await api.getECG(user_code)
+            if (success) {
+                this.stateEcg.isData = data
+                this.stateEcg.isLoading = false
+                this.stateEcg.isStatus = "success"
+                return {
+                    data : data
+                }
+            }else{
+                this.stateEcg.isLoading = false
+                this.stateEcg.isStatus = "error"
+                return Promise.reject({
+                    message: message
+                });       
+            }
+        },
+
+        
+        
     }
 
 })

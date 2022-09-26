@@ -20,6 +20,7 @@
 
     onMounted(async () => {
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
+        console.log(user)
         session.delItem('cexup-checkout')
         session.delItem('cexup-quiz')
         dashboard.state.name = user.name

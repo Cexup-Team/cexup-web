@@ -166,7 +166,7 @@ export class DataStoreImpl implements DataStore{
     }
 
     async getECG(user_code: any): Promise<{ success: Boolean; message: string; data: any }> {
-        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`blood-pressure/${user_code}?size=10`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_MEDICAL_RECORS}`,`electrocardiogram/${user_code}`, `${import.meta.env.VITE_APP_MEDICAL_KEY}`, "")
         return {
             success:success,
             message:message,

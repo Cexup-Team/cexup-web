@@ -128,10 +128,9 @@ export const useUserStore = defineStore('userStore',{
           json: Object
         ){
             const api = useApi()
-            const users = JSON.parse(useSession().getItem("cexup-user"))
-            console.log(users)
             const {success, message, data} = await api.updatePatient(json)
             if(success){
+                useSession().setItem('cexup-user', aesEncrypt(JSON.stringify(data)))
                 return {
                     route : '/'
                 }

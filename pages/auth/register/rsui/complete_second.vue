@@ -187,37 +187,43 @@ import { stat } from "fs";
         
     
     onMounted(() => {
-        
-        const users = JSON.parse(aesDecrypt(session.getItem('cexup-profile')))
-        if (users.province_id || users.regency_id || users.district_id || users.village_id) {
-            state.province_id = users.province_id
-            state.regency_id = users.regency_id
-            state.district_id = users.district_id
-            state.village_id = users.village_id
-            setTimeout(() => {
-                state.province = users.province
-            }, 500);
-            setTimeout(() => {
-                state.regency = users.regency
-            }, 1000);
-            setTimeout(() => {
-                state.district = users.district
-            }, 1500);
-            setTimeout(() => {
-                state.village = users.village
-            }, 2000);
-            state.postal_code = users.postal_code
-            state.rt = users.rt
-            state.rw = users.rw
-            
-        }
 
-        // console.log(users)
-       
-        getRegion("", "province")
-        listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
-        listMap.set('gender', ["Male", "Female"])
-        listMap.set('province', state.listProvince)
+        try {
+            const users = JSON.parse(aesDecrypt(session.getItem('cexup-profile')))
+            if (users.province_id || users.regency_id || users.district_id || users.village_id) {
+                state.province_id = users.province_id
+                state.regency_id = users.regency_id
+                state.district_id = users.district_id
+                state.village_id = users.village_id
+                setTimeout(() => {
+                    state.province = users.province
+                }, 500);
+                setTimeout(() => {
+                    state.regency = users.regency
+                }, 1000);
+                setTimeout(() => {
+                    state.district = users.district
+                }, 1500);
+                setTimeout(() => {
+                    state.village = users.village
+                }, 2000);
+                state.postal_code = users.postal_code
+                state.rt = users.rt
+                state.rw = users.rw
+                
+            }
+
+            // console.log(users)
+        
+            getRegion("", "province")
+            listMap.set('identity', ["KTP", "KITAS", "PASSPORT"])
+            listMap.set('gender', ["Male", "Female"])
+            listMap.set('province', state.listProvince)    
+        } catch (error) {
+            router.push('/auth')
+        }
+        
+        
  
         
     })
@@ -247,7 +253,7 @@ import { stat } from "fs";
             session.setItem('cexup-profile', aesEncrypt(JSON.stringify(users)))
             router.push('/auth/register/rsui/complete_third')
         } catch (error) {
-            console.log(error)
+            router.push('/auth')
         }
         
    
@@ -262,6 +268,9 @@ import { stat } from "fs";
     <div>
         <nuxt-layout name="auth">
             <div class="mt-9 p-4">
+                <nuxt-link to="/auth/register/rsui/complete_first">
+                    <img src="~~/assets/images/icon_back.svg" alt="" class="w-2 h-4" />
+                </nuxt-link>
                 <h2 class="text-lg text-primary-color font-bold mt-9 w-full text-center font-poppins">Orginal Address
                 </h2>
                 <div class="inputForm mt-7">
