@@ -342,7 +342,7 @@ import 'vue-drumroll-datetime-picker/dist/style.css'
         color: #8A8A8E;
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
          #sheet {
             top: 0;
             left: 50%; 

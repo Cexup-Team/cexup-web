@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import Tabs from '~~/parts/Tabs.vue';
     import BottomNav from '~~/parts/BottomNav.vue';
+import NavBar from '~~/parts/NavBar.vue';
 
 </script>
 <template>
@@ -8,13 +9,7 @@
         <nuxt-layout name="main">
             <div class="pack-wrapper h-full relative w-full">
                 <BottomNav active="/pack" />
-                <div class="flex justify-between mt-7 mx-6 items-center">
-                    <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                    <h1 class="font-poppins text-xl font-semibold">Package</h1>
-                    <div>
-
-                    </div>
-                </div>
+                <NavBar title="Package" link="/" />
                 <Tabs bgBody="bg-white">
                     <template v-slot:tabHeader>
                         <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">

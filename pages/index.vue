@@ -7,22 +7,31 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useDashboardStore } from '~~/stores/dashboard-store';
+    import { useNotifStore } from "~~/stores/notif-store";
+    import { aesDecrypt } from "~~/utils/crypto";
+    import { collection, query, where, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+
 
     const dashboard = useDashboardStore()
+    const notif = useNotifStore()
     const $toast = useToast()
     const router = useRouter()
     const session = useSession()    
 
-    onMounted(() => {
-        const user = JSON.parse(session.getItem("cexup-user"))
+    onMounted(async () => {
+        const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
+        console.log(user)
+        session.delItem('cexup-checkout')
+        session.delItem('cexup-quiz')
+        dashboard.state.name = user.name
+        dashboard.state.address = `${user.current_address}, ${user.current_provinces_name}`
         dashboard.getListDoctor(4)
         dashboard.getListProduct("")
         dashboard.getListArticle("")
         dashboard.getLatestVitalSign(user.user_code)
         dashboard.getCurrentEWS(user.user_code)
-        
+        await notif.getSizeNotif()
     })
-
 </script>
 
 <template>
@@ -37,12 +46,13 @@
 
                     <div class="flex justify-between items-center w-full mt-6 px-4">
                         <div class="">
-                            <h1 class="font-poppins text-white font-semibold text-base leading-6">Hi, Mario Prasetyo <span>👋</span> </h1>
-                            <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span>Jl. Haji Merlin, Jakarta <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
+                            <h1 class="font-poppins text-white font-semibold text-base leading-6">Hi, {{dashboard.state.name}} <span>👋</span> </h1>
+                            <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span> {{dashboard.state.address}} <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
                         </div>
-                        <div class="">
+                        <nuxt-link to="/inbox/notification" class="rounded-full">
+                            <div class="w-3 h-3 bg-red-650 absolute z-20 rounded-full border-2 border-white" v-if="notif.stateSize.isStatus === 'success' && notif.stateSize.isData > 0"></div>
                             <img src="../assets/images/bell_icon.svg" alt="">
-                        </div>
+                        </nuxt-link>
                     </div>
 
                     <!-- Health Status -->
@@ -82,7 +92,7 @@
                             <div v-if="!dashboard.stateDoctor.isLoading && dashboard.stateDoctor.isStatus === 'success'">
                                 <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
                                     <div v-for="(item, index) in dashboard.stateDoctor.isData" :key="index">
-                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" />
+                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" :link="`/teleconsultation/doctor/${item.slug}`" />
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +137,7 @@
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                                 <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
                                     <div v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="">
-                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" />
+                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" :link="item.link" type="product" />
                                     </div>
                                 </div>
                             </div>
@@ -141,16 +151,16 @@
                                 <h2 class="font-poppins text-base leading-6 font-medium mb-1">Artikel Terbaru</h2>
                                 <p class="text-sm text-gray-350 font-poppins font-normal leading-5">Baca artikel seputar kesehatan</p>
                             </div>
-                            <div class="">
+                            <nuxt-link class="" to="/article">
                                 <img class="w-8 h-8" src="../assets/images/icon_right_background_rounded.svg" alt="">
-                            </div>
+                            </nuxt-link>
                         </div>
                         
                         <div class="overflow-x-scroll no-scrollbar">
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
                             <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
                                 <div v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="">
-                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" date="24 Mei 2022" author="Iqbal Tmvn" />                         
                                 </div>  
                             </div>
                             </div>

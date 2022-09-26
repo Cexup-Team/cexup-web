@@ -1,10 +1,15 @@
 import { defineStore } from "pinia";
 import { useSession } from "~~/composables/useSession"
 import { selectSafeZero } from "../utils/getFormatDate";
+import { useToast } from 'tailvue'
+import { aesDecrypt } from "~~/utils/crypto";
+
+const $toast = useToast()
 
 export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
     state:()=>({
         state : {
+            back : null,
             slcDate : null,
             note: null,
             allDay : null,
@@ -137,29 +142,64 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
         },
         
         next(){
-            const chekout = useSession().getItem("cexup-chekout")
-            const users = JSON.parse(useSession().getItem("cexup-user"))
-            if (!this.stateTime.isData) {
-            }else {
-                
-                const json = {
-                    "id" : this.stateTime.isData[this.stateTime.slcTime].id,
-                    "time" : this.stateTime.isData[this.stateTime.slcTime].time,
-                    "date" : this.stateSlcDate.slc,
-                    "type" : "call",
-                    "note" : this.state.note,
-                    "allow_access_data" : true,
-                    "data_questionnaire" :  null
-                }
-
-                useSession().setItem("cexup-chekout", JSON.stringify(json))
-                console.log(useSession().getItem("cexup-chekout"))
+            if(!this.state.note){
+                $toast.show({
+                    type: 'danger',
+                    message: 'Please enter simptons',
+                    timeout: 4,
+                })
                 return {
-                    router : 'register'
+                    router : ''
+                }
+            }
+            try {
+                const chekout = useSession().getItem("cexup-checkout")
+                const users = JSON.parse(aesDecrypt(useSession().getItem("cexup-user")))
+                if (!this.stateTime.isData) {
+                }else {
+                    
+                    const json = {
+                        "id" : this.stateTime.isData[this.stateTime.slcTime].id,
+                        "time" : this.stateTime.isData[this.stateTime.slcTime].time,
+                        "date" : this.stateSlcDate.slc,
+                        "type" : "call",
+                        "note" : this.state.note,
+                        "allow_access_data" : true,
+                        "data_questionnaire" :  null,
+                        "doctor" : {
+                            "name" : this.state.isData.name,
+                            "speciality" : this.state.isData.speciality,
+                            "speciality_id" : this.state.isData.speciality_id,
+                            "hospital" : this.state.isData.hospital[0].name,
+                            "online_price" : this.state.isData.hospital[0].online_price,
+                            "offline_price" : this.state.isData.hospital[0].offline_price,
+                            "thumb" : this.state.isData.thumb,
+                            "slug" : this.state.isData.slug
+                        }
+                    }
+
+                    
+
+                    useSession().setItem("cexup-checkout", JSON.stringify(json))
+                    return {
+                        router : 'register'
+                    }
+                    
+
                 }
                 
+            } catch (error) {
+                $toast.show({
+                    type: 'danger',
+                    message: 'Please select date',
+                    timeout: 4,
+                })
 
+                return {
+                    router : ''
+                }
             }
+            
             
         }
 

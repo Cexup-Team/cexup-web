@@ -19,4 +19,6 @@ build: {
     "@vueuse/nuxt",
     '@tailvue/nuxt',
   ],
+
+
 })

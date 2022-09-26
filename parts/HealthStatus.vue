@@ -7,8 +7,21 @@ import VueApexCharts from "vue3-apexcharts";
         },
         ews: {
             type: Object
+        },
+        role : {
+            type: String
+        },
+        tk : {
+            type: String
         }
     })
+
+
+    
+    const detailHealth = () => {
+        useRouter().push( props.role === 'doctor' ? '/doctor/detail?tk='+ props.tk : '/profile/medical/detail')
+    }
+
 
 
   const series = [70]
@@ -38,7 +51,7 @@ import VueApexCharts from "vue3-apexcharts";
                 }
               },
             },
-            labels: [props.ews.result],
+            labels: [props.ews?.result],
             fill: {
                 type: 'gradient',
                 gradient: {
@@ -55,7 +68,7 @@ import VueApexCharts from "vue3-apexcharts";
 
 <template>
   <div class="health-status mx-5 z-10 mt-6">
-        <div class="bg-white w-full px-3 pt-2 pb-6 rounded-lg">
+        <div class="bg-white w-full px-3 pt-2 pb-6 rounded-lg cursor-pointer" @click="detailHealth">
             <div class="flex flex-col">
                 <div class="w-full flex">
                     <div class="w-2/6 flex justify-center items-center">

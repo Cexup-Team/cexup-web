@@ -23,7 +23,7 @@ export default {
                     <CardFeature icon="../../assets/images/feature_tracker.svg" title1="Health" title2="Tracker" />
 
                     <CardFeature icon="../../assets/images/feature_record.svg" title1="Medical" title2="Record" />
-                    <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Health" title2="Monitor" className="s" />
+                    <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Health" title2="Monitor" />
             </div>
         </div>
     </div>

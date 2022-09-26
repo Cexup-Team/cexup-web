@@ -1,8 +1,5 @@
 <script setup lang="ts">
     import { ref } from "vue"
-
-    
-    
     
     defineProps({
         allDay : {
@@ -29,16 +26,23 @@
     onMounted(() => {
         
         let tabStatus = document.getElementsByClassName("card-select-date")[0]
-        let tabPaneStatus = document.getElementsByClassName("card-select-date-item")
+       
+        const myPromise = new Promise((resolve, reject) => {
+            let tabPaneStatus = document.getElementsByClassName("card-select-date-item")
+            resolve(tabPaneStatus)
+        });
+   
 
+        myPromise.then(res => {
+            for (let i = 0; i < res.length; i++) {
+                res[i].addEventListener("click", function(e) {
+                    emit('update:selectDate', e.target.getAttribute("slc"))
+                    tabStatus.getElementsByClassName("active")[0].classList.remove("active")
+                    res[i].classList.add("active")
+                })
+            }
+        })
 
-        for (let i = 0; i < tabPaneStatus.length; i++) {
-            tabPaneStatus[i].addEventListener("click", function(e) {
-                emit('update:selectDate', e.target.getAttribute("slc"))
-                tabStatus.getElementsByClassName("active")[0].classList.remove("active")
-                tabPaneStatus[i].classList.add("active")
-            })
-        }
     })
 
 

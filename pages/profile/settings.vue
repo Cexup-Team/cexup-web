@@ -1,8 +1,14 @@
 <script setup lang="ts">
-     import BottomNav from '~~/parts/BottomNav.vue';
-      let openModal: Ref<boolean> = ref(false)
+    import BottomNav from '~~/parts/BottomNav.vue';
+    import NavBar from '~~/parts/NavBar.vue';
+    import { useSession } from "~~/composables/useSession"
+    import { useRouter } from 'vue-router';
+    
+    let openModal: Ref<boolean> = ref(false)
+    const session = useSession()
+    const router = useRouter()
 
-      const changeOpen = (value) => {
+    const changeOpen = (value) => {
         openModal.value = value
     }
 
@@ -15,22 +21,25 @@
     const slcValue = (value) => {
         openModal.value = true
     }
+
+    const logout = () => {
+        session.delItem('cexup-user')
+        session.delItem('cexup-token')
+        session.delItem('cexup-checkout')
+        session.delItem('cexup-meet')
+        session.delItem('cexup-quiz')
+        router.push('/auth')
+        
+    }
 </script>
 <template>
     <div>
         <nuxt-layout name="main">
             <div class="profile-wrapper h-full relative w-full">
-         
+        
+                <NavBar title="Account Settings" link="/profile/more" />
 
-                <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
-                    
-                    <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                        <h1 class="font-poppins text-xl font-semibold">Account Settings</h1>
-                        <div></div>
-                    </div>
-                </div>
-                <section class="settings-profile px-4 pt-20 relative bg-blue-50 h-screen">
+                <section class="settings-profile px-4 pt-24 relative bg-blue-50 h-screen">
                    
                     <div class="bg-white rounded-lg px-4 w-full">
                         <MoreProfile img="" title="Delete Account" />
@@ -45,12 +54,8 @@
                         <div class="">
                             <h2 class="w-full text-center text-base font-poppins font-medium">Are you sure want <br> to logout</h2>
                             <div class="flex justify-between items-center mt-10 mb-5">
-
-                                
-                                    <button class="font-poppins text-base text-primary-color border border-primary-color bg-white rounded-xl py-3 w-full mr-3">Yes</button>
-                                
-                                    <button class="font-poppins text-base bg-primary-color text-white rounded-xl py-3 w-full">No</button>
-                                
+                                <button class="font-poppins text-base text-primary-color border border-primary-color bg-white rounded-xl py-3 w-full mr-3" @click="logout">Yes</button>
+                                <button class="font-poppins text-base bg-primary-color text-white rounded-xl py-3 w-full" @click="openModal = false">No</button>
                             </div>
                         </div>
                     </template>
@@ -65,7 +70,7 @@
 
 <style>
 
-      @media only screen and (min-width: 700px) {
+      @media only screen and (min-width: 520px) {
         .nav-bar {
             top: 0;
             left: 50%; 

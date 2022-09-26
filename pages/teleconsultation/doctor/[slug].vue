@@ -1,15 +1,19 @@
 <script setup lang="ts">
 
     import { ref } from "vue"
-    import { useRouter } from 'vue-router';
+    import { useRouter,useRoute } from 'vue-router';
     import { useToast, useModal } from 'tailvue'
     import { useTeleDoctorStore } from '~~/stores/tele-doctor-store';
     import { useUserStore } from '~~/stores/user-store';
     import { selectSafeZero } from "../../../utils/getFormatDate";
+    import NavBar from "~~/parts/NavBar.vue";
+    import {idrFormat} from '../../../utils/currencyFormat'
 
     const $toast = useToast()
     const router = useRouter()
+    const route = useRoute()
     const tele = useTeleDoctorStore()
+    const session = useSession()
 
     const now = new Date();
     const day =  now.getDate()
@@ -19,7 +23,7 @@
 
     const next = () => {
         router.push(tele.next().router)
-    }
+    }   
 
     watch(() => tele.stateTime.isData, (newCardItem) => {
         tele.stateTime.slcTime = null
@@ -37,8 +41,12 @@
         }, 500);
     })
 
-    onMounted(() => {
+    onMounted( async () => {
         const params = router.currentRoute.value.params.slug
+        tele.state.back = history.state.back
+        // typeof session.getItem("cexup-checkout") === 'string' ? router.push('/')  :''
+        const checkout = await JSON.parse(session.getItem("cexup-checkout"))
+        tele.state.note = checkout ? checkout.note : ''
         tele.getDoctorTele(params)
         tele.state.allDay = tele.getAllDaysInMonth(now.getFullYear(), now.getMonth()).slice(day-1, day+30);
     })
@@ -53,16 +61,19 @@
                 
                 <div class="flex justify-between mt-6 mx-6 items-center">
                     <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                    <h1 class="font-poppins text-xl font-semibold">Choose Schedule</h1>
+                    <h1 class="font-poppins text-xl font-semibold"></h1>
                     <div></div>
                 </div>
             </div>
+            <NavBar title="Choose Schedule" link="/teleconsultation" />
             <div class="mt-20">
                 <section class="choose-schedule-header px-5 relative">                   
                     <div class="relative">
-                        <div class="flex items-center justify-start">
-                            <div class="w-24 h-24 rounded-full overflow-hidden">
-                                <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
+                        <div class="w-full flex items-center">
+                            <div class="w-fit items-center flex">
+                                <div class="w-24 h-24 rounded-full overflow-hidden">
+                                    <img :src="tele.state.isData.thumb" class="object-cover" alt="">
+                                </div>
                             </div>
                             <div class="flex flex-col ml-4">
                                 <h2 class="font-poppins font-semibold text-lg">{{tele.state.isData.name}}</h2>
@@ -93,8 +104,8 @@
                 <section class="bg-blue-150 px-5 py-2 mt-4 choose-schedule-body">
                     <div class="flex justify-between items-center">
                         <div class="">
-                            <h4 class="font-medium font-poppins text-lg">Rp {{tele.state.isData.hospital[0].offline_price }}</h4>
-                            <span class="text-gray-350 font-poppins font-medium text-xs discount relative">{{tele.state.isData.hospital[0].offline_price === 0 ? '' : tele.state.isData.hospital[0].offline_price}}</span>
+                            <h4 class="font-medium font-poppins text-lg">{{idrFormat(tele.state.isData.hospital[0].online_price.toString(), "Rp. ") }}</h4>
+                            <!-- <span class="text-gray-350 font-poppins font-medium text-xs discount relative">{{tele.state.isData.hospital[0].offline_price === 0 ? '' : tele.state.isData.hospital[0].offline_price}}</span> -->
                         </div>
                         
                         <div class="px-3 py-2 rounded-md border-dashed border-teal-750 border-2">
@@ -109,7 +120,7 @@
                 <section class="mt-6">
                     <div class="chest-pain px-5">
                         <h2 class="text-base font-poppins font-semibold">My Simptons</h2>
-                        <input v-model="tele.state.note" type="text" class="mt-4 p-4 text-sm w-full rounded-md font-poppins border border-gray-150 text-gray-900 outline-none placeholder:text-gray-900" placeholder="Chest pain">
+                        <input v-model="tele.state.note" type="text" class="mt-4 p-4 text-sm w-full rounded-md font-poppins border border-gray-150 text-gray-900 outline-none placeholder:text-gray-350" placeholder="Chest pain">
                     </div>
                     <div class="avaibility-schedule">
                         <div class="flex justify-between mt-4 items-center px-5">
@@ -140,9 +151,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="px-4">
+                                <div v-if="!tele.stateTime.isLoading && tele.stateTime.isStatus === 'success' && tele.stateTime.isData.length === 0" class="w-full">    
+                                    <div ref="cardSelectTime" class="px-5 py-2 text-center rounded-xl w-full card-select-time-item bg-gray-550 cursor-pointer outline-none transition-all duration-300 ease-in-out overflow-hidden">
+                                        <h4 class="font-poppins text-sm whitespace-nowrap">No Schedule</h4>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mt-6 px-4 mb-10">
-                            <Button className="w-full text-center bg-primary-color text-white font-poppins py-3 rounded-lg font-medium text-base" title="Next" @click="next" />
+                            <Button :className="'w-full text-center text-white font-poppins py-3 rounded-lg font-medium text-base '+(tele.stateTime.slcTime && tele.state.note ? 'bg-primary-color' : 'bg-gray-550')" title="Next" @click="next" />
                         </div>
                     </div>
                 </section>

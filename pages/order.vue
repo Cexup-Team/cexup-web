@@ -6,6 +6,8 @@
     import { useSession } from "~~/composables/useSession"
     import { useToast, useModal } from 'tailvue'
     import { useOrderStore } from '~~/stores/order-store';
+    import NavBar from '~~/parts/NavBar.vue';
+    import { aesDecrypt } from "~~/utils/crypto";
 
 
 
@@ -21,7 +23,7 @@
     }
 
     onMounted(() => {
-        const user = JSON.parse(session.getItem("cexup-user"))
+        const user = JSON.parse(aesDecrypt(session.getItem("cexup-user")))
         getListOrder(order.state.slcAppointment, "", user.user_id)
     })
 
@@ -32,13 +34,8 @@
     <nuxt-layout name="main">
         <div class="order-wrapper h-full relative w-full">
              <BottomNav active="/order" />
-            <div class="flex justify-between mt-7 mx-6 items-center">
-                <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
-                <h1 class="font-poppins text-xl font-semibold">Order</h1>
-                <div>
 
-                </div>
-            </div>
+            <NavBar title="Order" link="/" />
 
 
             <Tabs bgBody="bg-blue-50" @update:select="order.updateSelect" @update:status="order.updateStatus">
@@ -100,7 +97,7 @@
                             </div>
                         </div>
                         
-                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success' && order.stateOrder.isData.type === 'call'">
                             <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>
@@ -116,7 +113,7 @@
                             </div>
                         </div>
 
-                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success'">
+                        <div v-if="!order.stateOrder.isLoading && order.stateOrder.isStatus === 'success' && order.stateOrder.isData.type === 'reservation'">
                             <div v-for="(item, index) in order.stateOrder.isData" :key="index">
                                 <CardOrder :order="item" />
                             </div>

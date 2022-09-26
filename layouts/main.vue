@@ -1,5 +1,19 @@
 <script setup lang="ts">
-
+    import { aesDecrypt } from "~~/utils/crypto";
+    import { useSession } from "~~/composables/useSession"
+    
+    const session = useSession()
+    const router = useRouter()
+    try {
+        aesDecrypt(session.getItem('cexup-user'))
+    } catch (error) {
+        session.delItem('cexup-token')
+        session.delItem('cexup-user')
+        session.delItem('cexup-quiz')
+        session.delItem('cexup-checkout')
+        window.location.href = '/auth'
+    }
+    
 
 
 </script>
@@ -38,7 +52,7 @@
         scrollbar-width: none;  /* Firefox */
     }
 
-    @media only screen and (min-width: 700px) {
+    @media only screen and (min-width: 520px) {
         .navigation {
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
             bottom: 0;
