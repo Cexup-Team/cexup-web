@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+    import { ref } from "vue";
     import NavBar from '~~/parts/NavBar.vue';
     import HealthStatusVue from "~~/parts/HealthStatus.vue";
     import { useRouter } from 'vue-router';
@@ -17,11 +18,13 @@
     const session = useSession()  
     const medical = useMedicalStore()
 
+    const backstack  = history.state.back
+
     onMounted(async () => {
-        // const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
-        // dashboard.state.name = user.name 
-        // dashboard.getLatestVitalSign(user.user_code)
-        // dashboard.getCurrentEWS(user.user_code)  
+        const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
+        dashboard.state.name = user.name 
+        dashboard.getLatestVitalSign(user.user_code)
+        dashboard.getCurrentEWS(user.user_code)  
     
     })
 
@@ -29,9 +32,9 @@
 
 <template>
     <div>
-        <nuxt-layout name="main">
+        <nuxt-layout name="medical">
             <div class="medical-record-wrapper">
-                <NavBar title="ECG History" link="/profile/medical" />
+                <NavBar title="ECG History" :link="backstack" />
                 
                 <!-- Health Status -->
                 <div class="pt-24">

@@ -26,7 +26,7 @@
     "firebase": "^9.10.0",
     "npm": "^8.12.2",
     "pinia": "^2.0.14",
-    "swiper": "^8.2.4",
+    "swiper": "^8.4.2",
     "vue-drumroll-datetime-picker": "1.0.0",
     "vue-router": "4",
     "vue-toast-notification": "^0.6.3",
