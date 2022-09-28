@@ -8,7 +8,10 @@
             <div class="telemonitoring-wrapper relative">
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <nuxt-link to="/">
+                            <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+
+                        </nuxt-link>
                         <h1 class="font-poppins text-xl font-semibold">Telemonitoring</h1>
                         <div></div>
                     </div>
@@ -28,7 +31,7 @@
                     <div class="grid grid-cols-2 gap-5 px-6 mt-4">
                         <CardTelemonitoring title="Kids Tracker" icon="../../assets/images/stetoskop.svg" />
                         <CardTelemonitoring title="Obgyn" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/obgyn" />
-                        <CardTelemonitoring title="Cardiac Tracker" icon="../../assets/images/stetoskop.svg" />
+                        <CardTelemonitoring title="Cardiac Tracker" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/cardiac" />
                         <CardTelemonitoring title="Covid-19" icon="../../assets/images/stetoskop.svg" />
                  
                     </div>

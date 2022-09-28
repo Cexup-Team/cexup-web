@@ -10,6 +10,15 @@
     import { useNotifStore } from "~~/stores/notif-store";
     import { aesDecrypt } from "~~/utils/crypto";
     import { collection, query, where, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+    import { Swiper, SwiperSlide } from 'swiper/vue';
+    import 'swiper/css';
+
+    const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
 
 
     const dashboard = useDashboardStore()
@@ -90,11 +99,23 @@
                             </div>
                             
                             <div v-if="!dashboard.stateDoctor.isLoading && dashboard.stateDoctor.isStatus === 'success'">
-                                <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start pb-6">                                    
-                                    <div v-for="(item, index) in dashboard.stateDoctor.isData" :key="index">
-                                        <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" :link="`/teleconsultation/doctor/${item.slug}`" />
-                                    </div>
-                                </div>
+                                <!-- <div class="slide-doctor pl-4 transform no-scrollbar overflow-auto flex justify-start">                                    
+                                   
+                                </div> -->
+                                <swiper
+                                    :slides-per-view="4"
+                                    :space-between="50"
+                                    @swiper="onSwiper"
+                                    @slideChange="onSlideChange"
+                                    >
+                                        <swiper-slide v-for="(item, index) in dashboard.stateDoctor.isData" :key="index" class="ml-4 pb-6">
+                                        
+                                            <CardDoctor :title="item.name" :subTitle="item.speciality" :price="item.hospital[0].online_price" :icon="item.thumb" :link="`/teleconsultation/doctor/${item.slug}`" />
+                                        </swiper-slide>
+                                        <swiper-slide>
+
+                                        </swiper-slide>
+                                    </swiper>
                             </div>
                         </div>
                     </div>
@@ -135,11 +156,22 @@
                             </div>
                             
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
-                                <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
-                                    <div v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="">
-                                        <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" :link="item.link" type="product" />
-                                    </div>
-                                </div>
+                                <!-- <div class="slide-doctor transform no-scrollbar overflow-auto flex justify-start pb-6 pl-4">                                    
+                                  
+                                </div> -->
+                                <swiper
+                                    :slides-per-view="4"
+                                    :space-between="50"
+                                    @swiper="onSwiper"
+                                    @slideChange="onSlideChange"
+                                >
+                                    <swiper-slide v-for="(item, index) in dashboard.stateProduct.isData" :key="index" class="ml-4 pb-6" >
+                                            <CardDoctor :title="item.title" :subTitle="item.category" :price="item.price" :icon="item.thumb" :link="item.link" type="product" />
+                                    </swiper-slide>
+                                    <swiper-slide>
+
+                                    </swiper-slide>
+                                </swiper>
                             </div>
                         </div>
                     
@@ -158,11 +190,22 @@
                         
                         <div class="overflow-x-scroll no-scrollbar">
                             <div v-if="!dashboard.stateProduct.isLoading && dashboard.stateProduct.isStatus === 'success'">
-                            <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
-                                <div v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="">
-                                    <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" date="24 Mei 2022" author="Iqbal Tmvn" />                         
-                                </div>  
-                            </div>
+                                <!-- <div class="flex justify-start min-w-max px-3 pb-5 pt-5">
+                                   
+                                </div> -->
+                                <swiper
+                                    :slides-per-view="2"
+                                    :space-between="120"
+                                    @swiper="onSwiper"
+                                    @slideChange="onSlideChange"
+                                >
+                                    <swiper-slide v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="ml-4 pb-6 pt-5">
+                                        <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                    </swiper-slide>  
+                                    <swiper-slide>
+
+                                    </swiper-slide>
+                                </swiper>
                             </div>
 
 

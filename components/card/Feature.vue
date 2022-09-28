@@ -14,18 +14,25 @@
         },
         className : {
             type: String,
+        },
+        link : {
+            type : String
         }
     })
 </script>
 
 <template>
-<div class="card-feature pr-3">
-    <div class="flex flex-col items-center bg-white px-7 py-4 rounded-lg w-full h-full">
-        <img :src="icon" class="h-16 w-16 mb-3" alt="">
-        <p class="text-sm font-poppins font-medium leading-5">{{ title1 }}</p>
-        <p class="text-sm font-poppins font-medium leading-5">{{ title2 }}</p>
+    <div class="card-feature pr-3">
+        <nuxt-link :to="link">
+
+            <div class="flex flex-col items-center bg-white px-7 py-4 rounded-lg w-full h-full">
+                <img :src="icon" class="h-16 w-16 mb-3" alt="">
+                <p class="text-sm font-poppins font-medium leading-5">{{ title1 }}</p>
+                <p class="text-sm font-poppins font-medium leading-5">{{ title2 }}</p>
+            </div>
+
+        </nuxt-link>
     </div>
-        </div>
 </template>
 
 

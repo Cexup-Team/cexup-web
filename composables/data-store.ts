@@ -41,4 +41,8 @@ interface DataStore{
 
     //meet
     joinRoom(json: object): Promise<{success:Boolean,message:string,data:any}>
+
+    //CHA2DS2-VASc and Hasbled Score
+    getChadsvas(): Promise<{success:Boolean,message:string,data:any}>
+    getHaasbledd(): Promise<{success:Boolean,message:string,data:any}>
 }

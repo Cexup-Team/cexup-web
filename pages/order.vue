@@ -9,6 +9,16 @@
     import NavBar from '~~/parts/NavBar.vue';
     import { aesDecrypt } from "~~/utils/crypto";
 
+    import { Swiper, SwiperSlide } from 'swiper/vue';
+    import 'swiper/css';
+
+    const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
+
 
 
 
@@ -53,7 +63,7 @@
                 </template>
                 <template v-slot:tabFilter>
                     <div class="pt-4 pb-5 bg-blue-50 overflow-x-scroll no-scrollbar">
-                        <div class="tab-status flex items-center w-full min-w-max mx-3">
+                        <!-- <div class="tab-status flex items-center w-full min-w-max mx-3">
                             <div class="tab-status-item mr-3 active_tab_filter" status="">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">All</p>
                             </div>
@@ -70,6 +80,36 @@
                             <div class="tab-status-item" status="failed">
                                 <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Canceled</p>
                             </div>
+                        </div> -->
+                        <div class="tab-status">
+                            <swiper
+                                :slides-per-view="3"
+                                :space-between="10"
+                                @swiper="onSwiper"
+                                @slideChange="onSlideChange"
+                            >
+                                <swiper-slide class="tab-status-item ml-4  border border-gray-250 rounded-2xl cursor-pointer text-center active_tab_filter" status="">
+                                    <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">All</p>
+                                </swiper-slide>
+                                <swiper-slide class="tab-status-item  border border-gray-250 rounded-2xl cursor-pointer text-center " status="pending">
+                                    <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Waiting Payment</p>
+                                </swiper-slide>
+                                <swiper-slide class="tab-status-item  border border-gray-250 rounded-2xl cursor-pointer text-center " status="booked">
+                                    <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Processed</p>
+                                </swiper-slide>
+                                <swiper-slide class="tab-status-item  border border-gray-250 rounded-2xl cursor-pointer text-center " status="finish">
+                                    <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Completed</p>
+                                </swiper-slide>
+                                <swiper-slide class="tab-status-item  border border-gray-250 rounded-2xl cursor-pointer text-center " status="failed">
+                                    <p class="px-4 py-2 font-poppins transition-all duration-200 pointer-events-none cursor-pointer ease-in-out font-medium text-sm">Order Canceled</p>
+                                </swiper-slide>
+
+                                <swiper-slide>
+                                    
+                                </swiper-slide>
+               
+                              
+                            </swiper>
                         </div>
                     </div>
                 </template>

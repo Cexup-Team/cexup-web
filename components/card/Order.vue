@@ -7,8 +7,6 @@
             type: Object
         }
     })  
-
-
 </script>
 <template>
     <div> 
@@ -31,7 +29,7 @@
                 </div>
                 <div class="card-order-body mt-0.5 bg-white px-4 py-3">
                     <div class="flex items-center">
-                        <img src="../../assets/images/doctor_img.png" class="w-14 h-14 rounded-full object-cover mr-3" alt="">
+                        <img :src="order.doctor_account.thumb" class="w-14 h-14 rounded-full object-cover mr-3" alt="">
                         <div>
                             <h2 class="font-poppins font-semibold text-base">{{order.doctor_account.name}}</h2>
                             <p class="text-xs font-poppins font-normal">{{ order.type === 'call' ? 'Online Consultation' : 'Clinic Reservation' }}</p>

@@ -318,6 +318,29 @@ export class DataStoreImpl implements DataStore{
          }
     }
 
+    //CHA2DS2-VASc and Hasbled Score 
+    async getChadsvas(): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, 'chadsvas', `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
+    async getHaasbledd(): Promise<{ success: Boolean; message: string; data: any }> {
+        const token = useSession().getItem("cexup-token")
+        const {success,message,data} = await this.api.get(`${import.meta.env.VITE_APP_BASE_URL}`, 'haasbledd', `${import.meta.env.VITE_APP_API_KEY}`, token)
+
+        return {
+            success:success,
+            message:message,
+            data:data
+        }
+    }
+
     
 
 
