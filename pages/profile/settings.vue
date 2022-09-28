@@ -15,7 +15,7 @@
 
     const changeSelect = (value) => {
         // state.gender = value
-        console.log(value)
+        
     }
 
     const slcValue = (value) => {

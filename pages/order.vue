@@ -13,10 +13,10 @@
     import 'swiper/css';
 
     const onSwiper = (swiper) => {
-        console.log(swiper);
+       
       };
       const onSlideChange = () => {
-        console.log('slide change');
+        
       };
 
 

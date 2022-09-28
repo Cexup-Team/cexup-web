@@ -2,6 +2,8 @@
 
     import {formatDate} from '../../utils/getFormatDate'
     import {getStatus} from '../../utils/statusOrder'
+    import { idrFormat } from "~~/utils/currencyFormat";
+
     const props = defineProps({
         order : {
             type: Object
@@ -38,7 +40,7 @@
 
                     <div class="flex flex-col">
                         <h3 class="text-xs font-poppins text-gray-350 mt-4">Order Date: {{formatDate(order.date)}}</h3>
-                        <h4 class="text-sm font-poppins font-medium mt-1">Total Tagihan: <span class="text-primary-color">Rp. {{order.price}}</span></h4>
+                        <h4 class="text-sm font-poppins font-medium mt-1">Total Tagihan: <span class="text-primary-color">{{idrFormat(order.price.toString(), "Rp. ")}}</span></h4>
                         <button class="mt-3 w-full border border-primary-color py-2 rounded-xl text-sm font-medium font-poppins text-primary-color">{{getStatus(props.order.status)}}</button>
                     </div>
                 </div>

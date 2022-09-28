@@ -14,10 +14,10 @@
     import 'swiper/css';
 
     const onSwiper = (swiper) => {
-        console.log(swiper);
+   
       };
       const onSlideChange = () => {
-        console.log('slide change');
+
       };
 
 
@@ -29,7 +29,6 @@
 
     onMounted(async () => {
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
-        console.log(user)
         session.delItem('cexup-checkout')
         session.delItem('cexup-quiz')
         dashboard.state.name = user.name
@@ -200,7 +199,7 @@
                                     @slideChange="onSlideChange"
                                 >
                                     <swiper-slide v-for="(item, index) in dashboard.stateArticle.isData" :key="index" class="ml-4 pb-6 pt-5">
-                                        <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                                        <CardArticle :img="item.thumb" :title="item.category" :subTitle="item.title" :slug="item.slug" :date="item.created_at" :author="item.author" />                         
                                     </swiper-slide>  
                                     <swiper-slide>
 

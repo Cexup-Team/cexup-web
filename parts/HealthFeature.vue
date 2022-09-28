@@ -4,10 +4,10 @@
     import 'swiper/css';
 
     const onSwiper = (swiper) => {
-        console.log(swiper);
+   
       };
       const onSlideChange = () => {
-        console.log('slide change');
+       
       };
 </script>
 <template>
@@ -42,10 +42,10 @@
                 <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Tele" title2="Monitoring" link="/telemonitoring" />
             </swiper-slide>
             <swiper-slide>
-                <CardFeature icon="../../assets/images/feature_meet.svg" title1="Clinic" title2="Reservation" />
+                <CardFeature icon="../../assets/images/feature_meet.svg" title1="Clinic" title2="Reservation" link="/reservation" />
             </swiper-slide>
             <swiper-slide>
-                <CardFeature icon="../../assets/images/feature_tracker.svg" title1="Health" title2="Tracker" />
+                <CardFeature icon="../../assets/images/feature_tracker.svg" title1="Health" title2="Tracker" link="/health" />
             </swiper-slide>
             <swiper-slide class="">
                 <CardFeature icon="../../assets/images/feature_record.svg" title1="Medical" title2="Record" link="/profile/medical" />

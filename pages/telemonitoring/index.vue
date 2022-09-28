@@ -29,10 +29,10 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-5 px-6 mt-4">
-                        <CardTelemonitoring title="Kids Tracker" icon="../../assets/images/stetoskop.svg" />
+                        <CardTelemonitoring title="Kids Tracker" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/kids" />
                         <CardTelemonitoring title="Obgyn" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/obgyn" />
                         <CardTelemonitoring title="Cardiac Tracker" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/cardiac" />
-                        <CardTelemonitoring title="Covid-19" icon="../../assets/images/stetoskop.svg" />
+                        <CardTelemonitoring title="Covid-19" icon="../../assets/images/stetoskop.svg" link="/telemonitoring/covid" />
                  
                     </div>
 
