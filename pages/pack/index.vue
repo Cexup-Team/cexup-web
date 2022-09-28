@@ -10,7 +10,7 @@ import NavBar from '~~/parts/NavBar.vue';
             <div class="pack-wrapper h-full relative w-full">
                 <BottomNav active="/pack" />
                 <NavBar title="Package" link="/" />
-                <Tabs bgBody="bg-white">
+                <!-- <Tabs bgBody="bg-white">
                     <template v-slot:tabHeader>
                         <div class="active font-poppins text-center font-semibold cursor-pointer outline-none text-sm leading-5">
                             Explore
@@ -55,7 +55,10 @@ import NavBar from '~~/parts/NavBar.vue';
                         </div>
                 
                     </template>
-                </Tabs>
+                </Tabs> -->
+                <div class="h-screen w-full flex justify-center items-center">
+                    <h1 class="font-poppins font-semibold text-2xl">Coming Soon</h1>
+                </div>
             </div>
         </nuxt-layout>
     </div>

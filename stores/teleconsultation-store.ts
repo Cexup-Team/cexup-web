@@ -55,8 +55,6 @@ export const useTeleconsultationStore = defineStore('TeleconsultationStore',{
                 this.stateSpeciality.isData.forEach(el => {
                     this.stateSpeciality.isSelect.push(el.name)
                 });
-                
-                console.log(this.stateSpeciality.isSelect)
                 this.stateSpeciality.isLoading = false
                 this.stateSpeciality.isStatus = "success"
                 return {

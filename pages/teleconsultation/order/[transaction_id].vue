@@ -92,8 +92,7 @@ import NavBar from "~~/parts/NavBar.vue";
     const actionStatus = async (status) => {
         if(status === 'waiting_payment') return window.open(order.stateShow.isData.payment_url, '_blank') 
         if(status === 'reschedule_from_doctor') return  modalRe.value = !modalRe.value
-        if(status === 'on_air') return router.push('/meet')
-        if(status === 'join_now') {
+        if(status === 'join_now' || status === 'on_air') {
             order.joinRoom({'transaction_id' : order.stateShow.isData.transaction_id, 'type': 'patient'})
                 .then(async res => {
                     const user = await JSON.parse(aesDecrypt(session.getItem('cexup-user')))

@@ -1,8 +1,14 @@
 
-<script>
-export default {
+<script setup lang="ts">
+    import { Swiper, SwiperSlide } from 'swiper/vue';
+    import 'swiper/css';
 
-}
+    const onSwiper = (swiper) => {
+   
+      };
+      const onSlideChange = () => {
+       
+      };
 </script>
 <template>
   <div class="feature mt-6">
@@ -13,19 +19,43 @@ export default {
                 <img src="../assets/images/arrow_right.svg" alt="">
             </div>
         </div>
-            <div class="feature-list no-scrollbar overflow-x-auto whitespace-nowrap w-full">
+            <!-- <div class="feature-list no-scrollbar overflow-x-auto whitespace-nowrap w-full">
                 <div class="slide-feature flex ml-4 w-full">
-
-                    <CardFeature icon="../../assets/images/feature_call.svg" title1="Call" title2="Doctor" />
-
-                    <CardFeature icon="../../assets/images/feature_meet.svg" title1="Meet" title2="Doctor" />
-
+                    <CardFeature icon="../../assets/images/feature_call.svg" title1="Tele" title2="Consultation" link="/teleconsultation" />
+                    <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Tele" title2="Monitoring" link="/telemonitoring" />
+                    <CardFeature icon="../../assets/images/feature_meet.svg" title1="Clinic" title2="Reservation" />
                     <CardFeature icon="../../assets/images/feature_tracker.svg" title1="Health" title2="Tracker" />
+                    <CardFeature icon="../../assets/images/feature_record.svg" title1="Medical" title2="Record" link="/profile/medical" />
+                </div>
+            </div> -->
 
-                    <CardFeature icon="../../assets/images/feature_record.svg" title1="Medical" title2="Record" />
-                    <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Health" title2="Monitor" />
-            </div>
-        </div>
+        <swiper
+            :slides-per-view="4"
+            :space-between="90"
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
+        >
+            <swiper-slide class="ml-4">
+                <CardFeature icon="../../assets/images/feature_call.svg" title1="Tele" title2="Consultation" link="/teleconsultation" />
+            </swiper-slide>
+            <swiper-slide class="">
+                <CardFeature icon="../../assets/images/feature_monitor.svg" title1="Tele" title2="Monitoring" link="/telemonitoring" />
+            </swiper-slide>
+            <swiper-slide>
+                <CardFeature icon="../../assets/images/feature_meet.svg" title1="Clinic" title2="Reservation" link="/reservation" />
+            </swiper-slide>
+            <swiper-slide>
+                <CardFeature icon="../../assets/images/feature_tracker.svg" title1="Health" title2="Tracker" link="/health" />
+            </swiper-slide>
+            <swiper-slide class="">
+                <CardFeature icon="../../assets/images/feature_record.svg" title1="Medical" title2="Record" link="/profile/medical" />
+            </swiper-slide>  
+            
+            <swiper-slide class="">
+                <div class=""></div>
+            </swiper-slide>  
+            
+            </swiper>
     </div>
 </template>
 

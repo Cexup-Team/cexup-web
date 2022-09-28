@@ -16,6 +16,7 @@ import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
     const router = useRouter()
     const session = useSession()  
     const medical = useMedicalStore()
+    const backstack = history.state.back
 
     onMounted(async () => {
         const user = await JSON.parse(aesDecrypt(session.getItem("cexup-user")))
@@ -30,7 +31,7 @@ import HealthMedicalFeature from "../../../parts/HealthMedicalFeature.vue";
     <div>
         <nuxt-layout name="main">
             <div class="medical-record-wrapper">
-                <NavBar title="Medical Record" link="/profile" />
+                <NavBar title="Medical Record" :link="backstack" />
                 
                 <!-- Health Status -->
                 <div class="pt-24">

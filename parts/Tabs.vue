@@ -127,16 +127,17 @@
         margin-top: 0px;
     }
 
-    .tab-status > div:not(.active_tab_filter) {
+    /* .tab-status > div:not(.active_tab_filter) {
         color: #8A8A8E;
         border: 1px solid #8A8A8E;
         border-radius: 16px;
         
-    }
+    } */
 
-    .tab-status > .active_tab_filter p {
+    .tab-status .active_tab_filter p {
         background-color: #008CA3;
         border-radius: 16px;
         color: white;
+        border: 0px solid #008CA3;
     }
 </style>

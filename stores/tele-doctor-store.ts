@@ -64,7 +64,6 @@ export const useTeleDoctorStore = defineStore('TeleDoctorStore',{
                     this.stateSpeciality.isSelect.push(el.name)
                 });
                 
-                console.log(this.stateSpeciality.isSelect)
                 this.stateSpeciality.isLoading = false
                 this.stateSpeciality.isStatus = "success"
                 return {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { idrFormat } from "~~/utils/currencyFormat";
     defineProps({
         name: {
             type: String
@@ -28,7 +29,7 @@
                 <div class="bg-teal-550 h-3 w-3 rounded-full mr-2"></div>
                 <h5 class="text-teal-550 font-poppins font-medium text-xs">{{online ? 'Online' : 'Offline'}}</h5>
             </div>
-            <h3 class="text-primary-color font-poppins font-semibold text-sm mt-4">Rp {{price}}</h3>
+            <h3 class="text-primary-color font-poppins font-semibold text-sm mt-4">{{idrFormat(price.toString(), "Rp. ")}}</h3>
         </div>
         <div class="flex flex-col items-center">
             <div class="w-20 h-20 rounded-full overflow-hidden">

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+     import { idrFormat } from "~~/utils/currencyFormat";
     defineProps({
         name: {
             type: String
@@ -56,7 +57,7 @@
                         </div>
                         <div class="flex flex-col">
                             <span class="text-gray-350 font-poppins font-semibold text-xs discount relative" v-if="priceDiscount">Rp. {{priceDiscount}}</span>
-                            <span class="text-primary-color font-semibold text-sm font-poppins">Rp. {{price}}</span>
+                            <span class="text-primary-color font-semibold text-sm font-poppins">{{idrFormat(price.toString(), "Rp. ")}}</span>
                         </div>
                         </div>
                 </div>

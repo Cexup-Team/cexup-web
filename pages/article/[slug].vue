@@ -28,7 +28,7 @@
                 <div class="px-4 mt-7">
                     <h2 class="text-primary-color text-xl font-semibold font-poppins">{{article.state.isData.title}}</h2>
                     <div class="font-poppins font-medium text-sm mt-4" v-html="article.state.isData.content"></div>
-                    <h4 class="text-gray-350 font-poppins font-medium mt-4 w-full text-right">20 sep 2022</h4>
+                    <h4 class="text-gray-350 font-poppins font-medium mt-4 w-full text-right">{{article.state.isData.created_at}}</h4>
                 </div>
                 <div class="pt-10"></div>
             </div>

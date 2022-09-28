@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { Ref } from "vue"
+  import NavBar from '~~/parts/NavBar.vue';
   let openPlus: Ref<boolean> = ref(false)
 
   const actionOpen = () => {
@@ -10,7 +11,7 @@
 
 <template>
   <div>
-     <nuxt-layout name="main">
+     <!-- <nuxt-layout name="main">
         <div class="obgyn-wrapper">
           <div class="relative">
               <div class="bg-blue-50 w-full">
@@ -177,7 +178,22 @@
 
 
         </div>
-     </nuxt-layout>
+     </nuxt-layout> -->
+
+
+     <nuxt-layout name="main">
+          <div class="medical-record-wrapper">
+              <NavBar title="Obgyn" link="/telemonitoring" />
+              
+              <!-- Health Status -->
+              <div class="pt-20">
+                  
+                  <div class="w-full h-screen flex justify-center items-center">
+                      <h1 class="font-poppins font-semibold text-2xl text-center">Coming Soon</h1>
+                  </div>
+              </div>
+          </div>
+      </nuxt-layout>
   </div>
 </template>
 

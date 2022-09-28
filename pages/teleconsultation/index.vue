@@ -74,6 +74,7 @@ import NavBar from "~~/parts/NavBar.vue";
         if (teleconsultation.stateSpeciality.isSelect.length === 0) {
             getListSpeciality()
         }
+        teleconsultation.stateTele.speciality = ""
     })
 
     listMap.set('speciality', teleconsultation.stateSpeciality.isSelect)
