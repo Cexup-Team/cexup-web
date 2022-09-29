@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-    import {formatDate} from '../../utils/getFormatDate'
-    import {getStatus} from '../../utils/statusOrder'
+    import {formatDate} from '~/utils/getFormatDate'
+    import {getStatus} from '~/utils/statusOrder'
     import { idrFormat } from "~~/utils/currencyFormat";
 
     const props = defineProps({
@@ -18,7 +18,7 @@
                     <div class="flex items-center justify-between"> 
                         <div class="w-full">
                             <div class="flex items-center">
-                                <img src="../../assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
+                                <img src="~/assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
                                 <p class="text-primary-color font-medium text-xs font-poppins">{{ order.type === 'call' ? 'Online Consultation' : 'Clinic Reservation' }}</p>
                             </div>
                             <h4 class="text-primary-color font-poppins text-sm font-medium mt-2">{{order.transaction_id}}</h4>

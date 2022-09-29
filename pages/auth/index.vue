@@ -23,7 +23,7 @@ watch(() => user.stateLogin.email, (newEmail) => {
 <div>
     <nuxt-layout name="auth">
         <div class="mt-9 p-4">
-            <img src="../../assets/images/icon_back.svg" alt="" class="w-2 h-4">
+            <img src="~/assets/images/icon_back.svg" alt="" class="w-2 h-4">
             <h2 class="text-3xl text-primary-color font-bold mt-9 w-full text-center font-poppins">Sign In</h2>
             <h5 class="text-sm font-medium w-full text-gray-350 text-center mt-6 font-poppins">Don’t have an account? <nuxt-link :to="'/auth/register'"><span class="text-primary-color">Sign up now!</span></nuxt-link></h5>
             
@@ -32,7 +32,7 @@ watch(() => user.stateLogin.email, (newEmail) => {
                 <h3 v-if="user.stateLogin.isErrorMessage.email" class="text-red-550 font-poppins" style="font-size: 10px; margin-top: 2px;"> {{user.stateLogin.isErrorMessage.email}} </h3>
             </div>
             <div class="inputForm mt-7">
-                <InputText :className="'rounded-md '+(user.stateLogin.isErrorMessage.password ? ' border-red-550' : ' border-gray-150')" v-model="user.stateLogin.password" type="password" placeholder="Password" src="../../assets/images/eye.svg" src_eye="../../assets/images/eye_open.svg" :icon="true" />
+                <InputText :className="'rounded-md '+(user.stateLogin.isErrorMessage.password ? ' border-red-550' : ' border-gray-150')" v-model="user.stateLogin.password" type="password" placeholder="Password" src="~/assets/images/eye.svg" src_eye="~/assets/images/eye_open.svg" :icon="true" />
                 <h3 v-if="user.stateLogin.isErrorMessage.password" class="text-red-550 font-poppins" style="font-size: 10px; margin-top: 2px;"> {{user.stateLogin.isErrorMessage.password }} </h3>
             </div>
             <div class="mt-7 flex justify-between items-center">

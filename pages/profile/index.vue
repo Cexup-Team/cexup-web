@@ -12,7 +12,7 @@ import NavBar from '~~/parts/NavBar.vue';
                 <section class="profile-header mt-20">
                     <div class="flex px-5 items-center">
                         <div class="w-20 h-20 rounded-full overflow-hidden mr-4">
-                            <img src="../../assets/images/profile_header.png" class="object-cover" alt="">
+                            <img src="~/assets/images/profile_header.png" class="object-cover" alt="">
                         </div>
                         <div class="flex flex-col">
                             <h2 class="text-lg font-semibold font-poppins leading-7">Iqbal Nur Tmvn</h2>
@@ -46,7 +46,7 @@ import NavBar from '~~/parts/NavBar.vue';
                         <div class="history-card mt-4">
                             <div class="history-card-body bg-white rounded-xl">
                                 <div class="flex items-start pt-5 px-6">
-                                    <img src="../../assets/images/activity_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="~/assets/images/activity_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4 mb-5">
                                         <h2 class="font-poppins font-semibold text-sm">Activity</h2>
                                         <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
@@ -54,7 +54,7 @@ import NavBar from '~~/parts/NavBar.vue';
                                 </div>
                                 <hr class="w-full h-0.5 bg-gray-175">
                                 <nuxt-link class="flex items-start pb-5 pt-5 px-6" to="/profile/medical">
-                                    <img src="../../assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="~/assets/images/medical_record_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4">
                                         <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
                                         <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>
@@ -66,7 +66,7 @@ import NavBar from '~~/parts/NavBar.vue';
                         <div class="history-card mt-4 mb-20">
                             <div class="history-card-body bg-white rounded-xl">
                                 <div class="flex items-start pt-5 px-6">
-                                    <img src="../../assets/images/help_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="~/assets/images/help_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4 mb-5">
                                         <h2 class="font-poppins font-semibold text-sm">Activity</h2>
                                         <p class="mt-2 font-poppins text-xs">Check history on Cexup to call doctor, meet doctor and reservation for medical treatment.</p>
@@ -74,7 +74,7 @@ import NavBar from '~~/parts/NavBar.vue';
                                 </div>
                                 <hr class="w-full h-0.5 bg-gray-175">
                                 <div class="flex items-start pb-5 pt-5 px-6">
-                                    <img src="../../assets/images/about_icon_profile.svg" class="w-8 h-w-8" alt="">
+                                    <img src="~/assets/images/about_icon_profile.svg" class="w-8 h-w-8" alt="">
                                     <div class="ml-4">
                                         <h2 class="font-poppins font-semibold text-sm">Medical Record</h2>
                                         <p class="mt-2 font-poppins text-xs">Read the notes on the consultation with the doctor for your health condition.</p>

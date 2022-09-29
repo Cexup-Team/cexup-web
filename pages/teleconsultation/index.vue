@@ -143,12 +143,12 @@ import NavBar from "~~/parts/NavBar.vue";
                             </div>
                             <div class="relative h-16 max-h-16 min-h-max mb-2" v-if="teleconsultation.stateTele.searchIcon.indexOf(teleconsultation.stateTele.selectActive) > -1">
                                 <input class="search_input outline-none border border-gray-150 w-full bg-none p-3 font-poppins text-sm absolute top-0 left-0" placeholder="Search" type="text">
-                                <img src="../../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
+                                <img src="~/assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                             </div>
                             <ul class="w-full h-full overflow-y-scroll mt-2 no-scrollbar">
                                 <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in teleconsultation.stateTele.item" :key="index">
                                     <p :class="'text-base leading-6 font-poppins '+(teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
-                                    <img v-if="teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                    <img v-if="teleconsultation.stateTele[`${teleconsultation.stateTele.selectActive}`] === text" src="~/assets/images/check_with_bg.svg" class="m-1" alt="" />
                                 </li>
                             </ul>
                         </div>

@@ -40,7 +40,7 @@
                 <div class="w-4/6">
                     <div class="flex justify-between items-center">
                         <h3 class="text-base font-poppins font-medium leading-6 line-clamp-1">{{name}}</h3>
-                        <img src="../../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
+                        <img src="~/assets/images/icon_pin.svg" class="w-4 h-5" alt="">
                     </div>
                         <h5 class="mt-1 font-poppins text-primary-color text-xs line-clamp-1">{{speciality}}</h5>
                         <h6 class="mt-3 font-poppins text-3">{{rs}}</h6>
@@ -51,7 +51,7 @@
                                 <h5 class="text-teal-550 font-poppins font-medium text-xs">{{online ? 'Online' : 'Offline'}}</h5>
                             </div>
                             <div class="flex mt-2 items-center justify-start">
-                                <img src="../../../assets/images/bag_icon.svg" class="mr-1" alt="">
+                                <img src="~/assets/images/bag_icon.svg" class="mr-1" alt="">
                                 <h5 class="text-gray-350 font-poppins font-medium text-xs">{{year}} Years</h5>
                             </div>
                         </div>

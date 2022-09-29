@@ -4,7 +4,7 @@ import { useToast, useModal } from 'tailvue'
 import { aesDecrypt, aesEncrypt } from "~~/utils/crypto";
 
 
-const $toast = useToast()
+// const $toast = useToast()
 
 
 export const useUserStore = defineStore('userStore',{
@@ -96,11 +96,11 @@ export const useUserStore = defineStore('userStore',{
                 }
             }else{
                 
-                $toast.show({
-                    type: 'danger',
-                    message: message,
-                    timeout: 4,
-                })
+                // $toast.show({
+                //     type: 'danger',
+                //     message: message,
+                //     timeout: 4,
+                // })
 
                 this.stateLogin.isLoading = false
 

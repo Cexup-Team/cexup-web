@@ -185,7 +185,7 @@ import { aesDecrypt } from "~~/utils/crypto";
                     </div>
                     <h2 class="font-poppins font-semibold text-base mt-6 mb-4">Questionnaire</h2>
                     <div class="flex justify-start items-center" @click="slcValue">
-                        <img src="../.././../assets/images/kuis_icon.svg" class="w-7 h-7 mr-3" alt="">
+                        <img src="~/assets/images/kuis_icon.svg" class="w-7 h-7 mr-3" alt="">
                         <h6 class="font-poppins font-medium text-sm">Please fill it out</h6>
                     </div>
                 </section>

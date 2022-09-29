@@ -207,7 +207,7 @@ import NavBar from "~~/parts/NavBar.vue";
                                     <h5 class="font-poppins text-xs text-gray-350 mt-2">{{order.stateShow.isData.hospital}}</h5>
 
                                     <div class="flex items-center mt-1">
-                                        <img src="../../../assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
+                                        <img src="~/assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
                                         <span class="text-xs font-poppins">5 Years</span>
                                     </div>
                                     <p class="font-poppins text-xs mt-3">{{getDateFormatBooking(order.stateShow.isData.date)}}</p>
@@ -219,18 +219,18 @@ import NavBar from "~~/parts/NavBar.vue";
                     <section>
                         <h2 class="font-poppins font-semibold text-sm mt-5">Order Information</h2>
                         <div class="flex items-center mt-4 w-full">
-                            <img src="../../../assets/images/transaction_id_icon.svg" class="w-9 h-9 mr-3" alt="">
+                            <img src="~/assets/images/transaction_id_icon.svg" class="w-9 h-9 mr-3" alt="">
                             <div class="flex flex-col w-full">
                                 <h4 class="font-poppins text-xs text-gray-350">Order ID</h4>
                                 <div class="flex justify-between items-center">
                                     <h5 class="font-poppins text-sm font-medium text-primary-color mt-1">{{order.stateShow.isData.transaction_id}}</h5>
-                                    <img src="../../../assets/images/copy_icon.svg" class="w-3 h-4 mr-4" alt="">
+                                    <img src="~/assets/images/copy_icon.svg" class="w-3 h-4 mr-4" alt="">
                                 </div>
                             </div>
                         </div>
 
                         <div class="flex items-center mt-3 w-full">
-                            <img src="../../../assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
+                            <img src="~/assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
                             <div class="flex flex-col w-full">
                                 <h4 class="font-poppins text-xs text-gray-350">Status Order</h4>
                                 <h5 class="font-poppins text-sm font-medium text-primary-color mt-1">{{getStatus(order.stateShow.isData.status)}}</h5>
@@ -238,7 +238,7 @@ import NavBar from "~~/parts/NavBar.vue";
                         </div>
 
                         <div class="flex items-center mt-3 w-full">
-                            <img src="../../../assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
+                            <img src="~/assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
                             <div class="flex flex-col w-full">
                                 <h4 class="font-poppins text-xs text-gray-350">Due Date</h4>
                                 <h5 class="font-poppins text-sm font-medium text-primary-color mt-1">{{getDateFormatBooking(order.stateShow.isData.date, order.stateShow.isData.estimate)}}</h5>

@@ -8,7 +8,7 @@
                 <div class="flex items-center justify-between"> 
                     <div class="w-8/12">
                         <div class="flex items-center">
-                            <img src="../../../assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
+                            <img src="~/assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
                             <p class="leading-relaxed w-4/12 h-2 animate-pulse bg-primary-color"></p>
                         </div>
                         <p class="leading-relaxed w-8/12 h-4 mt-2 animate-pulse bg-primary-color"></p>

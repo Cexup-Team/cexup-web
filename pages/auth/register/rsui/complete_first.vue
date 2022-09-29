@@ -206,7 +206,7 @@ watch(() => state.identity_number, (newNumber) => {
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Gender" v-model="state.gender"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="gender" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="gender" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">
@@ -218,7 +218,7 @@ watch(() => state.identity_number, (newNumber) => {
                         placeholder="Place Of Birth" />
                 </div>
                 <div class="inputForm mt-7">
-                    <!-- <InputText className="rounded-md" type="text" placeholder="Date of Birth" src="../../assets/images/calendar.svg" :icon="true" slc @update:slc-value="slcValue" select="date" /> -->
+                    <!-- <InputText className="rounded-md" type="text" placeholder="Date of Birth" src="~/assets/images/calendar.svg" :icon="true" slc @update:slc-value="slcValue" select="date" /> -->
                     <Datepicker :input-class-name="'h-14'" v-model="state.date" :enable-time-picker="false"
                         :placeholder="'Date of Birth'" />
                 </div>
@@ -231,7 +231,7 @@ watch(() => state.identity_number, (newNumber) => {
 
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Identity Type" v-model="state.identity"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="identity" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="identity" slc
                         @update:slc-value="slcValue" />
                 </div>
 
@@ -255,7 +255,7 @@ watch(() => state.identity_number, (newNumber) => {
                                 <input
                                     class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0"
                                     placeholder="Search" type="text">
-                                <img src="../../../assets/images/search_icon.svg"
+                                <img src="~/assets/images/search_icon.svg"
                                     class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                             </div>
                             <ul class="w-full h-full overflow-y-scroll mt-6 no-scrollbar">
@@ -265,7 +265,7 @@ watch(() => state.identity_number, (newNumber) => {
                                         :class="'text-base leading-6 font-poppins '+(state[`${state.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">
                                         {{text}}</p>
                                     <img v-if="state[`${state.selectActive}`] === text"
-                                        src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                        src="~/assets/images/check_with_bg.svg" class="m-1" alt="" />
                                 </li>
                             </ul>
                         </div>

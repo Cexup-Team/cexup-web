@@ -33,7 +33,7 @@
         </div>
         <div class="flex flex-col items-center">
             <div class="w-20 h-20 rounded-full overflow-hidden">
-                <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
+                <img src="~/assets/images/doctor_img.png" class="object-cover" alt="">
             </div>
                 <div class="mt-2">
                     <button class="outline-none bg-primary-color py-1 px-6 text-white font-poppins font-medium rounded-lg text-sm whitespace-pre">Start Call</button>

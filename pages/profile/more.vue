@@ -10,7 +10,7 @@ import NavBar from '~~/parts/NavBar.vue';
                 <!-- <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="../~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">More</h1>
                         <div></div>
                     </div>
@@ -20,9 +20,9 @@ import NavBar from '~~/parts/NavBar.vue';
                 <section class="history-profile px-4 pt-24 relative bg-blue-50 h-screen">
                     <div>
                         <div class="bg-white rounded-lg px-4 w-full">
-                           <MoreProfile link="/profile/settings" img="../assets/images/icon_setting.svg" title="Account Settings" alt="img account" />
+                           <MoreProfile link="/profile/settings" img="~/assets/images/icon_setting.svg" title="Account Settings" alt="img account" />
                             <hr>
-                            <MoreProfile img="../assets/images/icon_give_rating.svg" title="Give Rating" alt="img give rating" />
+                            <MoreProfile img="~/assets/images/icon_give_rating.svg" title="Give Rating" alt="img give rating" />
                         </div>
                     </div>              
                 </section>

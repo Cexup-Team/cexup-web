@@ -39,7 +39,7 @@
     
             <div class="flex justify-between w-full items-center mt-5">
                 <h4 class="text-xs font-poppins text-gray-400">{{date}} | {{author}}</h4>
-                <img src="../../assets/images/more_icon.svg" class="w-6 h-6" alt="">
+                <img src="~/assets/images/more_icon.svg" class="w-6 h-6" alt="">
             </div>
 
         </nuxt-link>

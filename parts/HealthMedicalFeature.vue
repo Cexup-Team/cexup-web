@@ -38,25 +38,25 @@
             @slideChange="onSlideChange"
         >
             <swiper-slide class="ml-4">
-                <CardMedicalFeature icon="../../assets/images/feature_call.svg"  title="Rontgen" :link="role === 'doctor' ? '/doctor/rontgen?tk='+tk+'&role=doctor' : '/profile/medical/rontgen'" />
+                <CardMedicalFeature icon="~/assets/images/feature_call.svg"  title="Rontgen" :link="role === 'doctor' ? '/doctor/rontgen?tk='+tk+'&role=doctor' : '/profile/medical/rontgen'" />
             </swiper-slide>
             <swiper-slide>
-                <CardMedicalFeature icon="../../assets/images/feature_meet.svg"  title="Labtest" :link="role === 'doctor' ? '/doctor/labtest?tk='+tk+'&role=doctor' : '/profile/medical/labtest'" />
+                <CardMedicalFeature icon="~/assets/images/feature_meet.svg"  title="Labtest" :link="role === 'doctor' ? '/doctor/labtest?tk='+tk+'&role=doctor' : '/profile/medical/labtest'" />
             </swiper-slide>
             <swiper-slide>
-                <CardMedicalFeature icon="../../assets/images/feature_tracker.svg"  title="Medicine" :link="role === 'doctor' ? '/doctor/medicine?tk='+tk+'&role=doctor' : '/profile/medical/medicine'" />
+                <CardMedicalFeature icon="~/assets/images/feature_tracker.svg"  title="Medicine" :link="role === 'doctor' ? '/doctor/medicine?tk='+tk+'&role=doctor' : '/profile/medical/medicine'" />
             </swiper-slide>
             <swiper-slide>
-                <CardMedicalFeature icon="../../assets/images/feature_record.svg"  title="Note" :link="role === 'doctor' ? '/doctor/note?tk='+tk+'&role=doctor' : '/profile/medical/note'" />
+                <CardMedicalFeature icon="~/assets/images/feature_record.svg"  title="Note" :link="role === 'doctor' ? '/doctor/note?tk='+tk+'&role=doctor' : '/profile/medical/note'" />
             </swiper-slide>
             <swiper-slide>
-                <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="ECG" :link="role === 'doctor' ? '/doctor/ecg?tk='+tk+'&role=doctor' : '/profile/medical/ecg'" />
+                <CardMedicalFeature icon="~/assets/images/feature_monitor.svg"  title="ECG" :link="role === 'doctor' ? '/doctor/ecg?tk='+tk+'&role=doctor' : '/profile/medical/ecg'" />
             </swiper-slide>  
             <swiper-slide> 
-                <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="USG" :link="role === 'doctor' ? '/doctor/usg?tk='+tk+'&role=doctor' : '/profile/medical/usg'" />
+                <CardMedicalFeature icon="~/assets/images/feature_monitor.svg"  title="USG" :link="role === 'doctor' ? '/doctor/usg?tk='+tk+'&role=doctor' : '/profile/medical/usg'" />
             </swiper-slide>
             <swiper-slide>
-                <CardMedicalFeature icon="../../assets/images/feature_monitor.svg"  title="SOAP" :link="role === 'doctor' ? '/doctor/soap?tk='+tk+'&role=doctor' : '/profile/medical/soap'" />
+                <CardMedicalFeature icon="~/assets/images/feature_monitor.svg"  title="SOAP" :link="role === 'doctor' ? '/doctor/soap?tk='+tk+'&role=doctor' : '/profile/medical/soap'" />
             </swiper-slide>
             <swiper-slide></swiper-slide>
   </swiper>

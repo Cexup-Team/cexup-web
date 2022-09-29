@@ -9,7 +9,7 @@
             <div class="w-4/6">
                 <div class="flex justify-between items-center">
                     <p class="leading-relaxed w-3/4 h-3 animate-pulse bg-gray-400"></p>
-                    <img src="../../../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
+                    <img src="~/assets/images/icon_pin.svg" class="w-4 h-5" alt="">
                 </div>
                     <p class="leading-relaxed mt-2 w-6/12 h-3 animate-pulse bg-primary-color"></p>
                      <p class="leading-relaxed w-5/12 h-3 mt-4 animate-pulse bg-gray-400"></p>
@@ -23,7 +23,7 @@
                                 <p class="leading-relaxed w-3/12 h-2 animate-pulse bg-gray-400"></p>
                             </div>
                             <div class="flex mt-2 items-center justify-start">
-                                <img src="../../../../assets/images/bag_icon.svg" class="mr-2" alt="">
+                                <img src="~/assets/images/bag_icon.svg" class="mr-2" alt="">
                                 <p class="leading-relaxed w-5/12 h-2 animate-pulse bg-gray-200"></p>
                             </div>
                         </div>

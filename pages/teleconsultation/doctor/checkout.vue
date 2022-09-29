@@ -153,7 +153,7 @@
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">Checkout</h1>
                         <div></div>
                     </div>
@@ -174,7 +174,7 @@
                                     <h5 class="font-poppins text-xs text-gray-350 mt-2">{{tele.stateCheckout.isData.doctor.hospital}}</h5>
 
                                     <div class="flex items-center mt-1">
-                                        <img src="../../../assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
+                                        <img src="~/assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
                                         <span class="text-xs font-poppins">5 Years</span>
                                     </div>
                                     <p class="font-poppins text-xs mt-3">{{tele.stateCheckout.date}}</p>
@@ -187,7 +187,7 @@
                         <h2 class="font-poppins font-medium text-base mb-4">Detail Patient</h2>
                         <div class="flex justify-between items-center mt-4">
                             <div class="flex justify-start items-center">
-                                <img src="../../../assets/images/user_checkout_icon.svg" class="mr-3" alt="">
+                                <img src="~/assets/images/user_checkout_icon.svg" class="mr-3" alt="">
                                 <h4 class="font-poppins text-sm font-medium">{{tele.stateUser.isData.name}}</h4>
                             </div>
                             <h5 class="font-poppins text-xs">{{`${tele.stateUser.isData.gender === 'laki-laki' ? 'Male' : 'Female'}, ${tele.stateCheckout.birth}`}}</h5>
@@ -197,7 +197,7 @@
                             <!-- <h5 class="text-primary-color font-poppins font-medium text-xs">Change</h5> -->
                         </div>
                         <div class="flex justify-start items-center mt-2">
-                            <img src="../../../assets/images/date_checkout_icon.svg" class="w-9 h-9 mr-4" alt="">
+                            <img src="~/assets/images/date_checkout_icon.svg" class="w-9 h-9 mr-4" alt="">
                             <h6 class="font-poppins font-medium text-sm text-indigo-850">{{tele.stateCheckout.date}}</h6>
                         </div>
                         <div class="flex justify-between items-center mt-5">
@@ -205,7 +205,7 @@
                             <!-- <h5 class="text-primary-color font-poppins font-medium text-xs">Change</h5> -->
                         </div>
                         <div class="flex justify-start items-center mt-2">
-                            <img src="../../../assets/images/pain_checkout_icon.svg" class="w-9 h-9 mr-4" alt="">
+                            <img src="~/assets/images/pain_checkout_icon.svg" class="w-9 h-9 mr-4" alt="">
                             <h4 class="text-indigo-850 font-poppins font-medium text-sm">{{tele.stateCheckout.isData.note}}</h4>
                         </div>
                         <h4 class="font-poppins font-medium text-base mt-5">Voucher</h4>
@@ -216,7 +216,7 @@
                         <div class="select-payment flex justify-between items-center mt-4 p-4 rounded-xl" @click="slcValue">
                             <h5 class="font-poppins font-medium text-sm text-primary-color" v-if="!state.selected">Select your payment method</h5>
                             <h5 class="font-poppins font-medium text-sm text-primary-color" v-if="state.selected">{{state.selected}}</h5>
-                            <img src="../../../assets/images/arrow_right_blue.svg" alt="">
+                            <img src="~/assets/images/arrow_right_blue.svg" alt="">
                         </div> -->
                         <h4 class="font-poppins font-semibold text-base mt-5 text-indigo-850">Payment Detail</h4>
                         <div class="flex justify-between items-center mt-4"> 
@@ -252,14 +252,14 @@
                     <template v-slot:bottomSheet>
                         <div class="">
                             <div class="flex flex-col justify-center w-full items-center">
-                                <img src="../../../assets/images/money_icon.svg" class="w-20 h-20" alt="">
+                                <img src="~/assets/images/money_icon.svg" class="w-20 h-20" alt="">
                                 <h2 class="text-primary-color font-poppins font-semibold text-base mt-6">Select Payment Method</h2>
                                 <p class="text-gray-350 text-center font-poppins mt-3 font-medium text-sm">Choose payment method on your <br> demand</p>
                             </div>
                             <ul class="w-full h-full overflow-y-scroll mt-6">
                                 <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in state.item" :key="index">
                                     <p :class="'text-base leading-6 font-poppins '+(state.selected === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
-                                    <img v-if="state.selected === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                    <img v-if="state.selected === text" src="~/assets/images/check_with_bg.svg" class="m-1" alt="" />
                                 </li>
                             </ul>
                         </div>

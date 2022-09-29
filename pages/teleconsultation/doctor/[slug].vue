@@ -60,7 +60,7 @@
             <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                 
                 <div class="flex justify-between mt-6 mx-6 items-center">
-                    <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                    <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                     <h1 class="font-poppins text-xl font-semibold"></h1>
                     <div></div>
                 </div>
@@ -81,21 +81,21 @@
 
                                 <div class="flex items-center mt-4">
                                     <div class="flex items-center bg-primary-color px-2 py-1 rounded-md mr-3">
-                                        <img src="../../../assets/images/bag_icon_fill.svg" class="w-3 h-3 mr-2" alt="">
+                                        <img src="~/assets/images/bag_icon_fill.svg" class="w-3 h-3 mr-2" alt="">
                                         <span class="text-xs font-light text-white font-poppins">5 Years</span>
                                     </div>
-                                    <img src="../../../assets/images/icon_pin.svg" class="w-4 h-5" alt="">
+                                    <img src="~/assets/images/icon_pin.svg" class="w-4 h-5" alt="">
                                 </div>
                             </div>
                         </div>
                         <p class="font-poppins text-xs text-gray-350 mt-4">Doctor of Medicine or Doctor of University Indonesia from an best accredited school in Indonesia</p>
                         <div class="w-full flex items-center mt-6">
                             <div class="bg-blue-150 w-auto flex items-center px-2 py-2 rounded-lg mr-3">
-                                <img src="../../../assets/images/shield_icon.svg" class="w-3 mr-2" alt="">
+                                <img src="~/assets/images/shield_icon.svg" class="w-3 mr-2" alt="">
                                 <span class="text-xs font-poppins">STR-31.1.1.100.1.20.206361</span>
                             </div>
                             <div class="bg-blue-150 w-auto flex items-center px-2 py-2 rounded-lg">
-                                <img src="../../../assets/images/place_icon_red.svg" class="w-3 mr-2" alt="">
+                                <img src="~/assets/images/place_icon_red.svg" class="w-3 mr-2" alt="">
                                 <span class="text-xs font-poppins whitespace-nowrap">{{tele.state.isData.hospital[0].name}}</span>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                         
                         <div class="px-3 py-2 rounded-md border-dashed border-teal-750 border-2">
                             <div class="flex items-center">
-                                <img src="../../../assets/images/discount_call_icon.svg" class="w-5 mr-2" alt="">
+                                <img src="~/assets/images/discount_call_icon.svg" class="w-5 mr-2" alt="">
                                 <span class="text-teal-750 font-poppins font-medium text-sm">DISKONCALL</span>
                             </div>
                         </div>

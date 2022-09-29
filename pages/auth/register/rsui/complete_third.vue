@@ -368,7 +368,7 @@
                 <!-- current province -->
                 <div class="inputForm mt-7" v-if="!state.same">
                     <InputText className="rounded-md" type="text" placeholder="Current Province" v-model="state.province"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="province" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="province" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">
@@ -378,7 +378,7 @@
                 <!--Current regency-->
                 <div class="inputForm mt-7" v-if="!state.same">
                     <InputText className="rounded-md" type="text" placeholder="Current Regency" v-model="state.regency"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="regency" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="regency" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">
@@ -387,7 +387,7 @@
                 <!--Current district-->
                 <div class="inputForm mt-7" v-if="!state.same">
                     <InputText className="rounded-md" type="text" placeholder="Current District" v-model="state.district"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="district" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="district" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">
@@ -398,7 +398,7 @@
 
                 <div class="inputForm mt-7" v-if="!state.same">
                     <InputText className="rounded-md" type="text" placeholder="Current Village" v-model="state.village"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="village" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="village" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">

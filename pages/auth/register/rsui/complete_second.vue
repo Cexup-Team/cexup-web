@@ -275,27 +275,27 @@ import { stat } from "fs";
                 </h2>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Country" v-model="state.country"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Province" v-model="state.province"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="province" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="province" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Regency" v-model="state.regency"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="regency" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="regency" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="District" v-model="state.district"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="district" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="district" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-7">
                     <InputText className="rounded-md" type="text" placeholder="Village" v-model="state.village"
-                        src="../../assets/images/arrow_down.svg" :icon="true" select="village" slc
+                        src="~/assets/images/arrow_down.svg" :icon="true" select="village" slc
                         @update:slc-value="slcValue" />
                 </div>
                 <div class="inputForm mt-6">

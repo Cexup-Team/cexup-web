@@ -1,0 +1,1 @@
+const p=(a,e)=>{var o=a.replace(/[^,\d]/g,"").toString(),t=o.split(","),i=t[0].length%3,r=t[0].substr(0,i),s=t[0].substr(i).match(/\d{3}/gi);return s&&(r+=(i?".":"")+s.join(".")),r=t[1]!=null?r+","+t[1]:r,e==null?r:r?"Rp. "+r:""};export{p as i};
