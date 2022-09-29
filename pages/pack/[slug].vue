@@ -35,19 +35,19 @@
         <nuxt-layout name="main">
             <div class="pack-detail-wrapper h-full relative w-full">
                 <div class="nav-bar-package flex justify-between mt-7 mx-6 items-center">
-                    <img src="../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                    <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                     <h1 class="font-poppins text-xl font-semibold">Package</h1>
                     <div>
                     </div>
                 </div>
                 <div class="pack-detail-item w-full mt-6 relative" style="height: 240px;">
-                    <img src="../../assets/images/image-package.png" class="object-cover object-top w-full h-full" alt="">
+                    <img src="~/assets/images/image-package.png" class="object-cover object-top w-full h-full" alt="">
                    
                 </div>
                 <div class="mt-24">
                     <div class="w-full flex justify-center items-center">
                         <div class="flex items-center bg-blue-150 py-2 px-4" style="border-radius: 10px;">
-                            <img src="../../assets/images/coupon_icon.svg" class="w-5 h-4" alt="">
+                            <img src="~/assets/images/coupon_icon.svg" class="w-5 h-4" alt="">
                             <h5 class="font-poppins text-sm ml-3">Hemat hingga Rp5000</h5>
                         </div>
                     </div>

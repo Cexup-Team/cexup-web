@@ -7,15 +7,15 @@
         <nuxt-layout name="main">
             <div class="form-search pl-5 pr-4 mt-9 flex items-center">
                 <div class="w-auto">
-                    <img src="../../assets/images/icon_back.svg" alt="" class="w-2 h-4">
+                    <img src="~/assets/images/icon_back.svg" alt="" class="w-2 h-4">
                 </div>
                 <div class="relative w-full ml-5">
                     <input type="text" class="w-full border border-gray-150 placeholder:text-gray-350 h-10 outline-none pr-12 pl-4 py-2 font-poppins text-sm" placeholder="Search Article" style="border-radius: 10px;">
-                    <img src="../../assets/images/search_icon.svg" class="absolute z-20 right-6 transform translate-y-0.5 w-4 h-4" alt="search icon">
+                    <img src="~/assets/images/search_icon.svg" class="absolute z-20 right-6 transform translate-y-0.5 w-4 h-4" alt="search icon">
                 </div>
             </div>
             <div class="w-full mt-2 overflow-hidden relative" style="height: 205px;">
-                <img src="../../assets/images/article4.png" class="object-cover w-full h-full" alt="">
+                <img src="~/assets/images/article4.png" class="object-cover w-full h-full" alt="">
                 <div class="overlay-article absolute inset-0 z-10"></div>
                 <div class="absolute bottom-4 z-20 px-4">
                     <h3 class="font-poppins text-blue-550 text-xs font-medium">Penyakit</h3>
@@ -45,9 +45,9 @@
                 
                 <div class="overflow-x-scroll no-scrollbar">
                     <div class="flex justify-start min-w-max px-4 pb-28 pt-4">
-                        <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                        <CardArticle img="~/assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
                     
-                        <CardArticle img="../../assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
+                        <CardArticle img="~/assets/images/article1.png" title="Hidup Sehat" subTitle="Persiapan Vaksin Anak, Apa Saja yang Diperlukan?" date="24 Mei 2022" author="Iqbal Tmvn" />                         
                                             
                     </div>
                 </div>

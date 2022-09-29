@@ -115,12 +115,12 @@
                             <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-6">{{state.selectActive.charAt(0).toUpperCase() + state.selectActive.slice(1)}}</h3>
                             <div class="relative h-16 max-h-16 min-h-max mb-5" v-if="state.searchIcon.indexOf(state.selectActive) > -1">
                                 <input class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0" placeholder="Search" type="text">
-                                <img src="../../../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
+                                <img src="~/assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
                             </div>
                             <ul class="w-full h-full overflow-y-scroll mt-6 no-scrollbar">
                                 <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in state.item" :key="index">
                                     <p :class="'text-base leading-6 font-poppins '+(state[`${state.selectActive}`] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
-                                    <img v-if="state[`${state.selectActive}`] === text" src="../../../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                                    <img v-if="state[`${state.selectActive}`] === text" src="~/assets/images/check_with_bg.svg" class="m-1" alt="" />
                                 </li>
                             </ul>
                         </div>

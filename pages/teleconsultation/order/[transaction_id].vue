@@ -7,7 +7,7 @@
             <div class="detail-order-wrapper relative">
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">  
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">Detail Order</h1>
                         <div></div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="card-register-doctor bg-white rounded-xl mt-3        ">
                             <div class="flex items-start p-4">
                                 <div class="w-20 h-20 rounded-full overflow-hidden mr-5">
-                                    <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
+                                    <img src="~/assets/images/doctor_img.png" class="object-cover" alt="">
                                 </div>
                                 <div class="flex flex-col">
                                     <h3 class="font-poppins font-medium text-base">Dr Iqbal Nur Haq</h3>
@@ -28,7 +28,7 @@
                                     <h5 class="font-poppins text-xs text-gray-350 mt-2">RS. Sari Asih</h5>
 
                                     <div class="flex items-center mt-1">
-                                        <img src="../../../assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
+                                        <img src="~/assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
                                         <span class="text-xs font-poppins">5 Years</span>
                                     </div>
                                     <p class="font-poppins text-xs mt-3">Monday, 14 Feb 2022 09:30 - 09:45</p>
@@ -40,18 +40,18 @@
                     <section>
                         <h2 class="font-poppins font-semibold text-sm mt-5">Order Information</h2>
                         <div class="flex items-center mt-4 w-full">
-                            <img src="../../../assets/images/transaction_id_icon.svg" class="w-9 h-9 mr-3" alt="">
+                            <img src="~/assets/images/transaction_id_icon.svg" class="w-9 h-9 mr-3" alt="">
                             <div class="flex flex-col w-full">
                                 <h4 class="font-poppins text-xs text-gray-350">Order ID</h4>
                                 <div class="flex justify-between items-center">
                                     <h5 class="font-poppins text-sm font-medium text-primary-color mt-1">#CXP-MT61b6f3fc2d7fd</h5>
-                                    <img src="../../../assets/images/copy_icon.svg" class="w-3 h-4 mr-4" alt="">
+                                    <img src="~/assets/images/copy_icon.svg" class="w-3 h-4 mr-4" alt="">
                                 </div>
                             </div>
                         </div>
 
                         <div class="flex items-center mt-3 w-full">
-                            <img src="../../../assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
+                            <img src="~/assets/images/waiting_icon.svg" class="w-9 h-9 mr-3" alt="">
                             <div class="flex flex-col w-full">
                                 <h4 class="font-poppins text-xs text-gray-350">Status Order</h4>
                                 <h5 class="font-poppins text-sm font-medium text-primary-color mt-1">Waiting Meeting</h5>
@@ -64,7 +64,7 @@
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center">
                                     <div class="w-12 h-12 overflow-hidden rounded-full mr-4">
-                                        <img src="../../../assets/images/profile_header.png" class="object-cover" alt="">
+                                        <img src="~/assets/images/profile_header.png" class="object-cover" alt="">
                                     </div>
                                     <div class="flex flex-col">
                                         <h4 class="font-poppins font-medium text-sm">Mario Prasetyo</h4>

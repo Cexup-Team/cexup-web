@@ -29,7 +29,7 @@
             <div class="input-vital-wrapper relative">
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">Input Obstetrics</h1>
                         <div></div>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="px-4 mt-24">
                     <h3 class="font-poppins font-medium text-base">Gestational age based on HPHT?</h3>
                     <div class="mt-3">
-                        <InputText className="rounded-md" type="text" placeholder="HPHT" src="../../../assets/images/calendar.svg" :icon="true" select="date" />
+                        <InputText className="rounded-md" type="text" placeholder="HPHT" src="~/assets/images/calendar.svg" :icon="true" select="date" />
                     </div>
                     <h3 class="font-poppins font-medium text-base mt-6">What is the current Fatal Weight?</h3>
                     <div class="mt-3">

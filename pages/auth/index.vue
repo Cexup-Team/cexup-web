@@ -3,10 +3,10 @@ import { useUserStore } from '~~/stores/user-store';
 import {ref} from 'vue';
 import { useError } from "../../utils/errorValidation"
 
-import { useToast, useModal } from 'tailvue'
+// import { useToast, useModal } from 'tailvue'
 import { useRouter } from 'vue-router';
 
-const $toast = useToast()
+// const $toast = useToast()
 const router = useRouter()
 
 interface LoginState {
@@ -48,11 +48,11 @@ function signIn(){
             res => router.push("/")
         ).catch(
             err => {
-                $toast.show({
-                    type: 'danger',
-                    message: err.message,
-                    timeout: 4,
-                })
+                // $toast.show({
+                //     type: 'danger',
+                //     message: err.message,
+                //     timeout: 4,
+                // })
             }
         )
         state.isLoading = false
@@ -67,7 +67,7 @@ function signIn(){
     <nuxt-layout name="auth">
         
         <div class="mt-9 p-4">
-            <img src="../../assets/images/icon_back.svg" alt="" class="w-2 h-4">
+            <img src="~/assets/images/icon_back.svg" alt="" class="w-2 h-4">
             <h2 class="text-3xl text-primary-color font-bold mt-9 w-full text-center font-poppins">Sign In</h2>
             <h5 class="text-sm font-medium w-full text-gray-350 text-center mt-6 font-poppins">Don’t have an account? <nuxt-link :to="'/auth/register'"><span class="text-primary-color">Sign up now!</span></nuxt-link></h5>
             
@@ -80,7 +80,7 @@ function signIn(){
 
 
             <div class="inputForm mt-7">
-                <InputText :className="'rounded-md '+(state.isErrorMessage.password ? ' border-red-550' : ' border-gray-150')" v-model="state.password" type="password" placeholder="Password" src="../../assets/images/eye.svg" src_eye="../../assets/images/eye_open.svg" :icon="true" />
+                <InputText :className="'rounded-md '+(state.isErrorMessage.password ? ' border-red-550' : ' border-gray-150')" v-model="state.password" type="password" placeholder="Password" src="~/assets/images/eye.svg" src_eye="~/assets/images/eye_open.svg" :icon="true" />
                 <h3 v-if="state.isErrorMessage.password" class="text-red-550 font-poppins" style="font-size: 10px; margin-top: 2px;"> {{state.isErrorMessage.password }} </h3>
             </div>
             <div class="mt-7 flex justify-between items-center">

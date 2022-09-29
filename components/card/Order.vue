@@ -8,7 +8,7 @@
                 <div class="flex items-center justify-between"> 
                     <div class="w-full">
                         <div class="flex items-center">
-                            <img src="../../assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
+                            <img src="~/assets/images/call_doctor__order.svg" class="w-5 h-5 mr-2" alt="">
                             <p class="text-primary-color font-medium text-xs font-poppins">Call Doctor</p>
                         </div>
                         <h4 class="text-primary-color font-poppins text-sm font-medium mt-2">#CXP-MT61b6f3fc2d7fd</h4>
@@ -21,7 +21,7 @@
             </div>
             <div class="card-order-body mt-0.5 bg-white px-4 py-3">
                 <div class="flex items-center">
-                    <img src="../../assets/images/doctor_img.png" class="w-14 h-14 rounded-full object-cover mr-3" alt="">
+                    <img src="~/assets/images/doctor_img.png" class="w-14 h-14 rounded-full object-cover mr-3" alt="">
                     <div>
                         <h2 class="font-poppins font-semibold text-base">Dr. Yakob</h2>
                         <p class="text-xs font-poppins font-normal">Telemedicine Call Doctor</p>

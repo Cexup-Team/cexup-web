@@ -24,7 +24,7 @@ import BottomNav from '~~/parts/BottomNav.vue';
                             <h2 class="flex items-center justify-start text-white text-sm font-normal"><span class="mr-1"><img src="../assets/images/place_icon.svg" alt=""></span>Jl. Haji Merlin, Jakarta <span class="ml-2"><img src="../assets/images/arrow_right.svg" alt=""></span></h2>
                         </div>
                         <div class="">
-                            <img src="../assets/images/bell_icon.svg" alt="">
+                            <img src="~/assets/images/bell_icon.svg" alt="">
                         </div>
                     </div>
 

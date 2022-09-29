@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  front_end_cexup_web:
+    container_name: "front_end_cexup_web"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    # ports:
+    #   - '8080:80'
+    expose:
+      - '8080:80'
+    networks:
+      - app
+
+networks:
+  app:
+    external: true

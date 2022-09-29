@@ -32,7 +32,7 @@
                     <span class="font-poppins text-xs mt-3 font-medium">Dari {{price}} / {{duration}}</span>
                 </div>
                 <div class="w-auto items-center mx-4">
-                    <img src="../../assets/images/icon_right_background_rounded.svg" class="w-10 h-10" alt="">
+                    <img src="~/assets/images/icon_right_background_rounded.svg" class="w-10 h-10" alt="">
                 </div>
             </div>
         </div>

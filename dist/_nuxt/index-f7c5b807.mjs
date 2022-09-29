@@ -1,0 +1,1 @@
+import{_ as t,o as a,c as n,b as o,w as s,e as c,a as _}from"./entry-76a6ea75.mjs";const r={},l=_("section",{class:"mt-5 p-4 h-full bg-slate-800"},null,-1);function p(u,d,i,m,f,x){const e=c;return a(),n("div",null,[o(e,{name:"main"},{default:s(()=>[l]),_:1})])}var $=t(r,[["render",p]]);export{$ as default};

@@ -20,7 +20,7 @@
                 <img :src="img" class="mr-5" v-if="img !== ''" :alt="alt">
                 <h3 :class="(img === '' ? 'ml-5' : '') + ' text-base font-poppins font-medium'">{{title}}</h3>
             </div>
-            <img src="../assets/images/arrow_right_gray.svg" alt="">
+            <img src="~/assets/images/arrow_right_gray.svg" alt="">
         </nuxt-link>
 </template>
 

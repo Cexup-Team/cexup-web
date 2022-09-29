@@ -10,7 +10,7 @@
         <div class="order-wrapper h-full relative w-full">
              <BottomNav active="/order" />
             <div class="flex justify-between mt-7 mx-6 items-center">
-                <img src="../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                 <h1 class="font-poppins text-xl font-semibold">Order</h1>
                 <div>
 

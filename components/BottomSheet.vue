@@ -169,12 +169,12 @@ import 'vue-drumroll-datetime-picker/dist/style.css'
               <h3 class="text-sm font-semibold font-poppins leading-5 w-full mb-6">{{ props.select.charAt(0).toUpperCase() + props.select.slice(1) }}</h3>
               <div class="relative h-16 max-h-16 min-h-max mb-5" v-if="props.searchIcon.indexOf(props.select) > -1">
                   <input class="search_input outline-none border border-gray-150 w-full bg-none p-4 font-poppins text-sm absolute top-0 left-0 h-full" placeholder="Search" type="text">
-                  <img src="../assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
+                  <img src="~/assets/images/search_icon.svg" class="absolute w-5 h-5 right-3 top-0 transform translate-y-3" alt="">
               </div>
                 <ul class="w-full h-full overflow-y-scroll no-scrollbar">
                     <li class="w-full border-b border-solid border-gray-175 pb-2 flex justify-between items-center mb-4" @click="selectOption(text)" v-for="(text, index) in s.item" :key="index">
                         <p :class="'text-base leading-6 font-poppins '+(props.choose[props.select] === text ? 'text-primary-color' : 'text-gray-350')">{{text}}</p>
-                        <img v-if="props.choose[props.select] === text" src="../assets/images/check_with_bg.svg" class="m-1" alt="" />
+                        <img v-if="props.choose[props.select] === text" src="~/assets/images/check_with_bg.svg" class="m-1" alt="" />
                         
                     </li>
                 </ul>

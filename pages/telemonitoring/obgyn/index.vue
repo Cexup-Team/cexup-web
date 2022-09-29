@@ -15,10 +15,10 @@
           <div class="relative">
               <div class="bg-blue-50 w-full">
                   <div class="flex justify-between pt-6 mx-6 items-center">
-                          <img src="../../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                          <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                           <h1 class="font-poppins text-xl font-semibold">Pregnant Tracker</h1>
                           <div class="relative">
-                            <img src="../../../assets/images/plus_icon.svg" alt="" class="w-6 h-6" @click="actionOpen()">
+                            <img src="~/assets/images/plus_icon.svg" alt="" class="w-6 h-6" @click="actionOpen()">
                             <div class="absolute right-0 shadow-card-obgyn px-3 py-2 bg-white rounded-xl top-10" v-if="openPlus === true">
                             <nuxt-link to="/telemonitoring/obgyn/input/vital" class="w-full">
                               <h5 class="font-poppins font-medium text-xs w-full">Input Vital Sign</h5>

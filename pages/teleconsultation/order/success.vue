@@ -9,14 +9,14 @@
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">order</h1>
                         <div></div>
                     </div>
                 </div>
 
                 <div class="px-4 mt-20">
-                    <img src="../../../assets/images/card_success_order.png" alt="">
+                    <img src="~/assets/images/card_success_order.png" alt="">
                     <h2 class="mt-6 font-poppins text-sm w-full text-center">Expected consultation by today 09:30 AM</h2>
                     <div class="mt-4 flex items-center">
                         <button class="w-3/6 bg-blue-150 mr-3 font-poppins px-4 py-3 font-medium text-sm text-primary-color rounded-xl">Back to browse</button>
@@ -27,7 +27,7 @@
                         <div class="flex justify-between items-center">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 overflow-hidden rounded-full mr-4">
-                                    <img src="../../../assets/images/profile_header.png" class="object-cover" alt="">
+                                    <img src="~/assets/images/profile_header.png" class="object-cover" alt="">
                                 </div>
                                 <div class="flex flex-col">
                                     <h4 class="font-poppins font-medium text-sm">Mario Prasetyo</h4>
@@ -45,7 +45,7 @@
                     <div class="select-payment flex justify-between items-center mt-4 p-4 rounded-xl">
                         <h5 class="font-poppins font-medium text-sm text-primary-color">E- Wallet | <span class="text-gray-900">0857825688768</span></h5>
                         <div class="w-16">
-                            <img src="../../../assets/images/gopay_logo.png" class="" alt="">
+                            <img src="~/assets/images/gopay_logo.png" class="" alt="">
                         </div>
                     </div>
                     <h3 class="font-poppins font-semibold text-sm mt-6">Payment Detail</h3>

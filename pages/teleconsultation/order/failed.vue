@@ -9,7 +9,7 @@
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">order</h1>
                         <div></div>
                     </div>
@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="px-4 pt-20">
-                    <img src="../../../assets/images/card_failed_order.png" alt="">
+                    <img src="~/assets/images/card_failed_order.png" alt="">
                     <h2 class="mt-6 font-poppins text-sm w-full text-center">Canceled due to overdue payment</h2>
 
 

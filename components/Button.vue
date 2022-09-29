@@ -29,7 +29,7 @@
 <template>
     <div class="relative">
     <nuxt-link :to="link">
-        <img v-if="icon === true" class="absolute right-0 left-2 bottom-0" src="../../assets/images/google.svg" alt="">
+        <img v-if="icon === true" class="absolute right-0 left-2 bottom-0" src="~/assets/images/google.svg" alt="">
         <button v-if="!loading" :class="className+ ' focus:outline-none'">{{ title }}</button>
 
         <button v-if="loading" :class="className+ ' focus:outline-none'">

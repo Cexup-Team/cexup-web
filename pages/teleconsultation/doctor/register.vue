@@ -12,7 +12,7 @@ export default {
                 <div class="nav-bar fixed bg-white w-full z-30 top-0 pb-4">
                     
                     <div class="flex justify-between mt-6 mx-6 items-center">
-                        <img src="../../../assets/images/icon_back.svg" class="w-3 h-4" alt="">
+                        <img src="~/assets/images/icon_back.svg" class="w-3 h-4" alt="">
                         <h1 class="font-poppins text-xl font-semibold">Register Call Doctor</h1>
                         <div></div>
                     </div>
@@ -23,7 +23,7 @@ export default {
                         <div class="card-register-doctor bg-white rounded-xl mt-3        ">
                             <div class="flex items-start p-4">
                                 <div class="w-20 h-20 rounded-full overflow-hidden mr-5">
-                                    <img src="../../../assets/images/doctor_img.png" class="object-cover" alt="">
+                                    <img src="~/assets/images/doctor_img.png" class="object-cover" alt="">
                                 </div>
                                 <div class="flex flex-col">
                                     <h3 class="font-poppins font-medium text-base">Dr Iqbal Nur Haq</h3>
@@ -31,7 +31,7 @@ export default {
                                     <h5 class="font-poppins text-xs text-gray-350 mt-2">RS. Sari Asih</h5>
 
                                     <div class="flex items-center mt-1">
-                                        <img src="../../../assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
+                                        <img src="~/assets/images/bag_icon.svg" class="w-3 h-3 mr-2" alt="">
                                         <span class="text-xs font-poppins">5 Years</span>
                                     </div>
                                     <p class="font-poppins text-xs mt-3">Monday, 14 Feb 2022 09:30 - 09:45</p>
@@ -58,7 +58,7 @@ export default {
                         </div>
                         <h2 class="font-poppins font-semibold text-base mt-6 mb-4">Questionnaire</h2>
                         <div class="flex justify-start items-center">
-                            <img src="../.././../assets/images/kuis_icon.svg" class="w-7 h-7 mr-3" alt="">
+                            <img src="~/assets/images/kuis_icon.svg" class="w-7 h-7 mr-3" alt="">
                             <h6 class="font-poppins font-medium text-sm">Please fill it out</h6>
                         </div>
                     </section>
