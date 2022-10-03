@@ -1,18 +1,13 @@
-version: '3.5'
+version: '3.8'
 
 services:
-  front_end_cexup_web:
-    container_name: "front_end_cexup_web"
+  front_end_web_consumer:
+    container_name: "front_end_web_consumer"
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
-    # ports:
-    #   - '8080:80'
-    expose:
-      - '8080:80'
+    ports:
+      - 3000:3000
     networks:
       - app
 
